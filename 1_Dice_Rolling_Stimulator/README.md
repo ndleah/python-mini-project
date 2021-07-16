@@ -6,7 +6,7 @@
 
 # Dice Rolling Stimulator
 <p align="center">
-<img src="https://uploads-ssl.webflow.com/5a9ee6416e90d20001b20038/5fe621cca706ae24f7a6cc24_TCB5GHgdlbx1K-YU8l2MXrq0BSQ5Bc0m4U31QjF76p_jpM-jcVNwblBDGHK4CnP3P-k-65PBGs_yuzm-wqMJXnjYfuZ7Y01_NA2TuBF53HA7PEc3xW0W_JJBTlH-fVZUX05PmRw8.png" width=50% height=50%>
+<img src="https://uploads-ssl.webflow.com/5a9ee6416e90d20001b20038/5fe621cca706ae24f7a6cc24_TCB5GHgdlbx1K-YU8l2MXrq0BSQ5Bc0m4U31QjF76p_jpM-jcVNwblBDGHK4CnP3P-k-65PBGs_yuzm-wqMJXnjYfuZ7Y01_NA2TuBF53HA7PEc3xW0W_JJBTlH-fVZUX05PmRw8.png" width=40% height=40%>
 
 ## 🛠️ Description
 

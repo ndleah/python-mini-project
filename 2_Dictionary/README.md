@@ -6,7 +6,7 @@
 
 # Dictionary
 <p align="center">
-<img src="https://cdn.tgdd.vn/Files/2019/12/31/1229256/anhdaidien_1280x720-800-resize.jpg" width=70% height=70%>
+<img src="https://cdn.tgdd.vn/Files/2019/12/31/1229256/anhdaidien_1280x720-800-resize.jpg" width=40% height=40%>
 
 ## 🛠️ Description
 
