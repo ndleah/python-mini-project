@@ -12,9 +12,6 @@
 
 This is a simple dice stimulator made using Python.
 
-## 🌈 Demo
-<p align="center">
-<img src="https://github.com/nduongthucanh/python-mini-project/blob/main/IMG/ds.gif" width=50% height=50%>
 
 ## ⚙️ Languages or Frameworks Used
 You only need Python to run this script. You can visit [here](https://www.python.org/downloads/) to download Python.
@@ -26,6 +23,10 @@ Running the script is really simple! Just open a terminal in the folder where yo
 ```sh
 python dice_stimulator.py
 ```
+
+## 🌈 Demo
+<p align="center">
+<img src="https://github.com/nduongthucanh/python-mini-project/blob/main/IMG/ds.gif" width=50% height=50%>
 
 ## 🤖 Author
 [Leah Nguyen](https://github.com/nduongthucanh)
