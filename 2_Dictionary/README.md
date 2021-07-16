@@ -14,7 +14,7 @@ A dictionary stimulator by Python in which you can enter any words and you will 
 
 ## 🌈 Demo
 <p align="center">
-<img src="https://github.com/nduongthucanh/python-mini-projects/blob/main/IMG/dict.gif" width=50% height=50%>
+<img src="https://github.com/nduongthucanh/python-mini-project/blob/main/IMG/dict.gif" width=50% height=50%>
 
 ## ⚙️ Languages or Frameworks Used
 You only need Python to run this script. You can visit [here](https://www.python.org/downloads/) to download Python.
