@@ -3,30 +3,27 @@
 [![View My Profile](https://img.shields.io/badge/View-My_Profile-green?logo=GitHub)](https://github.com/nduongthucanh)
 [![View Repositories](https://img.shields.io/badge/View-My_Repositories-blue?logo=GitHub)](https://github.com/nduongthucanh?tab=repositories)
 
-
-# Dice Rolling Stimulator
+# Hangman Game
 <p align="center">
-<img src="https://uploads-ssl.webflow.com/5a9ee6416e90d20001b20038/5fe621cca706ae24f7a6cc24_TCB5GHgdlbx1K-YU8l2MXrq0BSQ5Bc0m4U31QjF76p_jpM-jcVNwblBDGHK4CnP3P-k-65PBGs_yuzm-wqMJXnjYfuZ7Y01_NA2TuBF53HA7PEc3xW0W_JJBTlH-fVZUX05PmRw8.png" width=40% height=40%>
+<img src="https://i.pinimg.com/736x/56/21/55/5621553db7eedebcad64bf185be3d7e6.jpg" width=40% height=40%>
 
 ## 🛠️ Description
 
-This is a simple dice stimulator made using Python.
-
+A hangman game stimulator using Python in which the player have 10 attempts to guess the phrase before the men is hung.
 
 ## ⚙️ Languages or Frameworks Used
 You only need Python to run this script. You can visit [here](https://www.python.org/downloads/) to download Python.
 
 ## 🌟 How to run
-
 Running the script is really simple! Just open a terminal in the folder where your script is located and run the following command:
 
 ```sh
-python dice_stimulator.py
+python hangman.py
 ```
-
-## 🌈 Demo
+## 📺 Demo
 <p align="center">
-<img src="https://github.com/nduongthucanh/python-mini-project/blob/main/IMG/ds.gif" width=50% height=50%>
+<img src="https://github.com/nduongthucanh/python-mini-project/blob/main/IMG/hangman.gif" width=50% height=50%>
+
 
 ## 🤖 Author
 [Leah Nguyen](https://github.com/nduongthucanh)

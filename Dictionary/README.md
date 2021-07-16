@@ -3,27 +3,30 @@
 [![View My Profile](https://img.shields.io/badge/View-My_Profile-green?logo=GitHub)](https://github.com/nduongthucanh)
 [![View Repositories](https://img.shields.io/badge/View-My_Repositories-blue?logo=GitHub)](https://github.com/nduongthucanh?tab=repositories)
 
-# Hangman Game
+
+# Dictionary
 <p align="center">
-<img src="https://i.pinimg.com/736x/56/21/55/5621553db7eedebcad64bf185be3d7e6.jpg" width=40% height=40%>
+<img src="https://cdn.tgdd.vn/Files/2019/12/31/1229256/anhdaidien_1280x720-800-resize.jpg" width=40% height=40%>
 
 ## 🛠️ Description
 
-A hangman game stimulator using Python in which the player have 10 attempts to guess the phrase before the men is hung.
+A dictionary stimulator by Python in which you can enter any words and you will get the definition of it as the output.
+
 
 ## ⚙️ Languages or Frameworks Used
 You only need Python to run this script. You can visit [here](https://www.python.org/downloads/) to download Python.
 
 ## 🌟 How to run
+
 Running the script is really simple! Just open a terminal in the folder where your script is located and run the following command:
 
 ```sh
-python hangman.py
+python dictionary.py
 ```
-## 🌈 Demo
-<p align="center">
-<img src="https://github.com/nduongthucanh/python-mini-project/blob/main/IMG/hangman.gif" width=50% height=50%>
 
+## 📺 Demo
+<p align="center">
+<img src="https://github.com/nduongthucanh/python-mini-project/blob/main/IMG/dict.gif" width=50% height=50%>
 
 ## 🤖 Author
 [Leah Nguyen](https://github.com/nduongthucanh)
