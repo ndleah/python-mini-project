@@ -105,6 +105,7 @@ Always keep your local copy of the repository updated with the original reposito
 Before making any changes and/or in an appropriate interval, follow the following steps:
 
 * **Method 1:** GitHub Desktop
+* 
 Learn more about how to creat new branch [here](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/making-changes-in-a-branch/managing-branches#creating-a-branch) and how to fetch and pull origin from/to your local machine [here](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/keeping-your-local-repository-in-sync-with-github/syncing-your-branch).
 
 
