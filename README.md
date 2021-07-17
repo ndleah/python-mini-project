@@ -19,14 +19,14 @@
 ![Stars](https://img.shields.io/github/stars/nduongthucanh/python-mini-project?style=social&logo=github)
 [![License](https://img.shields.io/github/license/nduongthucanh/python-mini-project?style=social&logo=github)](https://github.com/nduongthucanh/python-mini-project/blob/main/LICENSE)
 
+
 <!-- omit in toc -->
 ## Table Of Contents
-- [Python Mini Projects <img src="https://i.pinimg.com/originals/d8/5d/f0/d85df08df1212c0f8b219e779c5ebc46.gif" align="right" width="120" />](#python-mini-projects-)
-  - [!image Aim Of The Project](#-aim-of-the-project)
-  - [!image Contributing](#-contributing)
-  - [!image README Template for scripts](#-readme-template-for-scripts)
-  - [!image Projects](#-projects)
-  - [!image Feedback](#-feedback)
+  - [Aim Of The Project](#-aim-of-the-project)
+  - [Contributing](#-contributing)
+  - [README Template for scripts](#-readme-template-for-scripts)
+  - [Projects](#-projects)
+  - [Feedback](#-feedback)
 
 ## ![image](IMG/aiming.svg) Aim Of The Project
 
