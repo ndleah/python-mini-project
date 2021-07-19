@@ -196,6 +196,8 @@ SR No   | Project | Author
 1 | [Dice Rolling Stimulator](https://github.com/nduongthucanh/python-mini-project/tree/main/Dice_Rolling_Stimulator) | [Leah Nguyen](https://github.com/nduongthucanh)
 2 | [Dictionary](https://github.com/nduongthucanh/python-mini-project/tree/main/Dictionary)| [Leah Nguyen](https://github.com/nduongthucanh)
 3 | [Hangman Game](https://github.com/nduongthucanh/python-mini-project/tree/main/Hangman_Game) | [Leah Nguyen](https://github.com/nduongthucanh)
+4 | [Tic Tac Toe](https://github.com/nduongthucanh/python-mini-project/tree/main/Tic_Tac_Toe) | [Leah Nguyen](https://github.com/nduongthucanh)
+
 
 ## ![image](IMG/muscle.svg) Feedback
 
