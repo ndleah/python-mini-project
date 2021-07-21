@@ -191,13 +191,13 @@ please make sure to add a `README.md` file that follow the same construction as 
 
 ## ![image](IMG/like.svg) Projects 
 
-SR No   | Project | Author  
---- | --- | ---
-1 | [Dice Rolling Stimulator](https://github.com/nduongthucanh/python-mini-project/tree/main/Dice_Rolling_Stimulator) | [Leah Nguyen](https://github.com/nduongthucanh)
-2 | [Dictionary](https://github.com/nduongthucanh/python-mini-project/tree/main/Dictionary)| [Leah Nguyen](https://github.com/nduongthucanh)
-3 | [Hangman Game](https://github.com/nduongthucanh/python-mini-project/tree/main/Hangman_Game) | [Leah Nguyen](https://github.com/nduongthucanh)
-4 | [Tic Tac Toe](https://github.com/nduongthucanh/python-mini-project/tree/main/Tic_Tac_Toe) | [Leah Nguyen](https://github.com/nduongthucanh)
-
+SR No   | Project | Description | Author  
+--- | --- | --- | --- | 
+1 | [Dice Rolling Stimulator](https://github.com/nduongthucanh/python-mini-project/tree/main/Dice_Rolling_Stimulator) |This is a simple dice stimulator made using Python. | [Leah Nguyen](https://github.com/nduongthucanh)
+2 | [Dictionary](https://github.com/nduongthucanh/python-mini-project/tree/main/Dictionary)| A dictionary stimulator by Python in which you can enter any words and you will get the definition of it as the output. | [Leah Nguyen](https://github.com/nduongthucanh)
+3 | [Hangman Game](https://github.com/nduongthucanh/python-mini-project/tree/main/Hangman_Game) |A hangman game stimulator using Python in which the player have 10 attempts to guess the phrase before the men is hung. | [Leah Nguyen](https://github.com/nduongthucanh)
+4 | [Tic Tac Toe](https://github.com/nduongthucanh/python-mini-project/tree/main/Tic_Tac_Toe) |A simple game of tic tac toe, built in python. | [Leah Nguyen](https://github.com/nduongthucanh)
+5 | [Plotter](https://github.com/nduongthucanh/python-mini-project/tree/main/Plotter) | An automation program to plot data with different visualisations by user selections. | [Leah Nguyen](https://github.com/nduongthucanh)
 
 ## ![image](IMG/muscle.svg) Feedback
 
