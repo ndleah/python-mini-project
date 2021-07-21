@@ -35,7 +35,7 @@ Open the Jupyter Notebook file under ```Plotter.ipynb```
 3. Selecting the number of columns they want to plot (whole table/selected columns only) and plot types:
 
 <p align="center">
-<img src="https://github.com/nduongthucanh/python-mini-project/blob/main/IMG/dataplot.gif" width=50% height=50%>
+<img src="https://github.com/nduongthucanh/python-mini-project/blob/main/IMG/plotter_dataplot.gif" width=50% height=50%>
 
 4. Output: (Line Plot selection)
 
