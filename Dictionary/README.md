@@ -26,7 +26,7 @@ python dictionary.py
 
 ## 📺 Demo
 <p align="center">
-<img src="https://github.com/nduongthucanh/python-mini-project/blob/main/IMG/dict.gif" width=50% height=50%>
+<img src="https://github.com/nduongthucanh/python-mini-project/blob/main/IMG/dict.gif" width=70% height=70%>
 
 ## 🤖 Author
 [Leah Nguyen](https://github.com/nduongthucanh)

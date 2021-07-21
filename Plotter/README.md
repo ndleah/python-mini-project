@@ -25,22 +25,22 @@ Open the Jupyter Notebook file under ```Plotter.ipynb```
 1. User choose the way they want data to be create:
 
 <p align="center">
-<img src="https://github.com/nduongthucanh/python-mini-project/blob/main/IMG/plotter_datacreated.gif" width=50% height=50%>
+<img src="https://github.com/nduongthucanh/python-mini-project/blob/main/IMG/plotter_datacreated.gif" width=70% height=70%>
 
 2. Inspecting the first 5 rows of the dataframe using ```head()``` function:
  
 <p align="center">
-<img src="https://github.com/nduongthucanh/python-mini-project/blob/main/IMG/plotter_dfhead.gif" width=50% height=50%>
+<img src="https://github.com/nduongthucanh/python-mini-project/blob/main/IMG/plotter_dfhead.gif" width=70% height=70%>
 
 3. Selecting the number of columns they want to plot (whole table/selected columns only) and plot types:
 
 <p align="center">
-<img src="https://github.com/nduongthucanh/python-mini-project/blob/main/IMG/plotter_dataplot.gif" width=50% height=50%>
+<img src="https://github.com/nduongthucanh/python-mini-project/blob/main/IMG/plotter_dataplot.gif" width=70% height=70%>
 
 4. Output: (Line Plot selection)
 
 <p align="center">
-<img src="https://github.com/nduongthucanh/python-mini-project/blob/main/IMG/plotter_graph.gif" width=50% height=50%>
+<img src="https://github.com/nduongthucanh/python-mini-project/blob/main/IMG/plotter_graph.gif" width=70% height=70%>
 
 ## 🤖 Author
 [Leah Nguyen](https://github.com/nduongthucanh)
