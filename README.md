@@ -198,6 +198,7 @@ SR No   | Project | Description | Author
 3 | [Hangman Game](https://github.com/nduongthucanh/python-mini-project/tree/main/Hangman_Game) |A hangman game stimulator using Python in which the player have 10 attempts to guess the phrase before the men is hung. | [Leah Nguyen](https://github.com/nduongthucanh)
 4 | [Tic Tac Toe](https://github.com/nduongthucanh/python-mini-project/tree/main/Tic_Tac_Toe) |A simple game of tic tac toe, built in python. | [Leah Nguyen](https://github.com/nduongthucanh)
 5 | [Plotter](https://github.com/nduongthucanh/python-mini-project/tree/main/Plotter) | An automation program to plot data with different visualisations by user selections. | [Leah Nguyen](https://github.com/nduongthucanh)
+6 | [Geographical Plot Using Folium](https://github.com/nduongthucanh/python-mini-project/tree/main/Geo_Plot_Using_Folium) | Using Folium library to create different map data visualization. | [Leah Nguyen](https://github.com/nduongthucanh)
 
 ## ![image](IMG/muscle.svg) Feedback
 
