@@ -1,24 +1,22 @@
 ![Star Badge](https://img.shields.io/static/v1?label=%F0%9F%8C%9F&message=If%20Useful&style=style=flat&color=BC4E99)
 ![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)
-[![View My Profile](https://img.shields.io/badge/View-My_Profile-green?logo=GitHub)](https://github.com/nduongthucanh)
-[![View Repositories](https://img.shields.io/badge/View-My_Repositories-blue?logo=GitHub)](https://github.com/nduongthucanh?tab=repositories)
+[![View My Profile](https://img.shields.io/badge/View-My_Profile-green?logo=GitHub)](https://github.com/ndleah)
+[![View Repositories](https://img.shields.io/badge/View-My_Repositories-blue?logo=GitHub)](https://github.com/ndleah?tab=repositories)
 
 [![forthebadge](https://forthebadge.com/images/badges/powered-by-coffee.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/powered-by-black-magic.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)
 
-
 # Python Mini Projects <img src="https://i.pinimg.com/originals/d8/5d/f0/d85df08df1212c0f8b219e779c5ebc46.gif" align="right" width="120" />
 
  > A collection of easy Python small projects to help you improve your programming skills.
 
-![Issues](https://img.shields.io/github/issues/nduongthucanh/python-mini-project?style=social&logo=github)
-![Pull Requests](https://img.shields.io/github/issues-pr/nduongthucanh/python-mini-project?style=social&logo=github)
-![Forks](https://img.shields.io/github/forks/nduongthucanh/python-mini-project?style=social&logo=github)
-![Stars](https://img.shields.io/github/stars/nduongthucanh/python-mini-project?style=social&logo=github)
-[![License](https://img.shields.io/github/license/nduongthucanh/python-mini-project?style=social&logo=github)](https://github.com/nduongthucanh/python-mini-project/blob/main/LICENSE)
-
+![Issues](https://img.shields.io/github/issues/ndleah/python-mini-project?style=social&logo=github)
+![Pull Requests](https://img.shields.io/github/issues-pr/ndleah/python-mini-project?style=social&logo=github)
+![Forks](https://img.shields.io/github/forks/ndleah/python-mini-project?style=social&logo=github)
+![Stars](https://img.shields.io/github/stars/ndleah/python-mini-project?style=social&logo=github)
+[![License](https://img.shields.io/github/license/ndleah/python-mini-project?style=social&logo=github)](https://github.com/ndleah/python-mini-project/blob/main/LICENSE)
 
 <!-- omit in toc -->
 ## Table Of Contents
@@ -35,7 +33,6 @@ As a Python newbie, I understand the problems that people face when they first b
 My goal is to build a common playground where everyone, from beginners to experts, can learn and share knowledge, and I hope you enjoy your stay here!
 
 Let's "folk-ing" create amazing things together! 👉
-
 
 ## ![image](IMG/game-ps.svg) Contributing 
 
@@ -57,7 +54,7 @@ Star the repo by pressing the topmost-right button to start your wonderful journ
 Step 2: Fork it
 </summary>
 
-On the [GitHub page for this repository](https://github.com/nduongthucanh/python-mini-project), click on the Button "**Fork**".
+On the [GitHub page for this repository](https://github.com/ndleah/python-mini-project), click on the Button "**Fork**".
  
 ![fork image](https://help.github.com/assets/images/help/repository/fork_button.jpg)
 
@@ -108,10 +105,7 @@ Before making any changes and/or in an appropriate interval, follow the followin
 
 Learn more about how to creat new branch [here](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/making-changes-in-a-branch/managing-branches#creating-a-branch) and how to fetch and pull origin from/to your local machine [here](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/keeping-your-local-repository-in-sync-with-github/syncing-your-branch).
 
-
 Learn more about how to fetch and pull origin from/to your local machine using **GitHub Desktop** [here](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/keeping-your-local-repository-in-sync-with-github/syncing-your-branch).
-
-
 
 * **Method 2:** Git
 
@@ -138,7 +132,7 @@ Step 6: Ready, Set, Go...
 Once you have completed these steps, you are ready to start contributing to the project and creating **pull requests**.
 
 - Create a folder in
-  [projects directory](https://github.com/nduongthucanh/python-mini-project) according to your project name.
+  [projects directory](https://github.com/ndleah/python-mini-project) according to your project name.
 > The folder name should follow the following format "Your_Project_Name_Here". For example: Dice_Stimulator
 - Write your code and add to the respective folder in the projects directory, locally.
 - Don't forget to add a `README.md` in your folder, according to the
@@ -187,27 +181,27 @@ Now wait, until *your Pull Request* is approved! If there are any conflicts, you
 
 please make sure to add a `README.md` file that follow the same construction as this template for consistency.
 
-[README Template](https://github.com/nduongthucanh/python-mini-project/blob/master/README_TEMPLATE.md)
+[README Template](https://github.com/ndleah/python-mini-project/blob/master/README_TEMPLATE.md)
 
 ## ![image](IMG/like.svg) Projects 
 
 SR No   | Project | Description | Author  
 --- | --- | --- | --- | 
-1 | [Dice Rolling Stimulator](https://github.com/nduongthucanh/python-mini-project/tree/main/Dice_Rolling_Stimulator) |This is a simple dice stimulator made using Python. | [Leah Nguyen](https://github.com/nduongthucanh)
-2 | [Dictionary](https://github.com/nduongthucanh/python-mini-project/tree/main/Dictionary)| A dictionary stimulator by Python in which you can enter any words and you will get the definition of it as the output. | [Leah Nguyen](https://github.com/nduongthucanh)
-3 | [Hangman Game](https://github.com/nduongthucanh/python-mini-project/tree/main/Hangman_Game) |A hangman game stimulator using Python in which the player have 10 attempts to guess the phrase before the men is hung. | [Leah Nguyen](https://github.com/nduongthucanh)
-4 | [Tic Tac Toe](https://github.com/nduongthucanh/python-mini-project/tree/main/Tic_Tac_Toe) |A simple game of tic tac toe, built in python. | [Leah Nguyen](https://github.com/nduongthucanh)
-5 | [Plotter](https://github.com/nduongthucanh/python-mini-project/tree/main/Plotter) | An automation program to plot data with different visualisations by user selections. | [Leah Nguyen](https://github.com/nduongthucanh)
-6 | [Geographical Plot Using Folium](https://github.com/nduongthucanh/python-mini-project/tree/main/Geo_Plot_Using_Folium) | Using Folium library to create different map data visualization. | [Leah Nguyen](https://github.com/nduongthucanh)
+1 | [Dice Rolling Stimulator](https://github.com/ndleah/python-mini-project/tree/main/Dice_Rolling_Stimulator) |This is a simple dice stimulator made using Python. | [Leah Nguyen](https://github.com/ndleah)
+2 | [Dictionary](https://github.com/ndleah/python-mini-project/tree/main/Dictionary)| A dictionary stimulator by Python in which you can enter any words and you will get the definition of it as the output. | [Leah Nguyen](https://github.com/ndleah)
+3 | [Hangman Game](https://github.com/ndleah/python-mini-project/tree/main/Hangman_Game) |A hangman game stimulator using Python in which the player have 10 attempts to guess the phrase before the men is hung. | [Leah Nguyen](https://github.com/ndleah)
+4 | [Tic Tac Toe](https://github.com/ndleah/python-mini-project/tree/main/Tic_Tac_Toe) |A simple game of tic tac toe, built in python. | [Leah Nguyen](https://github.com/ndleah)
+5 | [Plotter](https://github.com/ndleah/python-mini-project/tree/main/Plotter) | An automation program to plot data with different visualisations by user selections. | [Leah Nguyen](https://github.com/ndleah)
+6 | [Geographical Plot Using Folium](https://github.com/ndleah/python-mini-project/tree/main/Geo_Plot_Using_Folium) | Using Folium library to create different map data visualization. | [Leah Nguyen](https://github.com/ndleah)
 
 ## ![image](IMG/muscle.svg) Feedback
 
 If you have any feedback or ideas to improve this project, feel free to contact me via
 
-<a href="https://www.linkedin.com/in/nduongthucanh/">
+<a href="https://www.linkedin.com/in/ndleah/">
   <img align="left" alt="Reeha's Linkdein" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/linkedin.svg" />
 
 </a>
-<a href="https://github.com/nduongthucanh">
+<a href="https://github.com/ndleah">
   <img align="left" alt="Reeha's Github" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/github.svg" />
 </a>

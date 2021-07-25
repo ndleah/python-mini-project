@@ -29,5 +29,5 @@ python dice_stimulator.py
 <img src="https://github.com/nduongthucanh/python-mini-project/blob/main/IMG/ds.gif" width=70% height=70%>
 
 ## 🤖 Author
-[Leah Nguyen](https://github.com/nduongthucanh)
+[Leah Nguyen](https://github.com/ndleah)
 
