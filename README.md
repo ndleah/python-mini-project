@@ -193,6 +193,9 @@ SR No   | Project | Description | Author
 4 | [Tic Tac Toe](https://github.com/ndleah/python-mini-project/tree/main/Tic_Tac_Toe) |A simple game of tic tac toe, built in python. | [Leah Nguyen](https://github.com/ndleah)
 5 | [Plotter](https://github.com/ndleah/python-mini-project/tree/main/Plotter) | An automation program to plot data with different visualisations by user selections. | [Leah Nguyen](https://github.com/ndleah)
 6 | [Geographical Plot Using Folium](https://github.com/ndleah/python-mini-project/tree/main/Geo_Plot_Using_Folium) | Using Folium library to create different map data visualization. | [Leah Nguyen](https://github.com/ndleah)
+7 | [Caterpillar Game](https://github.com/ndleah/python-mini-project/tree/main/Caterpillar_Game) | A simple Caterpillar game built in python. | [Leah Nguyen](https://github.com/ndleah)
+
+
 
 ## ![image](IMG/muscle.svg) Feedback
 
