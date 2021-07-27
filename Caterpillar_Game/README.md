@@ -5,7 +5,7 @@
 
 # Caterpillar
 <p align="center">
-<img src="https://static.wikia.nocookie.net/pixar/images/e/ec/Heimlich.png/revision/latest?cb=20170807224005" width=40% height=40%>
+<img src="https://static.wikia.nocookie.net/pixar/images/e/ec/Heimlich.png/revision/latest?cb=20170807224005" width=30% height=30%>
 
 ## 🛠️ Description
 
@@ -13,7 +13,7 @@ A simple Caterpillar game built in python.
 
 ## ⚙️ Languages or Frameworks Used
 ```bash
-pip install tk
+pip install turtle
 ```
 
 ## 🌟 How to run
