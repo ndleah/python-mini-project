@@ -24,7 +24,7 @@ python Matchmaker.py
 ```
 ## 📺 Demo
 <p align="center">
-<img src="https://github.com/ndleah/python-mini-project/blob/main/IMG/Matchmaker.gif" width=70% height=70%>
+<img src="https://github.com/ndleah/python-mini-project/blob/main/IMG/Matchmaker.gif" width=50% height=50%>
 
 ## 🤖 Author
 [Leah Nguyen](https://github.com/ndleah)
