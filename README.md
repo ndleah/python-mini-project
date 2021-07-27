@@ -195,6 +195,8 @@ SR No   | Project | Description | Author
 6 | [Geographical Plot Using Folium](https://github.com/ndleah/python-mini-project/tree/main/Geo_Plot_Using_Folium) | Using Folium library to create different map data visualization. | [Leah Nguyen](https://github.com/ndleah)
 7 | [Caterpillar Game](https://github.com/ndleah/python-mini-project/tree/main/Caterpillar_Game) | A simple Caterpillar game built in python. | [Leah Nguyen](https://github.com/ndleah)
 8 | [Matchmaker Game](https://github.com/ndleah/python-mini-project/tree/main/Matchmaker) | A simple Matchmaker game built by using python. | [Leah Nguyen](https://github.com/ndleah)
+9 | [Smart Calculator](https://github.com/ndleah/python-mini-project/tree/main/Smart_Calculator) | A smart calculator using for basic math equations, built by using python. | [Leah Nguyen](https://github.com/ndleah)
+
 
 
 ## ![image](IMG/muscle.svg) Feedback
