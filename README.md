@@ -196,7 +196,7 @@ SR No   | Project | Description | Author
 7 | [Caterpillar Game](https://github.com/ndleah/python-mini-project/tree/main/Caterpillar_Game) | A simple Caterpillar game built in python. | [Leah Nguyen](https://github.com/ndleah)
 8 | [Matchmaker Game](https://github.com/ndleah/python-mini-project/tree/main/Matchmaker) | A simple Matchmaker game built by using python. | [Leah Nguyen](https://github.com/ndleah)
 9 | [Smart Calculator](https://github.com/ndleah/python-mini-project/tree/main/Smart_Calculator) | A smart calculator using for basic math equations, built by using python. | [Leah Nguyen](https://github.com/ndleah)
-
+10 | [Screenpet](https://github.com/ndleah/python-mini-project/tree/main/Screenpet) | A cute screenpet having different reactions when interact on desktop. | [Leah Nguyen](https://github.com/ndleah)
 
 
 ## ![image](IMG/muscle.svg) Feedback
