@@ -9,7 +9,7 @@
 
 ## 🛠️ Description
 
-A cute screenpet having reactions when interact on desktop.
+A cute screenpet having different reactions when interact on desktop.
 
 ## ⚙️ Languages or Frameworks Used
 ```bash
@@ -24,7 +24,7 @@ python screenpet.py
 ```
 ## 📺 Demo
 <p align="center">
-<img src="https://github.com/ndleah/python-mini-project/blob/main/IMG/pet.gif" width=70% height=70%>
+<img src="https://github.com/ndleah/python-mini-project/blob/main/IMG/pet.gif" width=40% height=40%>
 
 ## 🤖 Author
 [Leah Nguyen](https://github.com/ndleah)
