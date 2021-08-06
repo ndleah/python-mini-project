@@ -27,6 +27,7 @@ Running the script is really simple! Just open a terminal in the folder where yo
 ```python number_guessing.py```
 
 ## 📺 Demo
+![Screenshot 2021-08-06 153013](https://user-images.githubusercontent.com/68545365/128493914-936c4140-35ff-4fc6-9b5b-3f5c3f4cdc2a.png)
 
 
 ## 🤖 Author
