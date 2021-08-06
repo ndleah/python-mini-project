@@ -198,7 +198,8 @@ SR No   | Project | Description | Author
 9 | [Smart Calculator](https://github.com/ndleah/python-mini-project/tree/main/Smart_Calculator) | A smart calculator using for basic math equations, built by using python. | [Leah Nguyen](https://github.com/ndleah)
 10 | [Screenpet](https://github.com/ndleah/python-mini-project/tree/main/Screenpet) | A cute screenpet having different reactions when interact on desktop. | [Leah Nguyen](https://github.com/ndleah)
 11 | [Egg Catcher](https://github.com/ndleah/python-mini-project/tree/main/Egg_Catcher) | Egg catcher game built in using Python. | [Leah Nguyen](https://github.com/ndleah)
-
+12 | <a href="https://github.com/ShrutiSolani/python-mini-project/tree/main/Number%20Guessing">Number Guessing | Number Guessing Game | [Shruti Solani](https://github.com/ShrutiSolani)
+13 | <a href="https://github.com/ShrutiSolani/python-mini-project/tree/main/Madlibs">Mad Libs | Mad Libs Game | [Shruti Solani](https://github.com/ShrutiSolani)
 ## ![image](IMG/muscle.svg) Feedback
 
 If you have any feedback or ideas to improve this project, feel free to contact me via
