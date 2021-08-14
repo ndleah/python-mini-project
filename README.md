@@ -200,7 +200,14 @@ SR No   | Project | Description | Author
 11 | [Egg Catcher](https://github.com/ndleah/python-mini-project/tree/main/Egg_Catcher) | Egg catcher game built in using Python. | [Leah Nguyen](https://github.com/ndleah)
 12 | <a href="https://github.com/ShrutiSolani/python-mini-project/tree/main/Number%20Guessing">Number Guessing | Number Guessing Game | [Shruti Solani](https://github.com/ShrutiSolani)
 13 | <a href="https://github.com/ShrutiSolani/python-mini-project/tree/main/Madlibs">Mad Libs | Mad Libs Game | [Shruti Solani](https://github.com/ShrutiSolani)
-## ![image](IMG/muscle.svg) Feedback
+
+ ## ![image](IMG/like.svg) Our Contributors
+ 
+<a href="https://github.com/ndleah/python-mini-project/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=ndleah/python-mini-project" />
+</a>
+ 
+ ## ![image](IMG/muscle.svg) Feedback
 
 If you have any feedback or ideas to improve this project, feel free to contact me via
 
