@@ -68,21 +68,28 @@ win.title('Smart Calculator')
 win.geometry('500x300')
 win.configure(bg='lightskyblue')
 
-l1 = Label(win, text='I am a smart calculator', width=20, padx=3)
-l1.place(x=150,y=10)
-l2 = Label(win, text='My name is Leah', padx=3)
-l2.place(x=180,y=40)
-l3 = Label(win, text='What can I help you?', padx=3)
-l3.place(x=176,y=130)
+win.resizable(0, 0)
+win.columnconfigure(0, weight=1)
+win.columnconfigure(1, weight=2)
+win.columnconfigure(2, weight=1)
+
+l1 = Label(win, text='I am a smart calculator', width=20)
+l1.grid(column=1, row=1, padx=5, pady=10)
+
+l2 = Label(win, text='My name is Leah', width=20)
+l2.grid(column=1, row=2, padx=5, pady=10)
+
+l3 = Label(win, text='What can I help you?', width=20)
+l3.grid(column=1, row=3, padx=5, pady=10)
 
 textin = StringVar()
-e1 = Entry(win, width=30,textvariable=textin)
-e1.place(x=100,y=160)
+e1 = Entry(win, width=30, textvariable=textin)
+e1.grid(column=1, row=4, padx=5, pady=10)
 
-b1 = Button(win, text='Just this',command=calculate)
-b1.place(x=210,y=200)
+b1 = Button(win, text='Just this', command=calculate)
+b1.grid(column=1, row=5, padx=5, pady=10)
 
-list = Listbox(win,width=20,height=3)
-list.place(x=150,y=230)
+list = Listbox(win, width=40, height=3)
+list.grid(column=1, row=6, padx=5, pady=10)
 
 win.mainloop()
