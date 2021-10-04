@@ -60,7 +60,7 @@ operations = {'ADD':add,'ADDITION':add, 'SUM':add, 'PLUS':add,
             'SUB':sub, 'DIFFERENCE':sub, 'MINUS': sub, 'SUBTRACT':sub,
             'LCM':lcm, 'HCF':hcf, 'PRODUCT':mul, 'MULTIPLICATION':mul,
             'MULTIPLY':mul, 'DIVISION':div, 'DIV':div, 'DIVIDE':div,
-            'MOD':mod,'REMANDER':mod, 'MODULUS':mod}
+            'MOD':mod,'REMAINDER':mod, 'MODULUS':mod}
 
 
 win = Tk()
