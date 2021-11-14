@@ -71,14 +71,14 @@ def hangman():
             print("     / \     ")
         if turns == 1:
             print("1 turns left")
-            print("Last breaths counting. Take care!")
+            print("Last breath counting. Take care!")
             print("  ---------  ")
             print("    \ O_|/   ")
             print("      |      ")
             print("     / \     ")    
         
         if turns == 0:    
-            print("You loose")
+            print("You lose")
             print("You let a kind man die")
             print("  ---------  ")
             print("      O_|    ")
