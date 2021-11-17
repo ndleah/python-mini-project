@@ -9,7 +9,7 @@
 
 ## 🛠️ Description
 
-A hangman game stimulator using Python in which the player have 10 attempts to guess the phrase before the men is hung.
+A hangman game simulator using Python in which the player have 10 attempts to guess the phrase before the men is hung.
 
 ## ⚙️ Languages or Frameworks Used
 You only need Python to run this script. You can visit [here](https://www.python.org/downloads/) to download Python.

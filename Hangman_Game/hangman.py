@@ -78,7 +78,7 @@ def hangman():
             print("     / \     ")    
         
         if turns == 0:    
-            print("You loose")
+            print("You lose")
             print("You let a kind man die")
             print("  ---------  ")
             print("      O_|    ")
