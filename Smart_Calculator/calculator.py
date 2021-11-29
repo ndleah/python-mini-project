@@ -16,13 +16,15 @@ def mod(a,b):
     return a % b
 
 def lcm(a,b):
+    if a<0 or b<0: return
     L = a if a > b else b
-    while L <= a + b:
+    while L <= a * b:
         if L%a == 0 and L%b ==0:
             return L
         L+=1
 
 def hcf(a,b):
+    if a<0 or b<0: return
     H = a if a<b else b
     while H >= 1:
         if a%H == 0 and b%H ==0:
