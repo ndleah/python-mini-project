@@ -17,8 +17,7 @@ def mod(a,b):
 
 def lcm(a,b):
     if a<0 or b<0: return
-    L = a if a > b else 
-    b
+    L = a if a > b else b
     while L <= a * b:
         if L%a == 0 and L%b ==0:
             return L
