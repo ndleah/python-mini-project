@@ -35,14 +35,12 @@ and how to install them.
 # fist run the server
 
 python ./server.py
-
 ```
 
 ```
 # then run the client
 
 python ./client.py
-
 ```
 <!-- ## 📺 Demo -->
 
