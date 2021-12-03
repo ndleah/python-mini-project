@@ -198,13 +198,15 @@ SR No   | Project | Description | Author
 9 | [Smart Calculator](https://github.com/ndleah/python-mini-project/tree/main/Smart_Calculator) | A smart calculator using for basic math equations, built by using python. | [Leah Nguyen](https://github.com/ndleah)
 10 | [Screenpet](https://github.com/ndleah/python-mini-project/tree/main/Screenpet) | A cute screenpet having different reactions when interact on desktop. | [Leah Nguyen](https://github.com/ndleah)
 11 | [Egg Catcher](https://github.com/ndleah/python-mini-project/tree/main/Egg_Catcher) | Egg catcher game built in using Python. | [Leah Nguyen](https://github.com/ndleah)
-12 | <a href="https://github.com/ShrutiSolani/python-mini-project/tree/main/Number%20Guessing">Number Guessing | Number Guessing Game | [Shruti Solani](https://github.com/ShrutiSolani)
-13 | <a href="https://github.com/ShrutiSolani/python-mini-project/tree/main/Madlibs">Mad Libs | Mad Libs Game | [Shruti Solani](https://github.com/ShrutiSolani)
+12 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Number%20Guessing">Number Guessing | Number Guessing Game | [Shruti Solani](https://github.com/ShrutiSolani)
+13 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Madlibs">Mad Libs | Mad Libs Game | [Shruti Solani](https://github.com/ShrutiSolani)
 14 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Caesar_Cipher">Caesar Cipher | Simple Caesar Cipher encryptor and decryptor bulit with python | [FH089](https://github.com/FH089)
-15 | <a href="https://github.com/ShrutiSolani/python-mini-project/tree/main/Email%20Slicer">Email Slicer | Email Slicer | [Shruti Solani](https://github.com/ShrutiSolani)
+15 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Email%20Slicer">Email Slicer | Email Slicer | [Shruti Solani](https://github.com/ShrutiSolani)
 16 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Speaking_Dictionary">Speaking Dictionary | Python program that allows the user to find the meaning of an English word by speaking it directly to the device | [19lyaejin](https://github.com/19lyaejin)
 17 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Cat_command">Cat Command | this project is a basic implementation of the linux cat command | [Alexander Monterrosa](https://github.com/Alex108-lab)
-
+18 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Sqlite-crud">Sqlite-crud | A simple crud implemented in python using sqlite. | [Alexander Monterrosa](https://github.com/Alex108-lab)
+19 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Binary_tree">Binary Tree | Implementation of a binary tree in python | [Alexander Monterrosa](https://github.com/Alex108-lab)
+20 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Socket_example">Socket |  Implementation of a socket in python | [Alexander Monterrosa](https://github.com/Alex108-lab)
 
  ## ![image](IMG/like.svg) Our Contributors
  
