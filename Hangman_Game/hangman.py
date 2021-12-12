@@ -18,7 +18,7 @@ def hangman():
             print("You win!")
             break
         print("Guess the word:", main)
-        guess = input()
+        guess = input().casefold()
 
         if guess in validletter:
             guessmade = guessmade + guess
