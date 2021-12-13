@@ -207,7 +207,9 @@ SR No   | Project | Description | Author
 18 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Sqlite-crud">Sqlite-crud | A simple crud implemented in python using sqlite. | [Alexander Monterrosa](https://github.com/Alex108-lab)
 19 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Binary_tree">Binary Tree | Implementation of a binary tree in python | [Alexander Monterrosa](https://github.com/Alex108-lab)
 20 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Socket_example">Socket |  Implementation of a socket in python | [Alexander Monterrosa](https://github.com/Alex108-lab)
-
+21 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Stack_structure">Stack Structure |  Implementation of a stack structure in python | [Alexander Monterrosa](https://github.com/Alex108-lab)
+22 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Math_Game">Math Game |  It's just a simple math game. Improve your math skills | [Pargorn Ruasijan (xNewz)](https://github.com/xNewz)
+ 
  ## ![image](IMG/like.svg) Our Contributors
  
 <a href="https://github.com/ndleah/python-mini-project/graphs/contributors">
