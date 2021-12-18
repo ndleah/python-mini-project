@@ -37,9 +37,11 @@ and how to install them.
 
 `python ./main.py`
 
-<!-- ## 📺 Demo -->
-
-<!-- Add a Screenshot/GIF showing the sample use of the script (jpeg/png/gif). -->
+## 📺 Demo
+<p align="center">
+<img
+src="https://github.com/ndleah/python-mini-project/blob/main/IMG/Youtube_video_download.png"
+width=70% height=70%>
 
 ## 🤖 Author
 
