@@ -25,7 +25,6 @@ def Download(): # Function for download video
 
     Label(root, text='Downloaded', font='arial 15').place(x=180, y=210)
 
-
 Button(root, text='Download', font='arial 15 bold',
        padx=2, command=Download).place(x=180, y=150)
 
