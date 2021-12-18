@@ -209,6 +209,7 @@ SR No   | Project | Description | Author
 20 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Socket_example">Socket |  Implementation of a socket in python | [Alexander Monterrosa](https://github.com/Alex108-lab)
 21 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Stack_structure">Stack Structure |  Implementation of a stack structure in python | [Alexander Monterrosa](https://github.com/Alex108-lab)
 22 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Math_Game">Math Game |  It's just a simple math game. Improve your math skills | [Pargorn Ruasijan (xNewz)](https://github.com/xNewz)
+23 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Password%20Generator">Password Generator |  Create secure passwords that are impossible to crack. | [Pargorn Ruasijan (xNewz)](https://github.com/xNewz)
  
  ## ![image](IMG/like.svg) Our Contributors
  
