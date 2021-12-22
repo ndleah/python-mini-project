@@ -1,6 +1,7 @@
 import random
 from tkinter import *
 from tkinter import messagebox
+import pyperclip
 
 gui = Tk()
 gui.title('Password Generator')
@@ -16,7 +17,8 @@ def process():
     all = lower + upper + num
     ran = random.sample(all,length)
     password = "".join(ran)
-    messagebox.showinfo('Result', 'Your password {}'.format(password))
+    messagebox.showinfo('Result', 'Your password {} \n\nPassword copied to clipboard'.format(password))
+    pyperclip.copy(password)
 
 string_pass = StringVar()
 label = Label(text="Password Length").pack(pady=10)
