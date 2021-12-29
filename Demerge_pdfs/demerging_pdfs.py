@@ -26,7 +26,17 @@ for i in range(1, pdf.numPages+1):
         if check_valid_filename(name) == True:
             break
 
-    ctr = int(input(f"Enter the number of pages for {name}: "))
+    while True:
+        ctr = input(f"Enter the number of pages for {name}: ")
+        try:
+            ctr = int(ctr)
+            if ctr > 0:
+                break
+            else:
+                raise ValueError
+        except ValueError:
+            print("Page number must be a positive integer")
+
     u += ctr
     if u > pdf.numPages:
         print('Limit exceeded! ')
