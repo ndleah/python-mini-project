@@ -1,4 +1,12 @@
 import PyPDF2
+import re
+def check_valid_filename(filename):
+    invalid_chars = r'[/\\:*?"<>|]'
+    if re.search(invalid_chars, filename):
+        print('A file name cannot contain any of these characters / \\ : * ? " < > |')
+        return False
+    else:
+        return True
 
 # Note: here instead of Python.pdf you should give the whole path to the pdf if the pdf is not present in the same directory where python program is present
 merged_pdf = open('Python.pdf', mode='rb')
@@ -12,7 +20,12 @@ for i in range(1, pdf.numPages+1):
     if u >= pdf.numPages:
         print("Successfully done!")
         exit(0)
-    name = input("Enter the name of the pdf: ")
+    
+    while True:
+        name = input("Enter the name of the pdf: ")
+        if check_valid_filename(name) == True:
+            break
+
     ctr = int(input(f"Enter the number of pages for {name}: "))
     u += ctr
     if u > pdf.numPages:
