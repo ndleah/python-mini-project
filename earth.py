@@ -1,5 +1,6 @@
 import numpy as np
 from netCDF4 import Dataset
+# download required datset from net
 
 def Etopo(lon_area, lat_area, resolution):
   ### Input
@@ -13,6 +14,7 @@ def Etopo(lon_area, lat_area, resolution):
   
   # Read NetCDF data
   data = Dataset("ETOPO1_Ice_g_gdal.grd", "r")
+
   
   # Get data
   lon_range = data.variables['x_range'][:]
