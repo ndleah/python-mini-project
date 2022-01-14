@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Edit "{{ products['title'] }}" {% endblock %}</h1>
+    <form method="post">
+        <label for="title">Title</label>
+        <br>
+        <input type="text" name="title"
+               placeholder="Post title"
+               value="{{ request.form['title'] or products['title'] }}"></input>
+        <br>
+
+        <label for="price">Post Content</label>
+        <br>
+        <input name="price"
+                placeholder="Product price"
+                value="{{ request.form['price'] or products['price'] }}"></textarea>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <hr>
+    
+{% endblock %}

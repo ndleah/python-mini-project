@@ -1,0 +1,17 @@
+{% extends 'base.html' %} {% block price %} {% for products in products %}
+<div class="products">
+    
+  <p>{{ products['created'] }}</p>
+  <h2>{{ products['title'] }}</h2>
+  <p>{{ products['price'] }}$</p>
+  <button href="{{ url_for('edit', id=products['id']) }}">Edit</button>
+  <form action="{{ url_for('delete', id=products['id']) }}" method="POST">
+    <input
+      type="submit"
+      value="Delete product"
+      onclick="return confirm('Are you sure you want to delete this product?')"
+    />
+  </form>
+</div>
+
+{% endfor %} {% endblock %}
