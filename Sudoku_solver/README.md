@@ -30,7 +30,7 @@ If you want to get your own board solved you have to look at the bottom of the f
 Just fill in the number of your board and use a comment to disable the board generator below.
 
 ## 📺 Demo
-<img src="https://github.com/ndleah/python-mini-project/blob/main/IMG/Sudoku_solver.jpg" width=70% height=70%>
+<img src="https://github.com/dmeurer/python-mini-project/blob/Sudoku_solver/IMG/Sudoku_solver.jpg" width=70% height=70%>
 
 ## 🤖 Author
 <!--Remove the below lines and add yours -->
