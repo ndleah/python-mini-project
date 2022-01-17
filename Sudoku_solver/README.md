@@ -4,14 +4,13 @@
 
 # Sudoku solver
 
-Add a jpeg/png/gif file here if applicable
-
-<!--An image is an illustration for your project, the tip here is using your sense of humour as much as you can :D 
+<!--An image is an illustration for your project, the tip here is using your sense of humour as much as you can :D
 
 You can copy paste my markdown photo insert as following:
-<p align="center">
-<img src="your-source-is-here" width=40% height=40%>
 -->
+<p align="center">
+<img src="https://theme.zdassets.com/theme_assets/2209631/22a60a03520b27c6f51a5bba5ef051d34ffc0b3a.png" width=40% height=40%>
+
 
 ## 🛠️ Description
 <!--Remove the below lines and add yours -->
@@ -35,4 +34,3 @@ Just fill in the number of your board and use a comment to disable the board gen
 ## 🤖 Author
 <!--Remove the below lines and add yours -->
 [Dominik Meurer](https://github.com/DMeurer)
-
