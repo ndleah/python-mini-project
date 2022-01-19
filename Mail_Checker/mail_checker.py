@@ -3,8 +3,8 @@ import imaplib
 
 
 
-user = 'siddharth.p2020@vitstudent.ac.in'
-password = 'GglF972+'
+user = 'Your Gamil address'
+password = 'Your password'
 
 mail = imaplib.IMAP4_SSL('imap.gmail.com')
 mail.login(user, password)
@@ -43,7 +43,7 @@ def readMails(address):
    
 
 
-listOfMails = ['siddharthpradeep4602@gmail.com','johnybrown69420@gmail.com']           #Modify the list contents here to suit you. If you would like to view mails 
+listOfMails = ['mail1@gmail.com','mail2@gmail.com']           #Modify the list contents here to suit you. If you would like to view mails 
                                                                                                     #  from say, 'abc@gmail.com' change 'mail1@gmail.com' to 'abc@gmail.com'
 for addresses in listOfMails:
     readMails(addresses)
