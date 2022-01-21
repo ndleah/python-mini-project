@@ -1,0 +1,25 @@
+.products {
+  padding: 10px;
+  margin: 5px;
+  background-color: #f3f3f3;
+}
+
+nav a {
+  color: #2d95eb;
+  font-size: 3em;
+  margin-left: 50px;
+  text-decoration: none;
+}
+
+.create {
+  font-size: 2em;
+  text-align: center;
+  color: rgb(28, 162, 185);
+}
+
+.alert {
+  padding: 20px;
+  margin: 5px;
+  color: #970020;
+  background-color: #ffd5de;
+}
