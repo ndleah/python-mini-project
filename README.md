@@ -210,7 +210,8 @@ SR No   | Project | Description | Author
 21 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Stack_structure">Stack Structure |  Implementation of a stack structure in python | [Alexander Monterrosa](https://github.com/Alex108-lab)
 22 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Math_Game">Math Game |  It's just a simple math game. Improve your math skills | [Pargorn Ruasijan (xNewz)](https://github.com/xNewz)
 23 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Password%20Generator">Password Generator |  Create secure passwords that are impossible to crack. | [Pargorn Ruasijan (xNewz)](https://github.com/xNewz)
-24 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Password%20Generator">Demerging PDF |  Python program to convert a large pdf file to number of different sized pdf files without any change in the large file. | [Darpan-Balar](https://github.com/Darpan-Balar)
+24 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Demerge_pdfs">Demerging PDF |  Python program to convert a large pdf file to number of different sized pdf files without any change in the large file. | [Darpan-Balar](https://github.com/Darpan-Balar)
+25 | <a href="https://github.com/vivekthedev/python-mini-project/tree/main/QR%20Code%20Genrator">QR Code Generator |  GUI with Tkinter to get convert text to a PNG QR Code. | [Vivek Kumar Singh](https://github.com/vivekthedev)
 
  ## ![image](IMG/like.svg) Our Contributors
  
