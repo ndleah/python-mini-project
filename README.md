@@ -215,7 +215,7 @@ SR No   | Project | Description | Author
 26 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Crud_in_flask">Flask Crud |  Crud using flask and sqlite3 | [Alexander Monterrosa](https://github.com/Alex108-lab)
 27 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Sudoku_solver">Sudoku solver |  This program can generate and solve Sudoku boards. | [Dominik Meurer](https://github.com/DMeurer)
 28 | <a href="https://github.com/vivekthedev/python-mini-project/tree/main/QR%20Code%20Genrator">Mail Checker |  Mail-Checker is a python script that lets you read your gmail subjects from particular gmail accounts directly from the terminal without having to login each time! | [Siddharth Pradeep](https://github.com/thirt33n)
-
+30 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Youtube_video_download">YouTube Video Downloader |  YouTube Video Downloader is a python script that lets you download videos from YouTube! | [Alexander Monterrosa](https://github.com/Alex108-lab)
  
 
  ## ![image](IMG/like.svg) Our Contributors
