@@ -4,6 +4,9 @@
 
 # Script Title
 
+![OpenCV](https://user-images.githubusercontent.com/87910771/150637975-dda7d408-60e6-4c9e-aa71-10196c51ec72.jpg)
+
+
 <!--An image is an illustration for your project, the tip here is using your sense of humour as much as you can :D 
 
 You can copy paste my markdown photo insert as following:
@@ -34,6 +37,8 @@ python main.py
 ```
 
 ## 📺 Demo
+
+
 
 
 ## 🤖 Author
