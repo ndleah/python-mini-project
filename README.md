@@ -217,11 +217,10 @@ SR No   | Project | Description | Author
 28 | <a href="https://github.com/ndleah/python-mini-project/tree/main/QR%20Code%20Genrator">Mail Checker |  Mail-Checker is a python script that lets you read your gmail subjects from particular gmail accounts directly from the terminal without having to login each time! | [Siddharth Pradeep](https://github.com/thirt33n)
 29 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Whatsapp_Bot">Whatsapp Bot |  Whatsapp Bot is a simple bot made using Python to send a WhatsApp message. | [Anish Lohiya](https://github.com/AnishLohiya)
 30 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Youtube_video_download">YouTube Video Downloader |  YouTube Video Downloader lets you download videos from YouTube. | [Alexander Monterrosa](https://github.com/Alex108-lab)
-30 | <a href="https://github.com/vivekthedev/python-mini-project/tree/main/Slideshare%20to%20PDF">Slideshare to PDF |  Download any presentation from slideshare to a PDF form without any signup or login | [Vivek](https://github.com/vivekthedev)
+31 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Face_Recognition">Face Recognition |  A Face Recognition Project developed using OpenCV Module in Python that displays a Blue Reactangle Frame around Faces. | [Anish Lohiya](https://github.com/AnishLohiya) 
+32 | <a href="https://github.com/vivekthedev/python-mini-project/tree/main/Slideshare%20to%20PDF">Slideshare to PDF |  Download any presentation from slideshare to a PDF form without any signup or login | [Vivek](https://github.com/vivekthedev)
  
-
  
-
  ## ![image](IMG/like.svg) Our Contributors
  
 <a href="https://github.com/ndleah/python-mini-project/graphs/contributors">
