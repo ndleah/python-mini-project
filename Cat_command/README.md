@@ -6,10 +6,12 @@
 # Cat Command 
 
 ## 🛠️ Description
-Cat command implementation using python
+Linux's "cat" command implemented using python
+
 
 ## Requirements
-### Not necessary, only python libraries are used
+- argparse
+- pathlib
 
 ## 🌟 How to run 
 On linux you can use 
@@ -18,6 +20,8 @@ Or
 ```python ./cat.py [path]```
 Example
 ```.cat.py ./test_cat.txt```
+<p align="center">
+<img src="IMG/cat_command.png" width=70% height=70%>
 
 ## Author Name
 
