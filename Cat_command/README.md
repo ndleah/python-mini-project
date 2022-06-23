@@ -9,7 +9,6 @@
 Linux's "cat" command implemented using Python. 
 It opens the file specified in the command argument and prints it onto console.
 
-
 ## Requirements
 - argparse
 - pathlib
