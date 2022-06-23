@@ -6,7 +6,8 @@
 # Cat Command 
 
 ## 🛠️ Description
-Linux's "cat" command implemented using python
+Linux's "cat" command implemented using Python. 
+It opens the file specified in the command argument and prints it onto console.
 
 
 ## Requirements
@@ -21,7 +22,6 @@ Or
 Example
 ```.cat.py ./test_cat.txt```
 <p align="center">
-<img src="IMG/cat_command.png" width=70% height=70%>
 
 ## Author Name
 
