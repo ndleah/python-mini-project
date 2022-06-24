@@ -16,7 +16,7 @@ You can copy paste my markdown photo insert as following:
 
 <!--Remove the below lines and add yours -->
 
-This program serve for downloaded videos from youtube
+This program allows users to download video from Youtube given an url. 
 
 ## ⚙️ Languages or Frameworks Used
 
