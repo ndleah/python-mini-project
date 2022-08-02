@@ -92,4 +92,6 @@ while True:
 	pygame.draw.aaline(screen, light_grey, (screen_width / 2, 0),(screen_width / 2, screen_height))
 
 	pygame.display.flip()
-	clock.tick(60)
+	clock.tick(120)
+    # Description
+
