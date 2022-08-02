@@ -13,7 +13,7 @@ def ball_movement():
 
 	if ball.colliderect(player) or ball.colliderect(opponent):
 		ball_speed_x *= -1
-        
+
 def ball_start():
 	global ball_speed_x, ball_speed_y
 
@@ -40,32 +40,34 @@ def opponent_ai():
 	if opponent.bottom >= screen_height:
 		opponent.bottom = screen_height
 
-
+#setup the pygame
 pygame.init()
 clock = pygame.time.Clock()
 screen_width = 1280
 screen_height = 960
 screen = pygame.display.set_mode((screen_width,screen_height))
 pygame.display.set_caption('Pong')
-
+#color
 light_grey = (200,200,200)
 bg_color = pygame.Color('black')
 
-
+#draw the shapes
 ball = pygame.Rect(screen_width / 2 - 15, screen_height / 2 - 15, 30, 30)
 player = pygame.Rect(screen_width - 60, screen_height / 2 - 70, 10,140)
 opponent = pygame.Rect(50, screen_height / 2 - 70, 10,140)
-
+#game variables
 ball_speed_x = 7 * random.choice((1,-1))
 ball_speed_y = 7 * random.choice((1,-1))
 player_speed = 0
 opponent_speed = 7
 score_time = None
+
 while True:
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			pygame.quit()
 			sys.exit()
+        #input handling
 		if event.type == pygame.KEYDOWN:
 			if event.key == pygame.K_UP:
 				player_speed -= 6
@@ -82,7 +84,7 @@ while True:
 	player_movement()
 	opponent_ai()
 
-	 
+	 #draw
 	screen.fill(bg_color)
 	pygame.draw.rect(screen, light_grey, player)
 	pygame.draw.rect(screen, light_grey, opponent)
