@@ -6,7 +6,7 @@
 
 
 <p align="center">
-<img src="/Users/timothychurchill/Documents/ScreenShots/Wordle_screenshot.png" width=40% height=40%>
+<img src="/Users/timothychurchill/Documents/GitHub/python-mini-project/Wordle Aid/Wordle_screenshot.png" width=40% height=40%>
 
 
 
@@ -32,7 +32,7 @@ Hit the run button with wordle open in a different window or on a different devi
 
 ## 📺 Demo
 <p align="center">
-<img src="/Users/timothychurchill/Documents/ScreenShots/Wordle_demo.png" width=40% height=40%>
+<img src="/Users/timothychurchill/Documents/GitHub/python-mini-project/Wordle Aid/Wordle_demo.png" width=40% height=40%>
 
 ## 🤖 Author
 <!--Remove the below lines and add yours -->
