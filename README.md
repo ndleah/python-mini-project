@@ -56,7 +56,7 @@ Step 2: Fork it
 
 On the [GitHub page for this repository](https://github.com/ndleah/python-mini-project), click on the Button "**Fork**".
  
-![fork image](https://help.github.com/assets/images/help/repository/fork_button.jpg)
+![fork image](https://www.earthdatascience.org/images/earth-analytics/git-version-control/githubguides-bootcamp-fork.png)
 
 </details>
 
