@@ -200,8 +200,7 @@ SR No   | Projeto | Descrição | Autor
 11 | [Apanhador de Ovos](https://github.com/ndleah/python-mini-project/tree/main/Egg_Catcher) | Jogo de pegar ovos feito em Python.| [Leah Nguyen](https://github.com/ndleah)
 12 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Number%20Guessing">Adivinhar número | Jogo de adivinhar número | [Shruti Solani](https://github.com/ShrutiSolani)
 13 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Madlibs">Biblioteca desorganizada | Jogo da biblioteca desorganizada | [Shruti Solani](https://github.com/ShrutiSolani)
-14 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Caesar_Cipher">Cifra de César | 
-Encriptador e decodificador simples Caesar Cipher feito com python | [FH089](https://github.com/FH089)
+14 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Caesar_Cipher">Cifra de César | Encriptador e decodificador simples Caesar Cipher feito com python | [FH089](https://github.com/FH089)
 15 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Email%20Slicer">Email Slicer | Email Slicer | [Shruti Solani](https://github.com/ShrutiSolani)
 16 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Speaking_Dictionary">Speaking Dictionary | Python program that allows the user to find the meaning of an English word by speaking it directly to the device | [19lyaejin](https://github.com/19lyaejin)
 17 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Cat_command">Cat Command | this project is a basic implementation of the linux cat command | [Alexander Monterrosa](https://github.com/Alex108-lab)
