@@ -167,7 +167,7 @@ Step 7: Pull Request
 
 Vá para a página do GitHub de seu_fork_ e **faça um pull request**:
 
-![pull request image](https://help.github.com/assets/images/help/pull_requests/choose-base-and-compare-branches.png)
+![pull request image](https://docs.github.com/assets/cb-26570/images/help/pull_requests/pull-request-start-review-button.png)
 
 Leia mais sobre pull requests na [página de ajuda do GitHub](https://docs.github.com/pt/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request).
 
