@@ -181,7 +181,7 @@ Agora espere, até que *seu Pull Request* seja aprovado! Se houver algum conflit
 
 por favor, certifique-se de adicionar um arquivo `README.md` que siga a mesma construção deste modelo para consistência.
 
-[README Template](https://github.com/ndleah/python-mini-project/blob/master/README_TEMPLATE.md)
+[Modelo README](https://github.com/brunombs/mini-projetos-python/blob/main/README_TEMPLATE.md)
 
 ## ![image](IMG/like.svg) Projetos 
 
@@ -189,18 +189,19 @@ SR No   | Projeto | Descrição | Autor
 --- | --- | --- | --- | 
 1 | [Simulador de rolamento de dados](https://github.com/ndleah/python-mini-project/tree/main/Dice_Rolling_Stimulator) |Este é um simulador de dados simples feito usando Python. | [Leah Nguyen](https://github.com/ndleah)
 2 | [Dicionário](https://github.com/ndleah/python-mini-project/tree/main/Dictionary)| Um simulador de dicionário do Python no qual você pode inserir qualquer palavra e obterá a definição dela como saída. | [Leah Nguyen](https://github.com/ndleah)
-3 | [Hangman Game](https://github.com/ndleah/python-mini-project/tree/main/Hangman_Game) |A hangman game stimulator using Python in which the player have 10 attempts to guess the phrase before the men is hung. | [Leah Nguyen](https://github.com/ndleah)
-4 | [Tic Tac Toe](https://github.com/ndleah/python-mini-project/tree/main/Tic_Tac_Toe) |A simple game of tic tac toe, built in python. | [Leah Nguyen](https://github.com/ndleah)
-5 | [Plotter](https://github.com/ndleah/python-mini-project/tree/main/Plotter) | An automation program to plot data with different visualisations by user selections. | [Leah Nguyen](https://github.com/ndleah)
-6 | [Geographical Plot Using Folium](https://github.com/ndleah/python-mini-project/tree/main/Geo_Plot_Using_Folium) | Using Folium library to create different map data visualization. | [Leah Nguyen](https://github.com/ndleah)
-7 | [Caterpillar Game](https://github.com/ndleah/python-mini-project/tree/main/Caterpillar_Game) | A simple Caterpillar game built in python. | [Leah Nguyen](https://github.com/ndleah)
-8 | [Matchmaker Game](https://github.com/ndleah/python-mini-project/tree/main/Matchmaker) | A simple Matchmaker game built by using python. | [Leah Nguyen](https://github.com/ndleah)
-9 | [Smart Calculator](https://github.com/ndleah/python-mini-project/tree/main/Smart_Calculator) | A smart calculator using for basic math equations, built by using python. | [Leah Nguyen](https://github.com/ndleah)
-10 | [Screenpet](https://github.com/ndleah/python-mini-project/tree/main/Screenpet) | A cute screenpet having different reactions when interact on desktop. | [Leah Nguyen](https://github.com/ndleah)
-11 | [Egg Catcher](https://github.com/ndleah/python-mini-project/tree/main/Egg_Catcher) | Egg catcher game built in using Python. | [Leah Nguyen](https://github.com/ndleah)
-12 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Number%20Guessing">Number Guessing | Number Guessing Game | [Shruti Solani](https://github.com/ShrutiSolani)
-13 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Madlibs">Mad Libs | Mad Libs Game | [Shruti Solani](https://github.com/ShrutiSolani)
-14 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Caesar_Cipher">Caesar Cipher | Simple Caesar Cipher encryptor and decryptor bulit with python | [FH089](https://github.com/FH089)
+3 | [Jogo da forca](https://github.com/ndleah/python-mini-project/tree/main/Hangman_Game) |Um simulador de jogo da forca usando Python no qual o jogador tem 10 tentativas para adivinhar a frase antes que o homem seja enforcado. | [Leah Nguyen](https://github.com/ndleah)
+4 | [Jogo da velha](https://github.com/ndleah/python-mini-project/tree/main/Tic_Tac_Toe) |Um simples jogo da velha feito em Python. | [Leah Nguyen](https://github.com/ndleah)
+5 | [Plotador](https://github.com/ndleah/python-mini-project/tree/main/Plotter) |Um programa de automação para plotar dados com diferentes visualizações por seleções do usuário. | [Leah Nguyen](https://github.com/ndleah)
+6 | [Plotagem eográfica usando Folium](https://github.com/ndleah/python-mini-project/tree/main/Geo_Plot_Using_Folium) | Usando a biblioteca Folium para criar diferentes visualizações de dados de mapas. | [Leah Nguyen](https://github.com/ndleah)
+7 | [Jogo da lagarta](https://github.com/ndleah/python-mini-project/tree/main/Caterpillar_Game) | Um simples jogo da lagarga desenvolvido em Python. | [Leah Nguyen](https://github.com/ndleah)
+8 | [Jogo da memória](https://github.com/ndleah/python-mini-project/tree/main/Matchmaker) | Um simples jogo da memória feito em Python. | [Leah Nguyen](https://github.com/ndleah)
+9 | [Calculadora inteligente](https://github.com/ndleah/python-mini-project/tree/main/Smart_Calculator) | Uma calculadora inteligente usada para questões básicas de matemática criada em Python.| [Leah Nguyen](https://github.com/ndleah)
+10 | [Tela pet](https://github.com/ndleah/python-mini-project/tree/main/Screenpet) | Uma tela pet fofa com reações diferentes ao interagir na área de trabalho. | [Leah Nguyen](https://github.com/ndleah)
+11 | [Apanhador de Ovos](https://github.com/ndleah/python-mini-project/tree/main/Egg_Catcher) | Jogo de pegar ovos feito em Python.| [Leah Nguyen](https://github.com/ndleah)
+12 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Number%20Guessing">Adivinhar número | Jogo de adivinhar número | [Shruti Solani](https://github.com/ShrutiSolani)
+13 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Madlibs">Biblioteca desorganizada | Jogo da biblioteca desorganizada | [Shruti Solani](https://github.com/ShrutiSolani)
+14 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Caesar_Cipher">Cifra de César | 
+Encriptador e decodificador simples Caesar Cipher feito com python | [FH089](https://github.com/FH089)
 15 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Email%20Slicer">Email Slicer | Email Slicer | [Shruti Solani](https://github.com/ShrutiSolani)
 16 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Speaking_Dictionary">Speaking Dictionary | Python program that allows the user to find the meaning of an English word by speaking it directly to the device | [19lyaejin](https://github.com/19lyaejin)
 17 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Cat_command">Cat Command | this project is a basic implementation of the linux cat command | [Alexander Monterrosa](https://github.com/Alex108-lab)
