@@ -1,14 +1,14 @@
-# Math Game
-It's just a simple math game. Improve your math skills
+# Jogo de matemática
+É um simples jogo de matemática. Aprimore suas habiidades de matemática.
 
-## Library used
-`import random` and `import operator`
+## Biblioteca usada
+`import random` e `import operator`
 
-## How to run the script
+## Como executar o script
 `python math_game.py`
 
 ## Screenshot
 <div align="center"><img src="https://github.com/xNewz/python-mini-projects/blob/master/projects/Math%20Game/img.gif"></div>
 
-## *Author Name*
+## *Nome do autor*
 [`Pargorn Ruasijan (xNewz)`](https://github.com/xNewz)
