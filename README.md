@@ -183,9 +183,9 @@ por favor, certifique-se de adicionar um arquivo `README.md` que siga a mesma co
 
 [README Template](https://github.com/ndleah/python-mini-project/blob/master/README_TEMPLATE.md)
 
-## ![image](IMG/like.svg) Projects 
+## ![image](IMG/like.svg) Projetos 
 
-SR No   | Project | Description | Author  
+SR No   | Projeto | Descrição | Autor  
 --- | --- | --- | --- | 
 1 | [Dice Rolling Stimulator](https://github.com/ndleah/python-mini-project/tree/main/Dice_Rolling_Stimulator) |This is a simple dice stimulator made using Python. | [Leah Nguyen](https://github.com/ndleah)
 2 | [Dictionary](https://github.com/ndleah/python-mini-project/tree/main/Dictionary)| A dictionary stimulator by Python in which you can enter any words and you will get the definition of it as the output. | [Leah Nguyen](https://github.com/ndleah)
@@ -222,7 +222,7 @@ SR No   | Project | Description | Author
 33 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Rock_Paper_Scissors_Spock">Rock Paper Scissors Spock | Rock Paper Scissors Spock has extra steps to it which add a little spice and creativity over the generic Rock Paper Scissors game we all know and love. The player gets to choose between Rock, Paper, Scissor, Lizard or Spock. If they choose correctly, then the player wins. Have fun and good luck! | [Anokh1](https://github.com/Anokh1)
  
  
- ## ![image](IMG/like.svg) Our Contributors
+ ## ![image](IMG/like.svg) Nossos contribuidores
  
 <a href="https://github.com/ndleah/python-mini-project/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=ndleah/python-mini-project" />
@@ -231,7 +231,7 @@ SR No   | Project | Description | Author
  
  ## ![image](IMG/muscle.svg) Feedback
 
-If you have any feedback or ideas to improve this project, feel free to contact me via
+Se você tiver algum comentário ou ideia para melhorar este projeto, sinta-se à vontade para entrar em contato comigo via
 
 <a href="https://www.linkedin.com/in/ndleah/">
   <img align="left" alt="Reeha's Linkdein" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/linkedin.svg" />
