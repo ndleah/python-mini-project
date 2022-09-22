@@ -22,7 +22,7 @@
 ## Tabela de conteúdo
   - [Objetivo do projeto](#-objetivo-do-projeto)
   - [Contribuindo](#-contribuindo)
-  - [README Template for scripts](#-readme-template-for-scripts)
+  - [README Modelo para os scripts](#-readme-modelo-para-os-scripts)
   - [Projetos](#-projetos)
   - [Feedback](#-feedback)
 
@@ -177,9 +177,9 @@ Now wait, until *your Pull Request* is approved! If there are any conflicts, you
 
 <br>
 
-## ![image](IMG/bookmark.svg) README Template for scripts
+## ![image](IMG/bookmark.svg) README Modelo para os scripts
 
-please make sure to add a `README.md` file that follow the same construction as this template for consistency.
+por favor, certifique-se de adicionar um arquivo `README.md` que siga a mesma construção deste modelo para consistência.
 
 [README Template](https://github.com/ndleah/python-mini-project/blob/master/README_TEMPLATE.md)
 
