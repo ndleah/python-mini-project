@@ -101,7 +101,7 @@ Step 4: Crie sua própria branch
 Sempre mantenha sua cópia local do repositório atualizada com o repositório original.
 Antes de fazer qualquer alteração e/ou em um intervalo apropriado, siga os seguintes passos:
  
-* **Método 1 1:** GitHub Desktop
+* **Método 1:** GitHub Desktop
 
 Saiba mais sobre como criar sua nova branch [aqui]([https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/making-changes-in-a-branch/managing-branches#creating-a-branch](https://docs.github.com/pt/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-and-deleting-branches-within-your-repository)) e como buscar e puxar a origem de/para sua máquina local (fetch and pull) [aqui](https://docs.github.com/pt/desktop/contributing-and-collaborating-using-github-desktop/keeping-your-local-repository-in-sync-with-github/syncing-your-branch).
 
@@ -131,30 +131,30 @@ Step 6: Preparar, Apontar, Começar...
 
 Depois de concluir essas etapas, você estará pronto para começar a contribuir com o projeto e criar **pull requests**.
  
-- Create a folder in
-  [projects directory](https://github.com/ndleah/python-mini-project) according to your project name.
-> The folder name should follow the following format "Your_Project_Name_Here". For example: Dice_Stimulator
-- Write your code and add to the respective folder in the projects directory, locally.
-- Don't forget to add a `README.md` in your folder, according to the
-   [README_TEMPLATE.](https://github.com/Python-World/python-mini-projects/blob/master/README_TEMPLATE.md)
+- Crie uma pasta dentro do:
+  [diretório do projeto](https://github.com/brunombs/mini-projetos-python) de acordo com o nome do seu projeto.
+> O nome da pasta deve ter o seguinte formato "Nome_do_seu_projeto_aqui". Por exemplo: Simulador_de_dado
+- Escreva seu código e adicione à respectiva pasta no diretório de projetos, localmente.
+- Não esqueça de adicionar um `README.md` em sua pasta, de acordo com o
+   [MODELO_README.](https://github.com/Python-World/python-mini-projects/blob/master/README_TEMPLATE.md)
 
-* **Method 1:** GitHub Desktop
+* **Método 1:** GitHub Desktop
 
-Learn more how to pull request from your local machine using **GitHub Desktop** to the main repo [here](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/working-with-your-remote-repository-on-github-or-github-enterprise/viewing-a-pull-request-in-github-desktop).
+Saiba mais como fazer pull request de sua máquina local usando o **GitHub Desktop** para o repositório principal[aqui](https://docs.github.com/pt/desktop/contributing-and-collaborating-using-github-desktop/working-with-your-remote-repository-on-github-or-github-enterprise/viewing-a-pull-request-in-github-desktop).
 
-* **Method 2:** Git
+* **Método 2:** Git
 
-Add the changes with `git add`, `git commit`:
+Adicione as alterações usando os comandos `git add`, `git commit`:
 
 ```bash
 git add -A
-git commit -m "<your message>"
+git commit -m "<sua mensagem>"
 ```
 
-Push the code *to your repository*.
+Envie o código *para o seu repositório*.
 
 ```bash
-git push origin <branch-name>
+git push origin <nome-da-branch>
 ```
 </details>
 
@@ -165,13 +165,13 @@ git push origin <branch-name>
 Step 7: Pull Request
 </summary>
 
-Go to the GitHub page of _your fork_, and **make a pull request**:
+Vá para a página do GitHub de seu_fork_ e **faça um pull request**:
 
 ![pull request image](https://help.github.com/assets/images/help/pull_requests/choose-base-and-compare-branches.png)
 
-Read more about pull requests on the [GitHub help pages](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
+Leia mais sobre pull requests na [página de ajuda do GitHub](https://docs.github.com/pt/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request).
 
-Now wait, until *your Pull Request* is approved! If there are any conflicts, you will get a notification.
+Agora espere, até que *seu Pull Request* seja aprovado! Se houver algum conflito, você receberá uma notificação.
 
 </details>
 
