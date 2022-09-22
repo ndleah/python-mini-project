@@ -21,9 +21,9 @@
 <!-- omit in toc -->
 ## Tabela de conteúdo
   - [Objetivo do projeto](#-objetivo-do-projeto)
-  - [Contributing](#-contributing)
+  - [Contribuindo](#-contribuindo)
   - [README Template for scripts](#-readme-template-for-scripts)
-  - [Projects](#-projects)
+  - [Projetos](#-projetos)
   - [Feedback](#-feedback)
 
 ## ![image](IMG/aiming.svg) Objetivo do projeto
@@ -38,7 +38,7 @@ Vamos criar coisas incríveis juntos! 👉
 
 <details>
 <summary>
-Step 1: Estrela no repositório (Star)
+Passo 1: Estrela no repositório (Star)
 </summary>
 
 Clique na estrela no repositório pressionando o botão superior direito para iniciar sua jornada maravilhosa
@@ -51,10 +51,10 @@ Clique na estrela no repositório pressionando o botão superior direito para in
 
 <details>
 <summary>
-Step 2: Fork it
+Passo 2: Fork it
 </summary>
 
-On the [GitHub page for this repository](https://github.com/ndleah/python-mini-project), click on the Button "**Fork**".
+Na página do GitHub deste repositório (https://github.com/brunombs/mini-projetos-python) clique no botão "**Fork**".
  
 ![fork image](https://www.earthdatascience.org/images/earth-analytics/git-version-control/githubguides-bootcamp-fork.png)
 
