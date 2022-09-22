@@ -13,12 +13,12 @@ def random_problem():
     num_2 = random.randint(1, 10)
     operation = random.choice(list(operators.keys()))
     answer = operators.get(operation)(num_1, num_2)
-    print(f'What is {num_1} {operation} {num_2}')
+    print(f'Quanto é {num_1} {operation} {num_2}')
     return answer
 
 def ask_question():
     answer = random_problem()
-    guess = float(input('Enter you answer: '))
+    guess = float(input('Digite a sua resposta: '))
     return guess == answer
 
 def game():
@@ -26,10 +26,10 @@ def game():
     while True:
         if ask_question() == True:
             score += 1
-            print('Correct !')
+            print('Correto!')
         else:
-            print('Incorrect')
+            print('Incorreto')
             break
-    print(f'======== Game Over ========\nYou score is {score}\nKepp going!')
+    print(f'======== Game Over ========\nSua pontuação foi {score}!')
 
 game()
