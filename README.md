@@ -38,7 +38,7 @@ Vamos criar coisas incríveis juntos! 👉
 
 <details>
 <summary>
-Passo 1: Estrela no repositório (Star)
+Passo 1: Dê uma estrela no repositório (Star)
 </summary>
 
 Clique na estrela no repositório pressionando o botão superior direito para iniciar sua jornada maravilhosa
@@ -51,7 +51,7 @@ Clique na estrela no repositório pressionando o botão superior direito para in
 
 <details>
 <summary>
-Passo 2: Fork it
+Passo 2: Faça um fork
 </summary>
 
 Na página do GitHub deste repositório (https://github.com/brunombs/mini-projetos-python) clique no botão "**Fork**".
@@ -64,30 +64,30 @@ Na página do GitHub deste repositório (https://github.com/brunombs/mini-projet
 
 <details>
 <summary>
-Step 3: Clone it
+Step 3: Clone o projeto
 </summary>
 
-* **Method 1:** GitHub Desktop
+* **Método 1:** GitHub Desktop
 
-> ⚠️ **NOTE:** If you're not familiar with Git, using **GitHub Desktop Application** is a better start. If you choose this method, make sure to download it before continuing reading. 
+> ⚠️ **OBSERVAÇÃO:** Se você não estiver familiarizado com o Git, usar o **GitHub Desktop** é um melhor começo. Se você escolher este método, certifique-se de baixá-lo antes de continuar a leitura.
 > 
-> ❗❗ Access link to download [**here**](https://desktop.github.com).
+> ❗❗ Acesse o link para fazer o download [**here**](https://desktop.github.com).
 
-Learn more about how to clone the remote respository on your local machine using **GitHub Desktop** [here](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/adding-and-cloning-repositories/cloning-and-forking-repositories-from-github-desktop#cloning-a-repository).
+Saiba mais sobre como clonar o repositório remoto em sua máquina local usando o **GitHub Desktop** [aqui](https://docs.github.com/pt/repositories/creating-and-managing-repositories/cloning-a-repository).
 
-* **Method 2:** Git
+* **Método 2:** Git
 
-Clone the forked repository. Open git bash and type:
+Clone o repositório que fez o fork. Abra o git bash e digite:
 
 ```bash
-git clone https://github.com/<your-github-username>/python-mini-project.git
+git clone https://github.com/<seu-user-github>/mini-projetos-python.git
 ```
 
-> This makes a local copy of the repository in your machine.
+> Isso faz uma cópia local do repositório em seu computador.
 > 
-⚠️ **Replace \<your-github-username\>!**
+⚠️ **Substituir \<seu-user-github\>!**
 
-Learn more about [forking](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) and [cloning a repo](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository).
+Saiba mais sobre isso [forking](https://docs.github.com/pt/get-started/quickstart/fork-a-repo).
 
 </details>
 
