@@ -2,9 +2,9 @@
 ![Star Badge](https://img.shields.io/static/v1?label=%F0%9F%8C%9F&message=If%20Useful&style=style=flat&color=BC4E99)
 ![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)
 
-# Script Title
+# Título do script
 
-Add a jpeg/png/gif file here if applicable
+Adicione um arquivo jpeg/png/gif aqui, se aplicável
 
 <!--An image is an illustration for your project, the tip here is using your sense of humour as much as you can :D 
 
@@ -13,25 +13,24 @@ You can copy paste my markdown photo insert as following:
 <img src="your-source-is-here" width=40% height=40%>
 -->
 
-## 🛠️ Description
+## 🛠️ Descrição
 <!--Remove the below lines and add yours -->
-A short description about the script must be mentioned here.
+Uma breve descrição sobre o script deve ser mencionada aqui.
 
-## ⚙️ Languages or Frameworks Used
+## ⚙️ Linguagens ou frameworks usados
 <!--Remove the below lines and add yours -->
-Modules required to be able to use the script successfully
-and how to install them.
-(If there are a lot of them, including a `requirements.txt` file will work better.)
+Módulos necessários para poder usar o script com sucesso
+e como instalá-los.
+(Se houver muitos deles, incluir um arquivo `requirements.txt` funcionará melhor.)
 
-## 🌟 How to run
+## 🌟 Como usa-lo
 <!--Remove the below lines and add yours -->
-Steps on how to run the script along with suitable examples.
+Etapas sobre como executar o script juntamente com exemplos adequados.
 
-## 📺 Demo
-Add a Screenshot/GIF showing the sample use of the script (jpeg/png/gif).
+## 📺 Demonstração
+Adicione uma captura de tela/GIF mostrando o exemplo de uso do script (jpeg/png/gif).
 
-## 🤖 Author
+## 🤖 Autor
 <!--Remove the below lines and add yours -->
-The name of the author of the code goes here.
-If you have a web site or a Git user name, feel free to link.
-
+O nome do autor do código vai aqui.
+Se você tiver um site ou um nome de usuário Git, sinta-se à vontade para criar um link.
