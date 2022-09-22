@@ -28,20 +28,20 @@
 
 ## ![image](IMG/aiming.svg) Objetivo do projeto
 
-As a Python newbie, I understand the problems that people face when they first begin studying and attempting to understand various Data Science concepts, particularly Python. This project is designed for folks who are just getting started with Python principles and exploring GitHub as "contributors."
+Como um iniciante em Python, eu compreendo os problemas que as pessoas enfrentam quando começam a estudar e tentar entender vários conceitos de Data Science, particularmente Python. Este projeto foi desenvolvido para pessoas que estão apenas começando com os princípios do Python e explorando o GitHub como "colaboradores".
 
-My goal is to build a common playground where everyone, from beginners to experts, can learn and share knowledge, and I hope you enjoy your stay here!
+Meu objetivo é construir um playground comum onde todos, de iniciantes a especialistas, possam aprender e compartilhar conhecimento, e espero que você aproveite sua estadia aqui!
 
-Let's "folk-ing" create amazing things together! 👉
+Vamos criar coisas incríveis juntos! 👉
 
-## ![image](IMG/game-ps.svg) Contributing 
+## ![image](IMG/game-ps.svg) Contribuindo 
 
 <details>
 <summary>
-Step 1: Star The Repo
+Step 1: Estrela no repositório (Star)
 </summary>
 
-Star the repo by pressing the topmost-right button to start your wonderful journey
+Clique na estrela no repositório pressionando o botão superior direito para iniciar sua jornada maravilhosa
 
 ![star repo](https://docs.github.com/assets/images/help/stars/starring-a-repository.png)
 
