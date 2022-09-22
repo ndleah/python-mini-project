@@ -187,7 +187,7 @@ por favor, certifique-se de adicionar um arquivo `README.md` que siga a mesma co
 
 SR No   | Projeto | Descrição | Autor  
 --- | --- | --- | --- | 
-1 | [Simulador de rolamento de dados](https://github.com/ndleah/python-mini-project/tree/main/Dice_Rolling_Stimulator) |Este é um simulador de dados simples feito usando Python. | [Leah Nguyen](https://github.com/ndleah)
+1 | [Simulador de rolamento de dados](https://github.com/brunombs/mini-projetos-python/tree/main/Dice_Rolling_Stimulator) |Este é um simulador de dados simples feito usando Python. | [Leah Nguyen](https://github.com/ndleah)
 2 | [Dicionário](https://github.com/ndleah/python-mini-project/tree/main/Dictionary)| Um simulador de dicionário do Python no qual você pode inserir qualquer palavra e obterá a definição dela como saída. | [Leah Nguyen](https://github.com/ndleah)
 3 | [Jogo da forca](https://github.com/ndleah/python-mini-project/tree/main/Hangman_Game) |Um simulador de jogo da forca usando Python no qual o jogador tem 10 tentativas para adivinhar a frase antes que o homem seja enforcado. | [Leah Nguyen](https://github.com/ndleah)
 4 | [Jogo da velha](https://github.com/ndleah/python-mini-project/tree/main/Tic_Tac_Toe) |Um simples jogo da velha feito em Python. | [Leah Nguyen](https://github.com/ndleah)
