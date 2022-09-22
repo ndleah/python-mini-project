@@ -167,7 +167,7 @@ Step 7: Pull Request
 
 Vá para a página do GitHub de seu_fork_ e **faça um pull request**:
 
-![pull request image](https://docs.github.com/assets/cb-26570/images/help/pull_requests/pull-request-start-review-button.png)
+![pull request image](https://docs.github.com/assets/cb-26223/images/help/pull_requests/pullrequest-send.png)
 
 Leia mais sobre pull requests na [página de ajuda do GitHub](https://docs.github.com/pt/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request).
 
@@ -187,8 +187,8 @@ por favor, certifique-se de adicionar um arquivo `README.md` que siga a mesma co
 
 SR No   | Projeto | Descrição | Autor  
 --- | --- | --- | --- | 
-1 | [Dice Rolling Stimulator](https://github.com/ndleah/python-mini-project/tree/main/Dice_Rolling_Stimulator) |This is a simple dice stimulator made using Python. | [Leah Nguyen](https://github.com/ndleah)
-2 | [Dictionary](https://github.com/ndleah/python-mini-project/tree/main/Dictionary)| A dictionary stimulator by Python in which you can enter any words and you will get the definition of it as the output. | [Leah Nguyen](https://github.com/ndleah)
+1 | [Simulador de rolamento de dados](https://github.com/ndleah/python-mini-project/tree/main/Dice_Rolling_Stimulator) |Este é um simulador de dados simples feito usando Python. | [Leah Nguyen](https://github.com/ndleah)
+2 | [Dicionário](https://github.com/ndleah/python-mini-project/tree/main/Dictionary)| Um simulador de dicionário do Python no qual você pode inserir qualquer palavra e obterá a definição dela como saída. | [Leah Nguyen](https://github.com/ndleah)
 3 | [Hangman Game](https://github.com/ndleah/python-mini-project/tree/main/Hangman_Game) |A hangman game stimulator using Python in which the player have 10 attempts to guess the phrase before the men is hung. | [Leah Nguyen](https://github.com/ndleah)
 4 | [Tic Tac Toe](https://github.com/ndleah/python-mini-project/tree/main/Tic_Tac_Toe) |A simple game of tic tac toe, built in python. | [Leah Nguyen](https://github.com/ndleah)
 5 | [Plotter](https://github.com/ndleah/python-mini-project/tree/main/Plotter) | An automation program to plot data with different visualisations by user selections. | [Leah Nguyen](https://github.com/ndleah)
