@@ -8,9 +8,9 @@
 [![forthebadge](https://forthebadge.com/images/badges/powered-by-black-magic.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)
 
-# Python Mini Projects <img src="https://i.pinimg.com/originals/d8/5d/f0/d85df08df1212c0f8b219e779c5ebc46.gif" align="right" width="120" />
+# Python Mini Projetos <img src="https://i.pinimg.com/originals/d8/5d/f0/d85df08df1212c0f8b219e779c5ebc46.gif" align="right" width="120" />
 
- > A collection of easy Python small projects to help you improve your programming skills.
+ > Uma coleção de pequenos e fáceis projetos em Python para ajudar você a melhorar suas habilidades de programar.
 
 ![Issues](https://img.shields.io/github/issues/ndleah/python-mini-project?style=social&logo=github)
 ![Pull Requests](https://img.shields.io/github/issues-pr/ndleah/python-mini-project?style=social&logo=github)
@@ -19,8 +19,8 @@
 [![License](https://img.shields.io/github/license/ndleah/python-mini-project?style=social&logo=github)](https://github.com/ndleah/python-mini-project/blob/main/LICENSE)
 
 <!-- omit in toc -->
-## Table Of Contents
-  - [Aim Of The Project](#-aim-of-the-project)
+## Tabela de conteúdo
+  - [Objetivo do projeto](#-aim-of-the-project)
   - [Contributing](#-contributing)
   - [README Template for scripts](#-readme-template-for-scripts)
   - [Projects](#-projects)
