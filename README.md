@@ -20,13 +20,13 @@
 
 <!-- omit in toc -->
 ## Tabela de conteúdo
-  - [Objetivo do projeto](#-aim-of-the-project)
+  - [Objetivo do projeto](#-objetivo-do-projeto)
   - [Contributing](#-contributing)
   - [README Template for scripts](#-readme-template-for-scripts)
   - [Projects](#-projects)
   - [Feedback](#-feedback)
 
-## ![image](IMG/aiming.svg) Aim Of The Project
+## ![image](IMG/aiming.svg) Objetivo do projeto
 
 As a Python newbie, I understand the problems that people face when they first begin studying and attempting to understand various Data Science concepts, particularly Python. This project is designed for folks who are just getting started with Python principles and exploring GitHub as "contributors."
 
