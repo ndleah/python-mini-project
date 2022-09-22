@@ -71,7 +71,7 @@ Step 3: Clone o projeto
 
 > ⚠️ **OBSERVAÇÃO:** Se você não estiver familiarizado com o Git, usar o **GitHub Desktop** é um melhor começo. Se você escolher este método, certifique-se de baixá-lo antes de continuar a leitura.
 > 
-> ❗❗ Acesse o link para fazer o download [**here**](https://desktop.github.com).
+> ❗❗ Acesse o link para fazer o download [**aqui**](https://desktop.github.com).
 
 Saiba mais sobre como clonar o repositório remoto em sua máquina local usando o **GitHub Desktop** [aqui](https://docs.github.com/pt/repositories/creating-and-managing-repositories/cloning-a-repository).
 
@@ -95,28 +95,28 @@ Saiba mais sobre isso [forking](https://docs.github.com/pt/get-started/quickstar
 
 <details>
 <summary>
-Step 4: Create your feature branch 
+Step 4: Crie sua própria branch
 </summary>
 
-Always keep your local copy of the repository updated with the original repository.
-Before making any changes and/or in an appropriate interval, follow the following steps:
+Sempre mantenha sua cópia local do repositório atualizada com o repositório original.
+Antes de fazer qualquer alteração e/ou em um intervalo apropriado, siga os seguintes passos:
+ 
+* **Método 1 1:** GitHub Desktop
 
-* **Method 1:** GitHub Desktop
+Saiba mais sobre como criar sua nova branch [aqui]([https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/making-changes-in-a-branch/managing-branches#creating-a-branch](https://docs.github.com/pt/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-and-deleting-branches-within-your-repository)) e como buscar e puxar a origem de/para sua máquina local (fetch and pull) [aqui](https://docs.github.com/pt/desktop/contributing-and-collaborating-using-github-desktop/keeping-your-local-repository-in-sync-with-github/syncing-your-branch).
 
-Learn more about how to creat new branch [here](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/making-changes-in-a-branch/managing-branches#creating-a-branch) and how to fetch and pull origin from/to your local machine [here](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/keeping-your-local-repository-in-sync-with-github/syncing-your-branch).
+Saiba mais sobre como buscar (fetch) e puxar (pull) a origem de/para sua máquina local usando **GitHub Desktop** [aqui](https://docs.github.com/pt/desktop/contributing-and-collaborating-using-github-desktop/keeping-your-local-repository-in-sync-with-github/syncing-your-branch).
 
-Learn more about how to fetch and pull origin from/to your local machine using **GitHub Desktop** [here](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/keeping-your-local-repository-in-sync-with-github/syncing-your-branch).
+* **Método 2:** Git
 
-* **Method 2:** Git
-
-Run the following commands ***carefully*** to update your local repository
+Execute os seguintes comandos ***com cuidado*** para atualizar seu repositório local
 
 ```sh
-# If you cloned a while ago, get the latest changes from upstream
+# Se você clonou há algum tempo, obtenha as últimas alterações do upstream
 git checkout <master>
 git pull upstream <master>
 
-# Make a feature branch (Always check your current branch is up to date before creating a new branch from it to avoid merge conflicts)
+# Faça uma ramificação (branch) de recurso (sempre verifique se sua ramificação (branch) atual está atualizada antes de criar uma nova ramificação para evitar conflitos de mesclagem (merge))
 git checkout -b <branch-name>
 
 #
@@ -126,11 +126,11 @@ git checkout -b <branch-name>
 ---
 <details>
 <summary>
-Step 6: Ready, Set, Go...
+Step 6: Preparar, Apontar, Começar...
 </summary>
 
-Once you have completed these steps, you are ready to start contributing to the project and creating **pull requests**.
-
+Depois de concluir essas etapas, você estará pronto para começar a contribuir com o projeto e criar **pull requests**.
+ 
 - Create a folder in
   [projects directory](https://github.com/ndleah/python-mini-project) according to your project name.
 > The folder name should follow the following format "Your_Project_Name_Here". For example: Dice_Stimulator
