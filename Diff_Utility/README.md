@@ -3,9 +3,8 @@
 [![View My Profile](https://img.shields.io/badge/View-My_Profile-green?logo=GitHub)](https://github.com/ndleah)
 [![View Repositories](https://img.shields.io/badge/View-My_Repositories-blue?logo=GitHub)](https://github.com/ndleah?tab=repositories)
 
-# Dictionary
+# Diff Utility
 <p align="center">
-<img src="https://cdn.tgdd.vn/Files/2019/12/31/1229256/anhdaidien_1280x720-800-resize.jpg" width=40% height=40%>
 
 ## 🛠️ Description
 
@@ -28,7 +27,7 @@ python diff.py <file1.txt> <file2.txt>
 
 ## 📺 Demo
 <p align="center">
-<img src="py_diff.png" width=70% height=70%>
+<img src="py_diff.jpg" width=70% height=70%>
 
 ## 🤖 Author
 [Shreyas Sable](https://github.com/KILLinefficiency)
