@@ -221,7 +221,7 @@ SR No   | Project | Description | Author
 32 | <a href="https://github.com/vivekthedev/python-mini-project/tree/main/Slideshare%20to%20PDF">Slideshare to PDF |  Download any presentation from slideshare to a PDF form without any signup or login | [Vivek](https://github.com/vivekthedev)
 33 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Rock_Paper_Scissors_Spock">Rock Paper Scissors Spock | Rock Paper Scissors Spock has extra steps to it which add a little spice and creativity over the generic Rock Paper Scissors game we all know and love. The player gets to choose between Rock, Paper, Scissor, Lizard or Spock. If they choose correctly, then the player wins. Have fun and good luck! | [Anokh1](https://github.com/Anokh1)
 34 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Port%20Scanner"> Port Scanner | It's a simple port scanner. | [AniYengibaryan](https://github.com/AniYengibaryan)
-35 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Port%20Scanner"> TextVenture | TextVenture is a short for Text Adventure. It is a game where you can play as a character and explore a world. | [RAO.exe](https://github.com/RAOexe)
+35 | <a href="https://github.com/ndleah/python-mini-project/tree/main/TEXTVENTURE"> TextVenture | TextVenture is a short for Text Adventure. It is a game where you can play as a character and explore a world. | [RAO.exe](https://github.com/RAOexe)
  
  
  ## ![image](IMG/like.svg) Our Contributors
