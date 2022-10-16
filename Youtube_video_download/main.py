@@ -22,7 +22,7 @@ def Download():  # Function for download video
 
     url = YouTube(str(link.get()))
 
-    video = url.streams.filter(file_extension=extension).first()
+    video = url.streams.get_highest_resolution()
 
     video.download()
 
