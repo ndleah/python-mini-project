@@ -3,7 +3,7 @@ import time
 print('Hello World! Welcome to the game')
 time.sleep(2)
 n = random.randint(1, 10)
-print('Number has been generated!!\nYou have 4 chnaces to guess the number')
+print('Number has been generated!!\nYou have 4 chances to guess the number')
 
 count = 4
 
