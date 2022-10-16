@@ -220,10 +220,15 @@ SR No   | Project | Description | Author
 31 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Face_Recognition">Face Recognition |  A Face Recognition Project developed using OpenCV Module in Python that displays a Blue Reactangle Frame around Faces. | [Anish Lohiya](https://github.com/AnishLohiya) 
 32 | <a href="https://github.com/vivekthedev/python-mini-project/tree/main/Slideshare%20to%20PDF">Slideshare to PDF |  Download any presentation from slideshare to a PDF form without any signup or login | [Vivek](https://github.com/vivekthedev)
 33 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Rock_Paper_Scissors_Spock">Rock Paper Scissors Spock | Rock Paper Scissors Spock has extra steps to it which add a little spice and creativity over the generic Rock Paper Scissors game we all know and love. The player gets to choose between Rock, Paper, Scissor, Lizard or Spock. If they choose correctly, then the player wins. Have fun and good luck! | [Anokh1](https://github.com/Anokh1)
-34 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Port%20Scanner"> Port Scanner | It's a simple port scanner. | [AniYengibaryan](https://github.com/AniYengibaryan)
-35 | <a href="https://github.com/ndleah/python-mini-project/tree/main/TEXTVENTURE"> TextVenture | TextVenture is a short for Text Adventure. It is a game where you can play as a character and explore a world. | [RAO.exe](https://github.com/RAOexe)
- 
- 
+34 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Port%20Scanner">Port Scanner | It's a simple port scanner. | [AniYengibaryan](https://github.com/AniYengibaryan)
+35 | <a href="https://github.com/ndleah/python-mini-project/tree/main/TEXTVENTURE">TextVenture | TextVenture is a short for Text Adventure. It is a game where you can play as a character and explore a world. | [RAO.exe](https://github.com/RAOexe)
+36 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Lazy_Pong">Lazy pong | This is a very simple Pong game made with python. It's so simple it doesnt even keep track of scores | [Ben-Sicat](https://github.com/Ben-Sicat)
+37 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Minesweeper_game">Minesweeper Game | The classic Minesweeper game in python.  | [`Subhadeep Das(Raven1233)`](https://github.com/Raven1233)
+38 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Zombie_Game">Zombie Game | Simple Zombie Survival Quiz Game bulit with python  |  [jmeyu](https://github.com/jmeyu)
+39 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Music-Player">Music Player | A simple music player in python which enables you to play, next, back, pause, resume the music |  [mr-shitij](https://github.com/mr-shitij)
+40 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Wordle_Aid">Wordle Aid! | Use this to give you all the possible options for today's wordle based on the information available. |  [Timmy Churchill](https://github.com/Timmy-Churchill)
+41 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Diff_Utility">Diff Utility | A Diff Utility that takes in two file names as commandline arguments and compares them. The comparison is then shown as the output indication which file has changed where.  |  [Shreyas Sable](https://github.com/KILLinefficiency)
+
  ## ![image](IMG/like.svg) Our Contributors
  
 <a href="https://github.com/ndleah/python-mini-project/graphs/contributors">
