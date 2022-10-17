@@ -1,10 +1,18 @@
+#cheat : high chance Win Strategy =>   1 - 8 - 6 - 5 - 4
+
+
+#libs
 import os
 
 
-#cheat : high chance Win Strategy =>   1 - 8 - 6 - 5 - 4
-
+#initialize 
 board = [' ' for x in range(10)]
 FirstRun = True
+
+
+#Game Modules
+
+#insert tic tac toe symbol to screen
 def insertLetter(letter,pos):
     if(board.count(' ') >= 1):
         board[pos] = letter
@@ -108,13 +116,18 @@ def StartTheGame():
     print('-------------------')
     GamePlay()
 
-
+#clean Old data in screen when event occur
 def CleanScreen():
+    #Linux and MacOS
     if(os.name == 'posix'):
          os.system('clear')
+    #windows
     else:
          os.system('cls')
 
+
+
+#check Tie Game condition
 def TieGame():
     
     if isBoardFull(board) and (not((IsWinner(board, 'X')) or (IsWinner(board, 'O')))):
@@ -122,6 +135,8 @@ def TieGame():
     else:
         return False
 
+
+#gameplay design here
 def GamePlay():
     print("Welcome to the game!")
     printBoard(board)
@@ -147,7 +162,9 @@ def GamePlay():
                 printBoard(board)
         else:
             print("you win!")
-            break       
+            break     
+        
+
 while True:
     if FirstRun:
         FirstRun=False
