@@ -1,7 +1,13 @@
-board = [' ' for x in range(10)]
+import os
 
+
+#cheat : high chance Win Strategy =>   1 - 8 - 6 - 5 - 4
+
+board = [' ' for x in range(10)]
+FirstRun = True
 def insertLetter(letter,pos):
-    board[pos] = letter
+    if(board.count(' ') >= 1):
+        board[pos] = letter
 
 def spaceIsFree(pos):
     return board[pos] == ' '
@@ -20,7 +26,7 @@ def printBoard(board):
     print('   |   |   ')
 
 def isBoardFull(board):
-    if board.count(' ') > 1:
+    if board.count(' ') >= 2:
         return False
     else:
         return True
@@ -95,40 +101,65 @@ def selectRandom(li):
     r = random.randrange(0, ln)
     return li[r]
 
-def main():
+def StartTheGame():
+    global board
+    board = [' ' for x in range(10)]
+    CleanScreen()
+    print('-------------------')
+    GamePlay()
+
+
+def CleanScreen():
+    if(os.name == 'posix'):
+         os.system('clear')
+    else:
+         os.system('cls')
+
+def TieGame():
+    
+    if isBoardFull(board) and (not((IsWinner(board, 'X')) or (IsWinner(board, 'O')))):
+        return True
+    else:
+        return False
+
+def GamePlay():
     print("Welcome to the game!")
     printBoard(board)
 
     while not(isBoardFull(board)):
-        if not(IsWinner(board, 'O')):
+        
+        if not(IsWinner(board, 'O')) :
             playerMove()
+            CleanScreen()
             printBoard(board)
         else:
             print("sorry you loose!")
             break
 
-        if not(IsWinner(board, 'X')):
+        if (not(IsWinner(board, 'X'))) :
             move = computerMove()
             if move == 0:
                 print(" ")
-            else:
+            elif not(isBoardFull(board)):
                 insertLetter('O', move)
                 print('computer placed an o on position', move, ':')
+                CleanScreen()
                 printBoard(board)
         else:
             print("you win!")
-            break
-
-
-
-    if isBoardFull(board):
-        print("Tie game")
-
+            break       
 while True:
-    x = input("Do you want to play again? (y/n)")
-    if x.lower() == 'y':
-        board = [' ' for x in range(10)]
-        print('-------------------')
-        main()
-    else:
-        break
+    if FirstRun:
+        FirstRun=False
+        StartTheGame()
+
+    else :
+        if TieGame():
+            print("Tie Game")
+        x = input("Do you want to play again? (y/n)")
+        if x.lower() == 'y' or x.lower() =='yes':
+            StartTheGame()
+        
+        else:
+            print("GLHF")
+            break
