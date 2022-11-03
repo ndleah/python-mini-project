@@ -5,7 +5,7 @@
 # Chinese Flashcards
 
 ![Dragon](dragon.png)
-*@Freepik*
+*Designed by Freepik*
 
 <!--An image is an illustration for your project, the tip here is using your sense of humour as much as you can :D 
 
@@ -16,23 +16,37 @@ You can copy paste my markdown photo insert as following:
 
 ## 🛠️ Description
 <!--Remove the below lines and add yours -->
-A tkinter application displays chinese characters with their meaning and pinyin.
+A tkinter application which displays chinese characters.
+
++ click on the characters from the list.
++ click on one or more button (pinyin, role, definition)
+
 The characters come from the HSK1 list (non official).
-More information on [pinyin](https://en.wikipedia.org/wiki/Pinyin).
-More information on [HSK](https://en.wikipedia.org/wiki/Hanyu_Shuiping_Kaoshi).
+
+More informations on [pinyin](https://en.wikipedia.org/wiki/Pinyin).
+
+More informations on [HSK](https://en.wikipedia.org/wiki/Hanyu_Shuiping_Kaoshi).
 
 ## ⚙️ Languages or Frameworks Used
 <!--Remove the below lines and add yours -->
-Modules required to be able to use the script successfully
-and how to install them.
-(If there are a lot of them, including a `requirements.txt` file will work better.)
++ beautifulsoup4==4.11.1
++ requests==2.28.1
++ python 3.10.6
 
 ## 🌟 How to run
 <!--Remove the below lines and add yours -->
-Steps on how to run the script along with suitable examples.
+Move to the app folder.
+```sh
+cd app
+```
+Run the main file.
+```sh
+python main.py
+```
 
 ## 📺 Demo
-Add a Screenshot/GIF showing the sample use of the script (jpeg/png/gif).
+
+![app](myapp.png)
 
 ## 🤖 Author
 <!--Remove the below lines and add yours -->
