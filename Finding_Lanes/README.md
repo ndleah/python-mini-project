@@ -4,7 +4,7 @@
 
 # <b>🚘 Finding Lanes </b>
 ### Let's go!
-<div style="width:100%;height:0;padding-bottom:77%;position:relative;"><iframe src="https://giphy.com/embed/8QC4kjqN9qDEk" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/funny-gif-gifs-8QC4kjqN9qDEk">via GIPHY</a></p>
+<img src="https://media3.giphy.com/media/8QC4kjqN9qDEk/giphy.gif?cid=ecf05e471kl80anlf7s2wx2yz9v5ssu5xxgkbsxq74j9afql&rid=giphy.gif&ct=g">
 
 ## 🛠️ <b> Description </b>
 A short description about the script must be mentioned here.
