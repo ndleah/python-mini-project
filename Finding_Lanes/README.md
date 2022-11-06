@@ -4,7 +4,7 @@
 
 # <b>🚘 Finding Lanes </b>
 ### Let's go!
-<iframe src="https://giphy.com/embed/8QC4kjqN9qDEk" width="480" height="369" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/funny-gif-gifs-8QC4kjqN9qDEk"></a align="center"></p>
+<img src="https://giphy.com/embed/8QC4kjqN9qDEk" width="480" height="369" frameBorder="0" class="giphy-embed" allowFullScreen></img><p><a href="https://giphy.com/gifs/funny-gif-gifs-8QC4kjqN9qDEk"></a align="center"></p>
 <!--An image is an illustration for your project, the tip here is using your sense of humour as much as you can :D 
 
 You can copy paste my markdown photo insert as following:
