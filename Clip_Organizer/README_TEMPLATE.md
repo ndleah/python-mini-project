@@ -24,6 +24,7 @@ At a minimum, you need to install MoviePy with pip/pip3. You may also need to in
 1. Copy all of the clips you want to use into the clips folder. 
 2. Run the script. 
 3. Done!
+
 Note- make sure you don't have a .DS_store file in the clips directory. This can cause issues.
 
 ## 📺 Demo
