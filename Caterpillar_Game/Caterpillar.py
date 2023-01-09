@@ -43,6 +43,7 @@ def game_over():
     t.penup()
     t.hideturtle()
     t.write('GAME OVER !', align='center', font=('Arial', 30, 'normal') )
+    t.onkey(start_game,'space')
 
 def display_score(current_score):
     score_turtle.clear()
@@ -88,22 +89,22 @@ def start_game():
             break
 
 def move_up():
-    if caterpillar.heading() == 0 or caterpillar.heading() == 180:
         caterpillar.setheading(90)
 
 def move_down():
-    if caterpillar.heading() == 0 or caterpillar.heading() == 180:
         caterpillar.setheading(270)
 
 def move_left():
-    if caterpillar.heading() == 90 or caterpillar.heading() == 270:
         caterpillar.setheading(180)
 
 def move_right():
-    if caterpillar.heading() == 90 or caterpillar.heading() == 270:
         caterpillar.setheading(0)
+        
+def restart_game():
+ start_game()
 
 t.onkey(start_game,'space')
+t.onkey(restart_game,'Up')
 t.onkey(move_up,'Up')
 t.onkey(move_right,'Right')
 t.onkey(move_down,'Down')
