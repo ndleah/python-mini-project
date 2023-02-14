@@ -1,6 +1,8 @@
 from tkinter import ttk
 from tkinter import *
 
+from pathlib import Path
+
 import sqlite3
 
 class Product:
@@ -44,8 +46,22 @@ class Product:
         ttk.Button(text = 'DELETE', command = self.delete_product).grid(row = 5, column = 0, sticky = W + E)
         ttk.Button(text = 'EDIT', command = self.edit_product).grid(row = 5, column = 1, sticky = W + E)
 
+        self.exits_db_file()
+
         # Filling the Rows
         self.get_products()
+
+    # Function to verify if already exist the table in database
+    # Else create the table
+    def exits_db_file(self):
+        if not Path(self.db_name).exists():
+            sql ='''CREATE TABLE product(
+                id INTEGER  PRIMARY KEY,
+                name CHAR(60) NOT NULL,
+                price FLOAT
+                )'''
+
+            self.run_query(sql)
 
     # Function to Execute Database Querys
     def run_query(self, query, parameters = ()):
