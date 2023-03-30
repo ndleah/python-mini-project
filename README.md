@@ -232,8 +232,8 @@ SR No   | Project | Description | Author
 
  ## ![image](IMG/like.svg) Our Contributors
  
-<a href="https://github.com/ndleah/python-mini-project/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=ndleah/python-mini-project" />
+<a href="https://github.com/Kranthi-Reddy">
+  <img src="https://avatars.githubusercontent.com/u/39714913?v=4" />
 </a>
 
  
