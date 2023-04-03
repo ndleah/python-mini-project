@@ -1,9 +1,14 @@
 import time
+from essential_generators import DocumentGenerator
 
-String='The quick brown fox jumps over the lazy dog.'
-wordcount=len(String.split())
+def typing_speed():
 
-while True:
+    # Generating a random sentence
+    gen = DocumentGenerator()
+    String = gen.sentence()
+    wordcount=len(String.split())
+
+    # Typing Speed Calculation
     print(String)
     print("----------------------------------------")
     startTime=time.time()
@@ -12,9 +17,10 @@ while True:
     accuracy= len(set(textInput.split())&set(String.split()))
     accuracy=accuracy/wordcount*100
     timeTaken=round(endTime-startTime,2)
-    wpm=round(wordcount/timeTaken*60)
+    wpm=round((wordcount/timeTaken)*60)
     print("----------------------------------------")
 
+    # Showing the results
     print ("Your accuracy is: ", accuracy)
     print ("Time taken: ", timeTaken, "seconds")
     print("Your typing speed is: ",wpm,"words per minute")
@@ -28,10 +34,14 @@ while True:
     else:
         print("You are a typing machine!")
 
-    if input("Do you want to try again? (y/n): ")=="n":
-        break
-    elif input("Do you want to try again? (y/n): ")=="y":
-        continue
-        
 
+if __name__ == "__main__":
+    print("Let's Start")   
+    typing_speed()
 
+    while True :  
+        if input("Do you want to try again? (y/n): ")=="y":
+            print("\n")
+            typing_speed()
+        else:
+            break    
