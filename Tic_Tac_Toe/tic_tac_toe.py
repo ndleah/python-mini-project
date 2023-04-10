@@ -1,8 +1,6 @@
 #cheat : high chance Win Strategy =>   1 - 8 - 6 - 5 - 4
-
-
-#libs
 import os
+
 
 
 #initialize 
@@ -21,23 +19,18 @@ def spaceIsFree(pos):
     return board[pos] == ' '
 
 def printBoard(board):
-    print('   |   |   ')
     print(' ' + board[1] + ' | ' + board[2] + ' | ' + board[3])
-    print('   |   |   ')
-    print('------------')
-    print('   |   |   ')
+    print('-----------')
     print(' ' + board[4] + ' | ' + board[5] + ' | ' + board[6])
-    print('   |   |   ')
-    print('------------')
-    print('   |   |   ')
+    print('-----------')
     print(' ' + board[7] + ' | ' + board[8] + ' | ' + board[9])
-    print('   |   |   ')
 
 def isBoardFull(board):
     if board.count(' ') >= 2:
         return False
     else:
         return True
+
 
 def IsWinner(b,l):
     return(
@@ -113,14 +106,14 @@ def StartTheGame():
     global board
     board = [' ' for x in range(10)]
     CleanScreen()
-    print('-------------------')
+    print('-------------------------')
     GamePlay()
 
 #clean Old data in screen when event occur
 def CleanScreen():
-    #Linux and MacOS
+    #Linux and macOS
     if(os.name == 'posix'):
-         os.system('clear')
+         os.system('clear') 
     #windows
     else:
          os.system('cls')
@@ -135,10 +128,17 @@ def TieGame():
     else:
         return False
 
-
+#Score Count
+scorecount = 0
 #gameplay design here
 def GamePlay():
-    print("Welcome to the game!")
+    global scorecount
+    if scorecount == 0:
+        #if the game is first time ran
+        print("Welcome to the game!")
+    if scorecount < 0:
+        #if the score is negative, set it to 0
+        scorecount = 0
     printBoard(board)
 
     while not(isBoardFull(board)):
@@ -148,7 +148,8 @@ def GamePlay():
             CleanScreen()
             printBoard(board)
         else:
-            print("sorry you loose!")
+            scorecount -= 1
+            print(f"Sorry, you lose 😢! Your Score is {scorecount}")
             break
 
         if (not(IsWinner(board, 'X'))) :
@@ -161,7 +162,8 @@ def GamePlay():
                 CleanScreen()
                 printBoard(board)
         else:
-            print("you win!")
+            scorecount += 1
+            print(f"You win! Your Score is {scorecount}")
             break     
         
 
@@ -172,7 +174,7 @@ while True:
 
     else :
         if TieGame():
-            print("Tie Game")
+            print("It's a tie!")
         x = input("Do you want to play again? (y/n)")
         if x.lower() == 'y' or x.lower() =='yes':
             StartTheGame()
