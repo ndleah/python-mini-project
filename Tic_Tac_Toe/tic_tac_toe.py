@@ -1,14 +1,10 @@
 #cheat : high chance Win Strategy =>   1 - 8 - 6 - 5 - 4
+#new version
 import os
-
-
 
 #initialize 
 board = [' ' for x in range(10)]
 FirstRun = True
-
-
-#Game Modules
 
 #insert tic tac toe symbol to screen
 def insertLetter(letter,pos):

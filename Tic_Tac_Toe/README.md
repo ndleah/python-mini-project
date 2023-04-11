@@ -26,3 +26,11 @@ python Tic_Tac_Toe.py
 
 ## 🤖 Author
 [Leah Nguyen](https://github.com/ndleah)
+
+## 📜 License
+This project is licensed under the MIT License
+
+## 📝 Acknowledgments
+- [Python](https://www.python.org/)
+- [VS Code](https://code.visualstudio.com/)
+- [GitHub](https://github.com/ndleah/python-mini-project)
