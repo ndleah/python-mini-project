@@ -1,3 +1,4 @@
+#Just Sample
 from itertools import cycle
 from random import randrange
 from tkinter import Tk , Canvas , messagebox , font
