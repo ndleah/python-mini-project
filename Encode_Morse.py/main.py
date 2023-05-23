@@ -16,4 +16,5 @@ def encode_morse(message):
 		string+=char_to_dots[x.upper()]+' '
 	return string[0:-1]
 #test run
+print("Morse code for Hello World!: ")
 print(encode_morse("Hello World!"))
