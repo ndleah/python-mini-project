@@ -3,7 +3,7 @@
 ![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)
 # Morse Encoder
 
-<img src = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fcapitalizemytitle.com%2Fmorse-code-translator%2F&psig=AOvVaw3xqICQMziL05B5e0CpJaQ5&ust=1684933797276000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCJDCz9fCi_8CFQAAAAAdAAAAABAG" width="40%" height="40%">
+<img src = "https://github.com/JohnN310/python-mini-project/blob/b03e7b77ed1f39475a1be8705d79b0411ae0305f/Encode_Morse.py/Morse-Code-Letters-and-Numbers.jpg" width="40%" height="40%">
 
 ## 🛠️ Description
 Morse encoder is a tool or program that converts text into Morse code, a system of representing letters and numbers using a combination of dots (.) and dashes (-). Morse Encoder is responsible for encripting English into Morse code.
