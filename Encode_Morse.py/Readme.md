@@ -16,7 +16,7 @@ It is really simple to run the program. Simple head over to the directory where 
 ```python3 main.py```
 
 ## 📺 Demo
-![Screenshot from 2023-5-23 9:20:05 ](https://github.com/JohnN310/python-mini-project/blob/main/Encode_Morse.py/morse_encoder.png)
+![Screenshoted on 2023-5-23](https://github.com/JohnN310/python-mini-project/blob/main/Encode_Morse.py/morse_encoder.png)
 
 ## 🤖 Author
 <a href="https://github.com/JohnN310">John Nguyen
