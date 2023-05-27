@@ -22,7 +22,9 @@ Notepad created using PyQt
 The program was created with Python3.10.1 and PyQt5.
 
 use this for install PyQt5
-'pip install PyQt5'
+``` bash
+pip install PyQt5
+```
 
 ## 🌟 How to run
 <!--Remove the below lines and add yours -->
