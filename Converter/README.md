@@ -4,14 +4,9 @@
 
 # Converter
 
-Add a jpeg/png/gif file here if applicable
-
-<!--An image is an illustration for your project, the tip here is using your sense of humour as much as you can :D 
-
-You can copy paste my markdown photo insert as following:
 <p align="center">
-<img src="your-source-is-here" width=40% height=40%>
--->
+<img src="https://github.com/AlenSenson/python-mini-project/blob/main/Converter/images.png" width=20% height=20%>
+
 
 ## 🛠️ Description
 A simple converter app built in python.
@@ -26,9 +21,8 @@ Running the script is really simple! Just open a terminal in the folder where yo
 python converter.py
 ```
 
-
 ## 📺 Demo
-Add a Screenshot/GIF showing the sample use of the script (jpeg/png/gif).
+
 
 ## 🤖 Author
 [Alen Senson](https://github.com/AlenSenson)
