@@ -22,7 +22,8 @@ python converter.py
 ```
 
 ## 📺 Demo
-
+<p align="center">
+<img src="https://github.com/AlenSenson/python-mini-project/blob/main/Converter/Screenshot%202023-05-31%20180831.png" width=70% height=70%>
 
 ## 🤖 Author
 [Alen Senson](https://github.com/AlenSenson)
