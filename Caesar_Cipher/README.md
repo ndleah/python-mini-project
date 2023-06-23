@@ -17,7 +17,7 @@ You can copy paste my markdown photo insert as following:
 
 ## 🛠️ Description
 <!--Remove the below lines and add yours -->
-Simple Caesar Cipher encryptor and decryptor bulit with python
+Simple Caesar Cipher encryptor and decryptor built with python
 
 ## ⚙️ Languages or Frameworks Used
 <!--Remove the below lines and add yours -->
