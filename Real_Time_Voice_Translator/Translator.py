@@ -56,7 +56,7 @@ from_lang = detect(query)
 print ("The user's sentence is in ", getLangName(from_lang))
 
 def destination_language():
-    print("Enter the language in which you	want to convert : Ex. Hindi , English , Spanish, etc.")
+    print("Enter the language in which you want to convert: Ex. Hindi, English, Spanish, etc.")
     print()
 
     # Input destination language in
@@ -72,7 +72,7 @@ to_lang = destination_language()
 
 # Mapping it with the code
 while (to_lang not in all_languages):
-    print("Language in which you are trying	to convert is currently not available, please input some other language")
+    print("Language in which you are trying to convert is currently not available, please input some other language")
     print()
     to_lang = destination_language()
 
