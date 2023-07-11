@@ -1,32 +1,36 @@
 <!--Please do not remove this part-->
 ![Star Badge](https://img.shields.io/static/v1?label=%F0%9F%8C%9F&message=If%20Useful&style=style=flat&color=BC4E99)
 ![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)
+[![View My Profile](https://img.shields.io/badge/View-My_Profile-green?logo=GitHub)](https://github.com/YehudaElyasaf)
 
 # Currency Converter
 
-Add a jpeg/png/gif file here if applicable
-
-<p align="center">
-<img src="../IMG/currency_converter_demo.png" width=40% height=40%>
-
 ## 🛠️ Description
-<!--Remove the below lines and add yours -->
-A short description about the script must be mentioned here.
+
+A program that converts currencies using CLI
 
 ## ⚙️ Languages or Frameworks Used
-<!--Remove the below lines and add yours -->
-Modules required to be able to use the script successfully
-and how to install them.
-(If there are a lot of them, including a `requirements.txt` file will work better.)
+
+```
+pip install forex-python
+pip install requests
+```
 
 ## 🌟 How to run
-<!--Remove the below lines and add yours -->
-Steps on how to run the script along with suitable examples.
+
+```
+python currency-converter.py <[amount]> <BASE> to <DESTINATION>
+```
+for example:
+```
+python currency-converter.py 1.5 USD to GBP
+```
 
 ## 📺 Demo
-Add a Screenshot/GIF showing the sample use of the script (jpeg/png/gif).
+
+<p align="center">
+<img src="../IMG/currency_converter_demo.png" width=85% height=40%>
 
 ## 🤖 Author
-<!--Remove the below lines and add yours -->
-The name of the author of the code goes here.
-If you have a web site or a Git user name, feel free to link.
+
+[Yehuda Elyasaf](https://github.com/YehudaElyasaf)
