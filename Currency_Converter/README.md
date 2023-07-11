@@ -21,7 +21,7 @@ pip install requests
 ```
 python currency-converter.py <[amount]> <BASE> to <DESTINATION>
 ```
-for example:
+example:
 ```
 python currency-converter.py 1.5 USD to GBP
 ```
@@ -29,7 +29,7 @@ python currency-converter.py 1.5 USD to GBP
 ## 📺 Demo
 
 <p align="center">
-<img src="../IMG/currency_converter_demo.png" width=85% height=40%>
+<img src="../IMG/currency_converter_demo.png" width=90% height=40%>
 
 ## 🤖 Author
 

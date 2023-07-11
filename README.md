@@ -229,6 +229,7 @@ SR No   | Project | Description | Author
 40 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Wordle_Aid">Wordle Aid! | Use this to give you all the possible options for today's wordle based on the information available. |  [Timmy Churchill](https://github.com/Timmy-Churchill)
 41 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Diff_Utility">Diff Utility | A Diff Utility that takes in two file names as commandline arguments and compares them. The comparison is then shown as the output indication which file has changed where.  |  [Shreyas Sable](https://github.com/KILLinefficiency)
 42 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Automated_Mailing">Automated Mailing | A python script that reads email addresses from CSV file and automatically sends email.  |  [Pradhyuman Arora](https://github.com/pradhyumanarora)
+43 | <a href="https://github.com/ndleah/python-mini-project/tree/main/Currency_Converter">Currency Converter | A program that converts currencies using CLI.  |  [Yehuda Elyasaf](https://github.com/YehudaElyasaf)
 
  ## ![image](IMG/like.svg) Our Contributors
  
