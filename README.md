@@ -248,7 +248,7 @@ please make sure to add a `README.md` file that follow the same construction as 
 | 54    | <a href="https://github.com/ndleah/python-mini-project/tree/main/Currency_Converter">Currency Converter | A program that converts currencies using CLI | [Yehuda Elyasaf](https://github.com/YehudaElyasaf) |
 | 55    | <a href="https://github.com/ndleah/python-mini-project/tree/main/linked_lists">Linked Lists | Implementation of various data structures using linked list. | [Alen Senson](https://github.com/AlenSenson) |
 | 56    | <a href="https://github.com/ndleah/python-mini-project/tree/main/Converter">Converter | A simple converter app built in python. | [Alen Senson](https://github.com/AlenSenson) |
-| 57    | <a href="https://github.com/ndleah/python-mini-project/tree/main/Spinning%20Donut)">Spinning Donut | This project uses the Pygame library to create an animation of a spinning donut on a black background. | [Gideon Ogunbanjo](https://github.com/gideon-ogunbanjo) |
+| 57    | <a href="https://github.com/ndleah/python-mini-project/tree/main/Spinning%20Donut">Spinning Donut | This project uses the Pygame library to create an animation of a spinning donut on a black background. | [Gideon Ogunbanjo](https://github.com/gideon-ogunbanjo) |
 
 
 ## ![image](IMG/like.svg) Our Contributors
