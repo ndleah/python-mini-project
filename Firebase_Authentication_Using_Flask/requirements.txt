@@ -1,0 +1,8 @@
+Flask==2.0.1
+firebase==3.0.1
+python-jwt==4.0.0
+gcloud==0.18.3
+sseclient==0.0.27
+pycryptodome==3.18.0
+requests-toolbelt==0.10.1
+urllib3==1.26.15
