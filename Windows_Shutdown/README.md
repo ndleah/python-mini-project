@@ -28,6 +28,11 @@ python shutdown.py
 ```
 
 Please note that the script requires administrative privileges to successfully shut down the machine.
+## Author
+
+*Alex Mwaniki*
+- GitHub: [lxmwaniky](https://github.com/lxmwaniky)
+
 
 ## License
 
