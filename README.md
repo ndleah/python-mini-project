@@ -130,7 +130,7 @@ git checkout -b <branch-name>
 
 <details>
 <summary>
-Step 6: Ready, Set, Go...
+Step 5: Ready, Set, Go...
 </summary>
 
 Once you have completed these steps, you are ready to start contributing to the project and creating **pull requests**.
@@ -167,7 +167,7 @@ git push origin <branch-name>
 
 <details>
 <summary>
-Step 7: Pull Request
+Step 6: Pull Request
 </summary>
 
 Go to the GitHub page of _your fork_, and **make a pull request**:
