@@ -4,6 +4,7 @@
 # Finance Tracker 
 A finance tracker application built using Python's tkinter module. It allows the user to keep track of their income and expenses, and visualize their balance through a pie chart.
 
+<p align="center">
 <img width="792" alt="Screenshot 2023-07-26 at 11 45 06" src="https://github.com/otahina/python-mini-project/assets/108225969/eaa973ee-b9f8-4f1f-8367-066a5462d167">
 
 ## Prerequisites
@@ -40,3 +41,5 @@ python3 main.py
 Hina Ota
 
 [![View My Profile](https://img.shields.io/badge/View-My_Profile-green?logo=GitHub)](https://github.com/otahina)
+[![View Repositories](https://img.shields.io/badge/View-My_Repositories-blue?logo=GitHub)](https://github.com/otahina?tab=repositories)
+
