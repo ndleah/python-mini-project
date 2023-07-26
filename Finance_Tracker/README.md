@@ -2,27 +2,42 @@
 ![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)
 [![View My Profile](https://img.shields.io/badge/View-My_Profile-green?logo=GitHub)](https://github.com/otahina)
 
-# Finance Tracker
-<!--Remove the below lines and add yours -->
-A short description about the script must be mentioned here.
+# Finance Tracker 
+A finance tracker application built using Python's tkinter module. It allows the user to keep track of their income and expenses, and visualize their balance through a pie chart.
 
 ![Preview](preview.png)
 
-### Prerequisites
-<!--Remove the below lines and add yours -->
-Modules required to be able to use the script successfully
-and how to install them.
-(Including a `requirements.txt` file will work.)
+## Prerequisites
+Before you begin, ensure you have met the following requirements:
+
+You have installed the following python modules:
+
+* `customtkinter`
+* `tkinter`
+* `matplotlib`
+
+You can install these modules using pip:
+
+```
+pip install customtkinter tkinter matplotlib
+```
 
 ### How to run the script
-<!--Remove the below lines and add yours -->
-Steps on how to run the script along with suitable examples.
 
-### Screenshot/GIF showing the sample use of the script
-<!--Remove the below lines and add yours -->
-Add a jpeg/png/gif file here.
+1. Go to the file. python-mini-project/Finance_Tracker
+
+2. Run this command on Terminal.
+
+```
+python3 main.py
+```
+
+### Flowchart of the code
+
+![Preview](Finace_tracker.drawio.png)
 
 ## *Author Name*
-<!--Remove the below lines and add yours -->
-The name of the author of the code goes here.
-If you have a web site or a Git user name, feel free to link.
+
+Hina Ota
+
+[![View My Profile](https://img.shields.io/badge/View-My_Profile-green?logo=GitHub)](https://github.com/otahina)
