@@ -17,18 +17,17 @@ Before you begin, ensure you have met the following requirements:
 You have installed the following python modules:
 
 * `customtkinter`
-* `tkinter`
 * `matplotlib`
 
 You can install these modules using pip:
 
 ```
-pip install customtkinter tkinter matplotlib
+pip install customtkinter matplotlib
 ```
 
 ### How to run the script 🚀
 
-1. Go to the file. python-mini-project/Finance_Tracker
+1. Go to the directory. python-mini-project/Finance_Tracker
 
 2. Run this command on Terminal.
 
