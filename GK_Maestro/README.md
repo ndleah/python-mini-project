@@ -17,7 +17,7 @@ python main.py
 ```
 
 ### 📺 Demo
-
+![Program Demo](./image.png)
 
 ## 🤖 Author
 [Arif Faisal](https://arifaisal123.github.io)
