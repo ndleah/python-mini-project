@@ -8,7 +8,6 @@ while True:
         break
     numbers.append(int(number))
 
-
 Avg = statistics.mean(numbers)
 Mode = statistics.mode(numbers)
 Deviation = statistics.stdev(numbers)
