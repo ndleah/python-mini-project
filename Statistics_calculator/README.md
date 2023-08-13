@@ -4,34 +4,27 @@
 
 # Script Title
 
-Add a jpeg/png/gif file here if applicable
-
-<!--An image is an illustration for your project, the tip here is using your sense of humour as much as you can :D 
-
-You can copy paste my markdown photo insert as following:
-<p align="center">
-<img src="your-source-is-here" width=40% height=40%>
--->
+Simple statistics calculator
 
 ## 🛠️ Description
 <!--Remove the below lines and add yours -->
-A short description about the script must be mentioned here.
+Very simple statistics calculator that I've built for personal use, then I decided to share here :)
 
 ## ⚙️ Languages or Frameworks Used
 <!--Remove the below lines and add yours -->
-Modules required to be able to use the script successfully
-and how to install them.
-(If there are a lot of them, including a `requirements.txt` file will work better.)
+We only require ``statistics`` python library to run this, this package is built-in to python, just import and use it like this!
+```py
+import statistics
+```
 
 ## 🌟 How to run
 <!--Remove the below lines and add yours -->
-Steps on how to run the script along with suitable examples.
+Simply execute in your favorite compiler and have fun
 
 ## 📺 Demo
-Add a Screenshot/GIF showing the sample use of the script (jpeg/png/gif).
+![Screenshot 2023-08-12 221939](https://github.com/FernaandoJr/python-mini-project/assets/90939363/8a5abe9b-3775-43fa-87cf-8632068fe5b4)
 
 ## 🤖 Author
 <!--Remove the below lines and add yours -->
-The name of the author of the code goes here.
-If you have a web site or a Git user name, feel free to link.
+* [FernaandoJr](https://github.com/FernaandoJr)
 
