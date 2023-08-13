@@ -27,3 +27,6 @@ txt = Entry(textvariable=string_pass).pack()
 btn = Button(text="Generator", command=process).pack(pady=10)
 
 gui.mainloop()
+
+a = "Pythyon"
+print(a)

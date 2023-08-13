@@ -18,3 +18,6 @@ while count!=0:
     else:
         print('The number is greater than ', a)
     count=-1
+
+
+print (count)
