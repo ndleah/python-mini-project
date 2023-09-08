@@ -13,8 +13,8 @@ def Display_Menu():
                 ^_ _^
                 (o o)\_________
                 (_ _)\         )/\/
-                  U ||----W||
-                    ||     ||
+                  U   ||----W||
+                      ||     ||
     ### Tools:
         [1] Locate an IP address
         [2] Get the IP address of a domain
