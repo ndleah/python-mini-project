@@ -30,6 +30,7 @@ Install the required modules using pip:
 run `main.py`
 
 ## Demo
+![screenshot](https://github.com/BazarganDev/python-mini-project/assets/124906353/cc148ef9-ecf8-4321-b2cd-70518c890a02)
 
 ## Author
 [Mohammad Bazargan](https://github.com/BazarganDev)
