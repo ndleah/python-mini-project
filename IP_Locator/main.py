@@ -10,11 +10,11 @@ def Display_Menu():
     |       IP Finder         |
     |_____________   _________|
                 \  \ 
-                    ^_ _^
-                    (o o)\_________
-                    (_ _)\         )/\/
-                    U   ||----W||
-                        ||     ||
+                ^_ _^
+                (o o)\_________
+                (_ _)\         )/\/
+                  U ||----W||
+                    ||     ||
     ### Tools:
         [1] Locate an IP address
         [2] Get the IP address of a domain
