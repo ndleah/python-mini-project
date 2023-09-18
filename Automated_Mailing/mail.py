@@ -1,4 +1,3 @@
-from os import name
 import pandas as pd
 import smtplib
 from email.mime.multipart import MIMEMultipart
@@ -12,19 +11,18 @@ to_addr=data['email'].tolist()      # Change'email' to column name containg emai
 name = data['name'].tolist()
 
 l=len(name)
+email=""   #Enter Your email id here
+password=""           #Enter your Password
 
 for i in range (l):
     msg=MIMEMultipart()
     msg['From']=from_addr
     msg['To']=to_addr[i]
-    msg['subject']='Just to Check'
+    msg['Subject']='Just to Check'
 
     body=name[i]+'Enter your content here' 
 
     msg.attach(MIMEText(body,'plain'))
-
-    email=""   #Enter Your email id here
-    password=""           #Enter your Password
 
     mail=smtplib.SMTP('smtp.gmail.com',587)
     mail.ehlo()
