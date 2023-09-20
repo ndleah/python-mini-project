@@ -251,7 +251,6 @@ please make sure to add a `README.md` file that follow the same construction as 
 | 57    | <a href="https://github.com/ndleah/python-mini-project/tree/main/Spinning%20Donut">Spinning Donut | This project uses the Pygame library to create an animation of a spinning donut on a black background. | [Gideon Ogunbanjo](https://github.com/gideon-ogunbanjo) |
 | 58    | <a href="https://github.com/ndleah/python-mini-project/tree/main/Firebase_Authentication_Using_Flask">Firebase Authentication | This project enables developers to implement secure user authentication features in their Flask applications with ease using Firebase Authentication | [MBSA INFINITY](https://github.com/MBSA-INFINITY) |
 | 59    | <a href="https://github.com/ndleah/python-mini-project/tree/main/Finance_Tracker">Finance Tracker | A finance tracker application allows the user to keep track of their income and expenses, and visualize their balance through a pie chart.  | [Hina Ota](https://github.com/otahina) |
-
 | 60    | <a href="https://github.com/ndleah/python-mini-project/tree/main/bredzilog_mini_resto_mngmnt_system">Finance Tracker | A mini Restaurant Management System Flask application  | [Aguilar, Stephen Joaquin G.](https://github.com/inamonanymous) |
 
 ## ![image](IMG/like.svg) Our Contributors
