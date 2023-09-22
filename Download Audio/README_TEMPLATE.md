@@ -2,9 +2,8 @@
 ![Star Badge](https://img.shields.io/static/v1?label=%F0%9F%8C%9F&message=If%20Useful&style=style=flat&color=BC4E99)
 ![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)
 
-# Script Title
+# Download Audio
 
-Add a jpeg/png/gif file here if applicable
 
 <!--An image is an illustration for your project, the tip here is using your sense of humour as much as you can :D 
 
@@ -15,23 +14,20 @@ You can copy paste my markdown photo insert as following:
 
 ## 🛠️ Description
 <!--Remove the below lines and add yours -->
-A short description about the script must be mentioned here.
+This is a python script that downloads audio files directly from youtube videos.
 
 ## ⚙️ Languages or Frameworks Used
 <!--Remove the below lines and add yours -->
-Modules required to be able to use the script successfully
-and how to install them.
-(If there are a lot of them, including a `requirements.txt` file will work better.)
-
+This script is written in Python language. So make sure you have python installed in your computer. No extra module is needed.
 ## 🌟 How to run
 <!--Remove the below lines and add yours -->
-Steps on how to run the script along with suitable examples.
+- Open the Download Audio.py script
+- Add your own youtube video url instead of the default one in line 6.
+- In Line 17, in the path section write your own path and in name section write the name You want your file to have.
 
-## 📺 Demo
-Add a Screenshot/GIF showing the sample use of the script (jpeg/png/gif).
 
 ## 🤖 Author
 <!--Remove the below lines and add yours -->
-The name of the author of the code goes here.
-If you have a web site or a Git user name, feel free to link.
+### Name of Author: Muhammad Abdullah
+Visit my Github profile [here](https://github.com/Muhammad-Abdullah3)
 
