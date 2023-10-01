@@ -48,15 +48,17 @@ This application requires Python to run. No external libraries are used, making 
 3. Open a terminal or command prompt and navigate to the directory where `expense_tracker.py` is saved.
 
 4. Run the following command:
-   
- python expense_tracker.py
 
+ ```sh
+python expense_tracker.py
+```
+ 
 
 5. Follow the on-screen instructions to use the Expense Tracker.
 
 ## 📺 Demo
 <p align="center">
-<img src="![https://github.com/ndleah/python-mini-project/blob/main/IMG/tictactoe.gif](<expense tracker.png>)" width=70% height=70%>
+<img src="https://github.com/ndleah/python-mini-project/blob/main/IMG/expense_tracker.png" width=70% height=70%>
 
 ## 🤖 Author
 [Darshan Patil](https://github.com/darshan8850)
