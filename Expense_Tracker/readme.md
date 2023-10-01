@@ -2,7 +2,7 @@
 
 Expense Tracker is a Python application designed to help users keep track of their daily expenses. It provides a simple and intuitive interface for recording expenses, categorizing them, and viewing summaries based on categories.
 
-## Features
+## 🛠️ Description
 
 - **Add Expense:** Users can input the date, amount, and category of their expenses. The expenses are stored and categorized for future reference.
   
@@ -12,7 +12,7 @@ Expense Tracker is a Python application designed to help users keep track of the
 
 - **View Categories:** Users can view a list of available categories, making it convenient to track expenses related to specific areas of their life.
 
-## Usage
+
 
 1. **Add Expense:**
     - Select option 1 from the menu.
@@ -35,11 +35,11 @@ Expense Tracker is a Python application designed to help users keep track of the
 5. **Exit:**
     - Select option 5 from the menu to exit the Expense Tracker application.
 
-## Dependencies
+## ⚙️ Languages or Frameworks Used
 
 This application requires Python to run. No external libraries are used, making it easy to set up and run on any system with Python installed.
 
-## How to Run
+## 🌟 How to run
 
 1. Ensure you have Python installed on your system.
 
@@ -54,3 +54,17 @@ This application requires Python to run. No external libraries are used, making 
 
 5. Follow the on-screen instructions to use the Expense Tracker.
 
+## 📺 Demo
+<p align="center">
+<img src="![https://github.com/ndleah/python-mini-project/blob/main/IMG/tictactoe.gif](<expense tracker.png>)" width=70% height=70%>
+
+## 🤖 Author
+[Darshan Patil](https://github.com/darshan8850)
+
+## 📜 License
+This project is licensed under the MIT License
+
+## 📝 Acknowledgments
+- [Python](https://www.python.org/)
+- [VS Code](https://code.visualstudio.com/)
+- [GitHub](https://github.com/ndleah/python-mini-project)
