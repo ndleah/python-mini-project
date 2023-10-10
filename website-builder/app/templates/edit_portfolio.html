@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Portfolio</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+
+</head>
+
+<body>
+    <header>
+        <h1>Edit Portfolio</h1>
+    </header>
+    <main>
+        <form action="{{ url_for('portfolio.edit_portfolio', portfolio_id=portfolio.id) }}" method="POST">
+            <!-- Add form fields for editing a portfolio -->
+            <label for="title">Title:</label>
+            <input type="text" name="title" id="title" value="{{ portfolio.title }}" required>
+
+            <label for="description">Description:</label>
+            <textarea name="description" id="description" rows="4" required>{{ portfolio.description }}</textarea>
+
+            <label for="image">Image URL:</label>
+            <input type="url" name="image" id="image" value="{{ portfolio.image }}" required>
+
+            <button type="submit">Save Changes</button>
+        </form>
+    </main>
+    <!-- Add a footer if needed -->
+</body>
+
+</html>

@@ -1,0 +1,19 @@
+# .gitignore
+
+# Ignore Python virtual environment files
+venv/
+__pycache__/
+
+# Ignore configuration files
+config.py
+
+# Ignore editor-specific files
+.vscode/
+.idea/
+*.pyc
+
+# Ignore local development settings
+local_settings.py
+
+# Ignore any files or directories you want to exclude
+__pycache__/

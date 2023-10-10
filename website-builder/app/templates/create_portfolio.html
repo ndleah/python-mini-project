@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Portfolio</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+
+</head>
+
+<body>
+    <header>
+        <h1>Create a New Portfolio</h1>
+    </header>
+    <main>
+        <form action="{{ url_for('portfolio.create_portfolio') }}" method="POST">
+            <!-- Add form fields for portfolio creation -->
+            <label for="title">Title:</label>
+            <input type="text" name="title" id="title" required>
+
+            <label for="description">Description:</label>
+            <textarea name="description" id="description" rows="4" required></textarea>
+
+            <label for="image">Image URL:</label>
+            <input type="url" name="image" id="image" required>
+
+            <button type="submit">Create Portfolio</button>
+        </form>
+    </main>
+    <!-- Add a footer if needed -->
+</body>
+
+</html>
