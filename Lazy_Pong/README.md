@@ -93,6 +93,10 @@ rgb_colors = {
 ```
 The default is **lightgrey** You can choose from colors like red, green, blue, yellow, and more.
 
+## 📺 Demo
+
+![demo_pong](https://github.com/dar8900/python-mini-project/assets/37539290/77528c65-900f-4d8c-979e-7fedb780f988)
+
 ## 😄 Enjoy the Game!
 Have fun playing this simple Pong game. Feel free to customize it and make it your own. If you encounter any issues, please refer to the script's comments and logs for troubleshooting.
 
