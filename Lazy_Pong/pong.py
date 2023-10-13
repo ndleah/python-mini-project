@@ -1,7 +1,83 @@
+from time import sleep
+import os
 import pygame
 import sys
 import random
+import argparse
+import logging
 
+rgb_colors = {
+		"red": (255, 0, 0),
+		"green": (0, 255, 0),
+		"blue": (0, 0, 255),
+		"yellow": (255, 255, 0),
+		"purple": (128, 0, 128),
+		"orange": (255, 165, 0),
+		"pink": (255, 192, 203),
+		"cyan": (0, 255, 255),
+		"lime": (0, 255, 0),
+		"teal": (0, 128, 128),
+		"navy": (0, 0, 128),
+		"maroon": (128, 0, 0),
+		"olive": (128, 128, 0),
+		"brown": (165, 42, 42),
+		"gray": (128, 128, 128),
+		"black": (0, 0, 0),
+		"white": (255, 255, 255),
+		"silver": (192, 192, 192),
+		"gold": (255, 215, 0),
+		"violet": (238, 130, 238),
+		"indigo": (75, 0, 130),
+		"turquoise": (64, 224, 208),
+		"lavender": (230, 230, 250),
+		"crimson": (220, 20, 60),
+		"coral": (255, 127, 80),
+		"skyblue": (135, 206, 235),
+		"magenta": (255, 0, 255),
+		"chartreuse": (127, 255, 0),
+		"sienna": (160, 82, 45),
+		"plum": (221, 160, 221),
+		"khaki": (240, 230, 140),
+		"darkgreen": (0, 100, 0),
+		"deepskyblue": (0, 191, 255),
+		"limegreen": (50, 205, 50),
+		"tomato": (255, 99, 71),
+		"salmon": (250, 128, 114),
+		"goldrod": (218, 165, 32),
+		"darkorchid": (153, 50, 204),
+		"peru": (205, 133, 63),
+		"orchid": (218, 112, 214),
+		"royalblue": (65, 105, 225),
+		"indianred": (205, 92, 92),
+		"yellowgreen": (154, 205, 50),
+		"lightgrey" : (200, 200, 200)
+}
+
+log_file = "pong_log.log"
+
+if os.path.exists(os.path.abspath(log_file)):
+	os.remove(os.path.abspath(log_file))
+
+# Configura il logger principale
+pong_log = logging.getLogger("Pong logger")
+pong_log.setLevel(logging.DEBUG)
+
+# Configura l'handler per la console
+console_handler = logging.StreamHandler()
+console_handler.setLevel(logging.DEBUG)  # Imposta il livello a INFO o altro a tuo piacere
+
+# Configura l'handler per il file di log
+file_handler = logging.FileHandler(log_file)
+file_handler.setLevel(logging.DEBUG)
+
+# Imposta il formato dei messaggi
+formatter = logging.Formatter('[%(asctime)s] - [%(levelname)s] - %(message)s')
+console_handler.setFormatter(formatter)
+file_handler.setFormatter(formatter)
+
+# Aggiungi gli handler al pong_log principale
+pong_log.addHandler(console_handler)
+pong_log.addHandler(file_handler)
 
 def get_random(limit: int):
 	num_rand = random.randint(-limit, limit)
@@ -88,6 +164,7 @@ class Gamer:
 				 width: int,
 				 high: int,
 				 color: tuple,
+				 player_name : str,
 				 display_width: int,
 				 display_high: int) -> None:
 		self.init_top_x = top_x
@@ -99,6 +176,7 @@ class Gamer:
 		self.speed_y = 0
 		self.disp_w = display_width
 		self.disp_h = display_high
+		self.name = player_name
 
 	def draw(self, display: pygame.Surface) -> None:
 		pygame.draw.rect(display, self.color, self.rect)
@@ -163,9 +241,9 @@ class PongGame:
 				 computer: Gamer,
 				 max_score: int = 100,
 				 fps: int = 120) -> None:
-		self._time_per_px = 1 / fps
+		self._period = 1 / fps
 		self._max_ball_time_4_travel = 3
-		self._max_gamer_time_4_travel = 4
+		self._max_gamer_time_4_travel = 2
 		self._pong_pygame = pygame
 		self._game_field = game_field
 		self._ball = ball
@@ -173,33 +251,33 @@ class PongGame:
 		self._computer = computer
 		self._pong_pygame.init()
 		self._clock = self._pong_pygame.time.Clock()
-		self._stat = {"player": 0, "cpu": 0,
+		self._stat = {"player_score": 0, "cpu_score": 0,
 					   "last_diff": 0, "level": 1, "max_score": max_score}
-
 		self._fps = fps
-		self._BALL_SPEED_X_DFLT = self._game_field.disp_w / self._max_ball_time_4_travel * self._time_per_px
-		self._BALL_SPEED_Y_DFLT = self._game_field.disp_h / self._max_ball_time_4_travel * self._time_per_px
-		self._CPU_SPEED_DFLT = self._game_field.disp_h / self._max_gamer_time_4_travel * self._time_per_px
-		self._game_speed_increment = 0.5
-		self._player_speed = 4
+		self._BALL_SPEED_X_DFLT = (self._game_field.disp_w) / (self._max_ball_time_4_travel * self._fps)
+		self._BALL_SPEED_Y_DFLT = (self._game_field.disp_h) / (self._max_ball_time_4_travel * self._fps)
+		self._CPU_SPEED_DFLT = (self._game_field.disp_h) / (self._max_gamer_time_4_travel * self._fps)
+		self._cpu_speed_increment = 1
+		self._ball_speed_increment = 0.5
+		self._player_speed = (self._game_field.disp_h) / (self._max_gamer_time_4_travel * self._fps)
 		self._cpu_speed = self._CPU_SPEED_DFLT
 
 	def _reset_game(self):
+		self._update_game_speed()
 		self._ball.reset()
 		self._player.reset()
 		self._computer.reset()
-		self._update_game_speed()
 
 	def _check_collision(self):
 		ball_coord = self._ball.get_borders()
 		if ball_coord['left'] <= self._computer.get_borders()['left']:
-			print("Player score +1")
-			self._stat['player'] += 1
+			pong_log.debug("Player score +1")
+			self._stat['player_score'] += 1
 			self._reset_game()
 
 		if ball_coord['right'] >= self._player.get_borders()['right']:
-			print("CPU score +1")
-			self._stat['cpu'] += 1
+			pong_log.debug("CPU score +1")
+			self._stat['cpu_score'] += 1
 			self._reset_game()
 
 		if ball_coord['right'] > self._game_field.disp_w / 2 and ball_coord['right'] >= self._player.get_borders()['left']:
@@ -211,15 +289,15 @@ class PongGame:
 				self._ball.invert_move(invert_x=True)
 
 	def _update_game_speed(self):
-		score_diff = self._stat['player'] - self._stat['cpu']
+		score_diff = self._stat['player_score'] - self._stat['cpu_score']
 		if score_diff > 0 and score_diff > self._stat['last_diff']:
 			self._ball.set_speed(abs(self._ball.get_speed()[
-								 0]) + self._game_speed_increment, abs(self._ball.get_speed()[1]) + self._game_speed_increment)
+								 0]) + self._cpu_speed_increment, abs(self._ball.get_speed()[1]) + self._cpu_speed_increment)
 			self._computer.set_speed(
-				self._cpu_speed + self._game_speed_increment)
+				self._cpu_speed + self._cpu_speed_increment)
 			self._stat['last_diff'] = score_diff
 			self._stat['level'] += 1
-			print(
+			pong_log.debug(
 				f"Update speed, score diff = {score_diff}, last diff {self._stat['last_diff']}, level: {self._stat['level']}")
 
 	def _move_computer(self):
@@ -231,51 +309,71 @@ class PongGame:
 		else:
 			self._computer.set_speed(0)
 
+	def _move_player(self, event: pygame.event):
+		if event.type == self._pong_pygame.KEYDOWN:
+			if event.key == self._pong_pygame.K_UP:
+				self._player.set_speed(-self._player_speed)
+			if event.key == self._pong_pygame.K_DOWN:
+				self._player.set_speed(self._player_speed)
+		if event.type == self._pong_pygame.KEYUP:
+			if event.key == self._pong_pygame.K_UP:
+				self._player.set_speed(self._player_speed)
+			if event.key == self._pong_pygame.K_DOWN:
+				self._player.set_speed(-self._player_speed)	
+
+	def _write_score(self):
+		font_size = 30
+		font = self._pong_pygame.font.SysFont("freemono", font_size)
+		img = font.render(
+			f'{self._stat["cpu_score"]}    {self._stat["player_score"]}', True, self._game_field.line_color)
+		scor_str_len = len(
+			str(f'{self._stat["cpu_score"]}    {self._stat["player_score"]}')) * font_size
+		self._game_field.screen.blit(
+			img, (((self._game_field.disp_w - scor_str_len) / 2) + 35, 10))
+		
+	def _write_win(self, winner_name: str):
+		font_size = 30
+		font = self._pong_pygame.font.SysFont("freemono", font_size)
+		img = font.render(
+			f'{winner_name} wins!', True, self._game_field.line_color)
+		win_name_str = len(
+			str(f'{winner_name} wins!')) * font_size
+		self._game_field.screen.blit(
+			img, (((self._game_field.disp_w - win_name_str) / 2) + 35, 10))
+		self._pong_pygame.display.flip()
+
+	def _check_end_game(self):
+		if self._stat['cpu_score'] == self._stat['max_score']:
+			self._game_field.fill_screen()
+			pong_log.info("End game, CPU wins!")
+			self._write_win("CPU")
+			sleep(2)
+			self._pong_pygame.quit()
+			sys.exit()
+		if self._stat['player_score'] == self._stat['max_score']:
+			self._game_field.fill_screen()
+			pong_log.info(f"End game, {self._player.name} wins!")
+			self._write_win(self._player.name)
+			sleep(2)
+			self._pong_pygame.quit()
+			sys.exit()
+
 	def _update_events(self):
-		if self._stat['cpu'] == self._stat['max_score']:
-			print("End game, CPU wins!")
-			self._pong_pygame.quit()
-			sys.exit()
-		if self._stat['player'] == self._stat['max_score']:
-			print("End game, Player wins!")
-			self._pong_pygame.quit()
-			sys.exit()
+		self._check_end_game()
 		for event in self._pong_pygame.event.get():
 			if event.type == self._pong_pygame.QUIT:
 				self._pong_pygame.quit()
 				sys.exit()
 			# After a ball reset, waits for a player keypress to restart the ball
 			if event.type == self._pong_pygame.KEYDOWN or event.type == self._pong_pygame.KEYUP:
-				start_speed_x = get_random(1) * (self._BALL_SPEED_X_DFLT + (self._game_speed_increment * self._stat['level']))
-				start_speed_y = self._BALL_SPEED_Y_DFLT + (self._game_speed_increment * self._stat['level'])
+				start_speed_x = get_random(1) * (self._BALL_SPEED_X_DFLT + (self._cpu_speed_increment * self._stat['level']))
+				start_speed_y = self._BALL_SPEED_Y_DFLT + (self._cpu_speed_increment * self._stat['level'])
 				if self._ball.get_speed()[0] == 0 and self._ball.get_speed()[1] == 0:
 					self._ball.set_speed(start_speed_x, start_speed_y)
-			if event.type == self._pong_pygame.KEYDOWN:
-				if event.key == self._pong_pygame.K_UP:
-					self._player.set_speed(-self._player_speed)
-					print(f"Player speed updated: {self._player.get_speed()}")
-				if event.key == self._pong_pygame.K_DOWN:
-					self._player.set_speed(self._player_speed)
-					print(f"Player speed updated: {self._player.get_speed()}")
-			if event.type == self._pong_pygame.KEYUP:
-				if event.key == self._pong_pygame.K_UP:
-					self._player.set_speed(self._player_speed)
-					print(f"Player speed updated: {self._player.get_speed()}")
-				if event.key == self._pong_pygame.K_DOWN:
-					self._player.set_speed(-self._player_speed)
-					print(f"Player speed updated: {self._player.get_speed()}")
-
-	def _write_score(self):
-		font_size = 30
-		font = self._pong_pygame.font.SysFont("freemono", font_size)
-		img = font.render(
-			f'{self._stat["cpu"]}    {self._stat["player"]}', True, self._game_field.line_color)
-		scor_str_len = len(
-			str(f'{self._stat["cpu"]}    {self._stat["player"]}')) * font_size
-		self._game_field.screen.blit(
-			img, (((self._game_field.disp_w - scor_str_len) / 2) + 35, 10))
+				self._move_player(event)
 
 	def run_game(self):
+		pong_log.info("Game start!")
 		while True:
 			self._check_collision()
 			self._move_computer()
@@ -294,23 +392,40 @@ class PongGame:
 
 
 def main():
-	screen_width = 240	
-	screen_height = 120
-	light_grey = (200, 200, 200)
+	os.remove(os.path.abspath(log_file))
+	parser = argparse.ArgumentParser(description='Pong Game')
+	parser.add_argument('-dw','--width', type=int, default=320, help='Width of the display (dflt 320)')
+	parser.add_argument('-dh','--height', type=int, default=240, help='Height of the display (dflt 240)')
+	parser.add_argument('-n','--name', type=str, default="player 1", help='Player name')
+	parser.add_argument('-c', '--color', type=str, default="lightgrey", help='Game color (dflt light grey)')
+	parser.add_argument('--fps', type=int, default=120, help='Framerate (dflt 120)')
+	parser.add_argument('--max_score', type=int, default=10, help='Max score to win (dflt 10)')
+	args = parser.parse_args()
+
+	screen_width = args.width
+	screen_height = args.height
+	fps = args.fps
+	max_score = args.max_score
+	color = args.color
+	player_name = args.name
+
+	if color not in rgb_colors.keys():
+		pong_log.error(f"Color {color} not found, setting light grey")
+		color = "lightgrey"
+	# Il resto del tuo codice rimane invariato
 
 	game_field = GameField(screen_width, screen_height,
-						   "black", light_grey, "Pong")
+						   "black", rgb_colors[color], "Pong")
 	ball = Ball(screen_width / 2, screen_height / 2, 5,
-				light_grey, screen_width, screen_height)
+				rgb_colors[color], screen_width, screen_height)
 	player = Gamer(screen_width - 30, (screen_height / 2) - 40,
-				   10, 40, light_grey, screen_width, screen_height)
+				   10, 40, rgb_colors[color], player_name, screen_width, screen_height)
 	computer = Gamer(20, (screen_height / 2) - 40, 10, 40,
-					 light_grey, screen_width, screen_height)
+					 rgb_colors[color], "CPU",screen_width, screen_height)
 
-	pong = PongGame(game_field, ball, player, computer, fps=120, max_score=10)
+	pong = PongGame(game_field, ball, player, computer, fps=fps, max_score=max_score)
 
 	pong.run_game()
-
 
 if __name__ == '__main__':
 	main()
