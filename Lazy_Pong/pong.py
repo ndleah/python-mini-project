@@ -58,24 +58,24 @@ log_file = "pong_log.log"
 if os.path.exists(os.path.abspath(log_file)):
 	os.remove(os.path.abspath(log_file))
 
-# Configura il logger principale
+# Configure main logger
 pong_log = logging.getLogger("Pong logger")
 pong_log.setLevel(logging.DEBUG)
 
-# Configura l'handler per la console
+# Configure console handler
 console_handler = logging.StreamHandler()
 console_handler.setLevel(logging.DEBUG)  # Imposta il livello a INFO o altro a tuo piacere
 
-# Configura l'handler per il file di log
+# Configure file handler
 file_handler = logging.FileHandler(log_file)
 file_handler.setLevel(logging.DEBUG)
 
-# Imposta il formato dei messaggi
+# Set format
 formatter = logging.Formatter('[%(asctime)s] - [%(levelname)s] - %(message)s')
 console_handler.setFormatter(formatter)
 file_handler.setFormatter(formatter)
 
-# Aggiungi gli handler al pong_log principale
+# Add handler to logger
 pong_log.addHandler(console_handler)
 pong_log.addHandler(file_handler)
 
@@ -288,6 +288,7 @@ class PongGame:
 			if ball_coord['top'] <= self._computer.get_borders()['bott'] and ball_coord['bott'] >= self._computer.get_borders()['top']:
 				self._ball.invert_move(invert_x=True)
 
+	# Update game speed after a reset due to cpu error
 	def _update_game_speed(self):
 		score_diff = self._stat['player_score'] - self._stat['cpu_score']
 		if score_diff > 0 and score_diff > self._stat['last_diff']:
@@ -300,6 +301,7 @@ class PongGame:
 			pong_log.debug(
 				f"Update speed, score diff = {score_diff}, last diff {self._stat['last_diff']}, level: {self._stat['level']}")
 
+	# Move computer  to follow the ball after half of the game field
 	def _move_computer(self):
 		if self._ball.get_borders()['right'] < self._game_field.disp_w / 2:
 			if self._computer.get_borders()['center_y'] < self._ball.get_borders()['center_y']:
@@ -309,6 +311,7 @@ class PongGame:
 		else:
 			self._computer.set_speed(0)
 
+	# Based on incoming keyboard event, move the player
 	def _move_player(self, event: pygame.event):
 		if event.type == self._pong_pygame.KEYDOWN:
 			if event.key == self._pong_pygame.K_UP:
@@ -342,6 +345,7 @@ class PongGame:
 			img, (((self._game_field.disp_w - win_name_str) / 2) + 35, 10))
 		self._pong_pygame.display.flip()
 
+	# Check if cpu or player wins
 	def _check_end_game(self):
 		if self._stat['cpu_score'] == self._stat['max_score']:
 			self._game_field.fill_screen()
@@ -358,6 +362,7 @@ class PongGame:
 			self._pong_pygame.quit()
 			sys.exit()
 
+	# Check for events like quit game, key press or game reset
 	def _update_events(self):
 		self._check_end_game()
 		for event in self._pong_pygame.event.get():
