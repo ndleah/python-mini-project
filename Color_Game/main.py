@@ -5,7 +5,6 @@ from tkinter import messagebox
 colours = ['Red', 'Blue', 'Green', 'Yellow', 'Orange', 'Purple', 'Pink', 'Black', 'White']
 score = 0
 timeleft = 30
-highest_score = 0
 
 def next_colour():
     global score, timeleft
