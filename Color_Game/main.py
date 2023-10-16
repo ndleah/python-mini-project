@@ -1,15 +1,10 @@
 import random
 import tkinter as tk
+from tkinter import messagebox
 
 colours = ['Red', 'Blue', 'Green', 'Yellow', 'Orange', 'Purple', 'Pink', 'Black', 'White']
 score = 0
 timeleft = 30
-
-def start_game(event):
-    global timeleft
-    if timeleft == 30:
-        countdown()
-    next_colour()
 
 def next_colour():
     global score, timeleft
@@ -26,6 +21,7 @@ def next_colour():
         label.config(fg=colours[1], text=colours[0])
         score_label.config(text=f"Score: {score}")
 
+
 def countdown():
     global timeleft
     if timeleft > 0:
@@ -33,23 +29,47 @@ def countdown():
         time_label.config(text=f"Time left: {timeleft}")
         time_label.after(1000, countdown)
     else:
-        record_highest_score()
+    # messagebox.showwarning ('Attention', 'Your time is out!!')
+        scoreshow()
+        
 
 def record_highest_score():
     highest_score = load_highest_score()
     if score > highest_score:
-        save_highest_score(score)
+        with open("highest_score.txt", "w") as file:
+            file.write(str(score))
+    
 
-def save_highest_score(score):
-    with open("highest_score.txt", "w") as file:
-        file.write(f"The highest score is: {score}")
 
 def load_highest_score():
     try:
         with open("highest_score.txt", "r") as file:
-            return int(file.read())
+            data = file.read()
+            if data:
+                return int(data)
+            else:
+                return 0
     except FileNotFoundError:
         return 0
+
+
+def scoreshow():
+    record_highest_score()
+    window2 = tk.Tk()
+    window2.title("HIGH SCORE")
+    window2.geometry("300x200")
+
+    label = tk.Label(window2, text=f"Highest Score: {load_highest_score()}",font=(font, 12))
+   
+    label.pack()
+
+    window2.mainloop()
+
+def start_game(event):
+    global timeleft
+    if timeleft == 30:
+        countdown()
+    next_colour()
 
 window = tk.Tk()
 font = 'Helvetica'
@@ -62,7 +82,7 @@ instructions.pack(pady=10)
 
 score_label = tk.Label(window, text="Press Enter to start", font=(font, 12))
 score_label.pack()
-
+ 
 time_label = tk.Label(window, text=f"Time left: {timeleft}", font=(font, 12))
 time_label.pack()
 
