@@ -20,7 +20,7 @@ You can copy paste my markdown photo insert as following:
 
 <!--Remove the below lines and add yours -->
 
-Simple Zombie Survival Quiz Game bulit with python
+Simple Zombie Survival Quiz Game built with python
 
 ## ⚙️ Languages or Frameworks Used
 
