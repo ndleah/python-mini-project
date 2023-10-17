@@ -1,2 +1,0 @@
-pypng==0.0.21
-PyQRCode==1.2.1

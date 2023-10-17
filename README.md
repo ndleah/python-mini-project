@@ -251,6 +251,9 @@ please make sure to add a `README.md` file that follow the same construction as 
 | 57    | <a href="https://github.com/ndleah/python-mini-project/tree/main/Spinning%20Donut">Spinning Donut | This project uses the Pygame library to create an animation of a spinning donut on a black background. | [Gideon Ogunbanjo](https://github.com/gideon-ogunbanjo) |
 | 58    | <a href="https://github.com/ndleah/python-mini-project/tree/main/Firebase_Authentication_Using_Flask">Firebase Authentication | This project enables developers to implement secure user authentication features in their Flask applications with ease using Firebase Authentication | [MBSA INFINITY](https://github.com/MBSA-INFINITY) |
 | 59    | <a href="https://github.com/ndleah/python-mini-project/tree/main/Finance_Tracker">Finance Tracker | A finance tracker application allows the user to keep track of their income and expenses, and visualize their balance through a pie chart.  | [Hina Ota](https://github.com/otahina) |
+| 60    | <a href="https://github.com/ndleah/python-mini-project/spam_bot/">Spam bot | The Python Script that uses Pyautogui library to create a spam to that can be used to prank you friends  | [Prafull Sonawane](https://github.com/prafuel) |
+| 61    | <a href="https://github.com/ndleah/python-mini-project/lorem_in_python/">Lorem Generator | The Python Script that used to create random paragraph based on how much you want like number of rows | [Prafull Sonawane](https://github.com/prafuel) |
+| 62    | <a href="https://github.com/ndleah/python-mini-project/minionGame//">Minion Game | The Terminal playable sub string game that deal with count of vowel and constituent, score will be based on some rules given in scrip file.| [Prafull Sonawane](https://github.com/prafuel) |
 
 ## ![image](IMG/like.svg) Our Contributors
 

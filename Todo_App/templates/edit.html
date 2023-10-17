@@ -1,0 +1,23 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+    <div class="container-fluid">
+        <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-sm-offset-4">
+                <h1 class="text-center page-header">Edit</h1>
+                <form action=" {{ url_for('edit',index=index)}} "  method="post">
+                    <div class="input-group">
+                        <input type="text" name="todo" class="form-control" value="{{ todo['task'] }}" required>
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-primary form-control">Save</button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}

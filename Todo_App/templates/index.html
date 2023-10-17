@@ -1,0 +1,50 @@
+{% extends "bootstrap/base.html" %}
+{% block title %} todo {% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-sm-offset-4">
+            <h2 class="lead text-center">Tasks</h2>
+            <ul class="list-group" >
+            {% if not todos %}
+                <li class="list-group-item list-group-item-warning"><span class="glyphicon glyphicon-exclamation-sign"></span> No Tasks to Display</li>
+            {% else %}
+            {% for todo in todos  %}
+            <div class="input-group">
+            <span class="input-group-addon">
+                <input type="checkbox" class="checkbox">
+            </span>
+            <li class="list-group-item list-group-item-default">
+                <div class="input-group">
+                {{ todo['task'] }}
+                    <span class="input-group-btn"><a href="{{ url_for('edit', index=loop.index0) }}" class="edit btn btn-info glyphicon glyphicon-pencil"></a></span>
+                    <span class="input-group-btn"><a href="{{ url_for('remove', index=loop.index0) }}" class="remove btn btn-danger glyphicon glyphicon-remove"></a></span>
+                </div>
+            </li>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </ul>
+            </div>
+        </div>
+    </div>
+    <hr>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-sm-offset-4">
+                <form action=" {{ url_for('add')  }} "  method="post">
+                    <div class="input-group">
+                        <input type="text" name="todo" class="form-control" required>
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-primary form-control"><span class="glyphicon glyphicon-plus"></span></button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}
