@@ -14,7 +14,7 @@ temp_file = audio_stream.download()
 
 # Convert the audio stream to an MP3 file using MoviePy
 audio_clip = AudioFileClip(temp_file)
-mp3_file = os.path.join("Give Your own path", "Name.mp3")
+mp3_file = os.path.join("Give your own path to save file", "Name.mp3")
 audio_clip.write_audiofile(mp3_file)
 
 # Clean up the temporary file
