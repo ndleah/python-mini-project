@@ -1,6 +1,6 @@
 <h1 align="center">⚫ Othello/Reversi ⚪ </h1>
 
-A two-player, GUI-equipped, [Othello/Reversi](https://www.worldothello.org/about/about-othello/othello-rules/official-rules/english) game made in **Python3** using the `pygame` library.
+A GUI-equipped, [Othello/Reversi](https://www.worldothello.org/about/about-othello/othello-rules/official-rules/english) game made in **Python3** using the `pygame` library. Featuring two-player as well as Play with Computer modes.
 
 ## 📜 Description
 Othello is a board-game played on a 8x8 board, with 64 discs that are black on one side and white on the other. Each player gets 32 such discs, out of which 2 from each player are kept on the board in the following manner:
@@ -31,14 +31,25 @@ Example:
 
 For a more comprehensive explanation of the game rules, check out this [link](https://www.worldothello.org/about/about-othello/othello-rules/official-rules/english).
 
+### 🎯 Game Modes
+
+#### ⚔ Two-Player Mode 
+Two players can play the game, alternating their turns.
+
+#### 🤖 Play with Computer
+Play with the computer! It makes use of the minimax algorithm with alpha-beta pruning. 
+
+Currently the algorithm makes use of the following heuristics for a position's evaluation:
+- Coin parity
+- Mobility
+- Corner Values
 
 ### How to Play the Game 🎮
-1. Download the source code
-2. Make sure to install Python3 on your Computer along with `pip`
-3. Install the `numpy` and `pygame` libraries. To do this, open the terminal and type `pip install numpy` and `pip install pygame`. 
-4. Run the `main.py` file and play the game!
-
-## Author
-This Project was Contributed by [Vikrant Singh Bhadouriya](https://www.github.com/TERNION-1121). 
-
-Thanks for your kind attention!
+1. Download the source code. (Either clone the repository or download the whole code from GitHub)
+2. Make sure to install Python3 on your Computer along with `pip`. (Python3.10+ is required)
+3. Open your terminal, navigate to `~/Othello-Reversi-Game` and type the command:
+   ```
+   pip install -r requirements
+   ```
+5. Navigate to the `src` directory, run the `main.py` file and play the game!
+> P.S. You can change color modes using the 'L' key!
