@@ -20,8 +20,8 @@ Just run `python mhttp.py <your-desired-folder>`, where `<your-desired-folder>` 
     <td align="center">Client</td>
   </tr>
   <tr>
-    <td><img src="server.gif" alt="Server GIF"></td>
-    <td><img src="client.gif" alt="Client GIF"></td>
+    <td><img src="https://github.com/harishtpj/python-mini-project/blob/main/IMG/mhttp_server.gif" alt="Server GIF"></td>
+    <td><img src="https://github.com/harishtpj/python-mini-project/blob/main/IMG/mhttp_client.gif" alt="Client GIF"></td>
   </tr>
 </table>
 
