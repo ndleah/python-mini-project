@@ -10,21 +10,20 @@ FOLDER = '.' if len(sys.argv) < 2 else sys.argv[1]
 
 def get_content(path):
     ext = "html"
-    match path:
-        case "/":
-            try:
-                with open(FOLDER + "/index.html", "r") as f:
-                    content = f.read()
-            except FileNotFoundError:
-                content = "The Server is working! but there is no index.html file to render"
-        case _:
-            try:
-                with open(FOLDER + path, "r") as f:
-                    if Path(FOLDER + path).suffix != ".html":
-                        ext = "plain"
-                    content = f.read()
-            except FileNotFoundError:
-                return 404, "File not found", ext
+    if path == "/":
+        try:
+            with open(FOLDER + "/index.html", "r") as f:
+                content = f.read()
+        except FileNotFoundError:
+            content = "The Server is working! but there is no index.html file to render"
+    else:
+        try:
+            with open(FOLDER + path, "r") as f:
+                if Path(FOLDER + path).suffix != ".html":
+                    ext = "plain"
+                content = f.read()
+        except FileNotFoundError:
+            return 404, "File not found", ext
     return 200, content, ext
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:

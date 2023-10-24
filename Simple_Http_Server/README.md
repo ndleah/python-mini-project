@@ -4,27 +4,26 @@
 
 # Simple HTTP Server
 
-Add a jpeg/png/gif file here if applicable
-
-<!--An image is an illustration for your project, the tip here is using your sense of humour as much as you can :D 
-
-You can copy paste my markdown photo insert as following:
-<p align="center">
-<img src="your-source-is-here" width=40% height=40%>
--->
-
 ## 🛠️ Description
 A simple HTTP server written using python sockets.
 
 ## ⚙️ Languages or Frameworks Used
-This project is written in Python and has no other dependencies other than the Python Standard library.
+This project is written in Python 3.10 and has no other dependencies other than the Python Standard library.
 
 ## 🌟 How to run
-<!--Remove the below lines and add yours -->
-Steps on how to run the script along with suitable examples.
+Just run `python mhttp.py <your-desired-folder>`, where `<your-desired-folder>` is the folder which you need to serve. If you want to serve the current folder, just run `python mhttp.py`
 
 ## 📺 Demo
-Add a Screenshot/GIF showing the sample use of the script (jpeg/png/gif).
+<table>
+  <tr>
+    <td align="center">Server</td>
+    <td align="center">Client</td>
+  </tr>
+  <tr>
+    <td><img src="server.gif" alt="Server GIF"></td>
+    <td><img src="client.gif" alt="Client GIF"></td>
+  </tr>
+</table>
 
 ## 🤖 Author
 [Harish Kumar](https://github.com/harishtpj)
