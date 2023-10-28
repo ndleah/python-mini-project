@@ -6,7 +6,7 @@
 
 
 ## 🛠️ Description
-The lets you create attractive text designs using ASCII characters. You input your text and the program transforms it into a large, stylish banner.
+This lets you create attractive text designs using ASCII characters. You input your text and the program transforms it into a large, stylish banner.
 ## ⚙️ Languages or Frameworks Used
 
 The program was created with Python3 and pyfiglet.
