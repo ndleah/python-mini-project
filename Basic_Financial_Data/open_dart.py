@@ -2,14 +2,36 @@
 import OpenDartReader
 import FinanceDataReader as fdr
 import numpy as np
+import pandas as pd
 from tabulate import tabulate as tb
-from IPython.display import display
+
+# from IPython.display import display
+
+def GetStockPrice(sp_data, date):
+    sp_data.reset_index(inplace=True) #HAVE TO DO THIS CUZ THE sp_data returns Date as default index. So changing it back to column
+    date = pd.to_datetime(date)
+
+    #If the there isn't any stock value equivalent
+    #NOTE: we are assuming that the date inputed is NEVER a weekend.
+
+    if sp_data['Date'].max() < date:
+        return np.nan
+    else:
+        while True:
+            if sum(sp_data['Date'] == date) > 0:
+                value = sp_data[sp_data['Date'] == date]
+                value = sp_data['Close'].iloc[0]
+                break
+            else:
+                date += pd.to_timedelta(1, 'day')
+        return value
 
 def GetReport(dart, corp_code: str, year: int) -> dict:
     key_info = {
         'EPS': {'current_EPS':0,'previous_EPS':0,'sprevious_EPS':0,}
     }
     report = dart.report(corp_code, "배당", year, "11012")
+
     if report is None:
         key_info = {
             'EPS': np.nan
@@ -25,7 +47,7 @@ def GetReport(dart, corp_code: str, year: int) -> dict:
 
     return key_info
 
-def GetFinState(dart, corp_code: str) -> dict:
+def GetFinState(dart, corp_code: str, year: int) -> dict:
     BasicInfo = {
         'Debt_Equity_Ratio' : 0,
         'Total_Assets' : 0,
@@ -34,8 +56,7 @@ def GetFinState(dart, corp_code: str) -> dict:
         'Operating_Income': {'3month':0, 'add':0},
         'Net_Income':{'3month':0, 'add':0}
     }
-
-    finstate = dart.finstate(corp_code, 2023, "1102")
+    finstate = dart.finstate(corp_code, year, "11012")
 
     #getting the total assets
     finstate_debt = finstate.loc[(finstate["account_nm"] == "자산총계") & (finstate["fs_nm"] == '재무제표')]
@@ -83,8 +104,11 @@ def main():
     KOP_list = KOP_list.loc[0:100, ['Code', 'Name']]
     name_code = dict(zip(KOP_list['Name'], KOP_list['Code']))
 
-    # GetFinState(dart, name_code['삼성전자'])
-    print(GetFinState(dart, name_code['삼성전자']))
+    GetFinState(dart, name_code['삼성전자'], 2023)
+    GetReport(dart, name_code['삼성전자'], 2023)
+
+    sp_data = fdr.DataReader("005380", "2020-10-01", "2023-10-28")
+    print(GetStockPrice(sp_data, "2023-10-25"))
 
     return 0
 
