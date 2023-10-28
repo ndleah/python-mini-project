@@ -12,7 +12,7 @@ def GetReport(dart, corp_code: str, year: int) -> dict:
     report = dart.report(corp_code, "배당", year, "11012")
     if report is None:
         key_info = {
-            'EPS': np.nan #EPS 주당순이익
+            'EPS': np.nan
         }
     else:
         # print(tb(report, headers='keys'))
@@ -31,12 +31,17 @@ def GetFinState(dart, corp_code: str) -> dict:
         'Total_Assets' : 0,
         'Total_Equity':0,
         'Total_Debt':0,
-        'Operating_Income':0,
-        'Net_Income':0
+        'Operating_Income': {'3month':0, 'add':0},
+        'Net_Income':{'3month':0, 'add':0}
     }
 
     finstate = dart.finstate(corp_code, 2023, "1102")
 
+    #getting the total assets
+    finstate_debt = finstate.loc[(finstate["account_nm"] == "자산총계") & (finstate["fs_nm"] == '재무제표')]
+    finstate_debt = finstate_debt[['fs_nm', 'frmtrm_dt', 'frmtrm_amount', 'thstrm_dt', 'thstrm_amount']]
+    BasicInfo['Total_Assets'] = finstate_debt['thstrm_amount'].str.replace(",","").astype(float).values[0]
+    
     #getting the total debt
     finstate_debt = finstate.loc[(finstate["account_nm"] == "부채총계") & (finstate["fs_nm"] == '재무제표')]
     finstate_debt = finstate_debt[['fs_nm', 'frmtrm_dt', 'frmtrm_amount', 'thstrm_dt', 'thstrm_amount']]
@@ -53,17 +58,33 @@ def GetFinState(dart, corp_code: str) -> dict:
     #Then this return an ARRAY. the real float value is in the [0]
     BasicInfo['Debt_Equity_Ratio'] = debt_equity_ratio[0]
 
+    #getting the total assets
+    finstate_OI = finstate.loc[(finstate["account_nm"] == "영업이익") & (finstate["fs_nm"] == '재무제표')]
+    finstate_OI = finstate_OI[['fs_nm', 'frmtrm_dt', 'frmtrm_amount', 'frmtrm_add_amount', 'thstrm_dt', 'thstrm_amount', 'thstrm_add_amount']]
+    BasicInfo['Operating_Income']['3month'] = finstate_OI['thstrm_amount'].str.replace(",","").astype(float).values[0]
+    BasicInfo['Operating_Income']['add'] = finstate_OI['thstrm_add_amount'].str.replace(",","").astype(float).values[0]
+
+    #getting the total assets
+    finstate_debt = finstate.loc[(finstate["account_nm"] == "당기순이익") & (finstate["fs_nm"] == '재무제표')]
+    finstate_debt = finstate_debt[['fs_nm', 'frmtrm_dt', 'frmtrm_amount', 'frmtrm_add_amount', 'thstrm_dt', 'thstrm_amount', 'thstrm_add_amount']]
+    BasicInfo['Net_Income']['3month'] = finstate_debt['thstrm_amount'].str.replace(",","").astype(float).values[0]
+    BasicInfo['Net_Income']['add'] = finstate_debt['thstrm_add_amount'].str.replace(",","").astype(float).values[0]
+
+
     return BasicInfo
 
 def main():
-    my_api = "d846275c00eff1f16dc3b0b724da1327a00141b8"
+    #INITIALIZING THE API KEY.
+    my_api = "d846275c00eff1f16dc3b0b724da1327a00141b8" #PUT YOU OWN API KEY HERE
     dart = OpenDartReader(my_api)
     
+    #GETTING THE LIST OF NAMES AND THEIR CORPORATE CODES IN THE KOSPI
     KOP_list = fdr.StockListing('KOSPI')
     KOP_list = KOP_list.loc[0:100, ['Code', 'Name']]
     name_code = dict(zip(KOP_list['Name'], KOP_list['Code']))
-    # print(GetFinState(dart, "035720"))
-    # print(GetReport(dart, "035720", 2023))
+
+    # GetFinState(dart, name_code['삼성전자'])
+    print(GetFinState(dart, name_code['삼성전자']))
 
     return 0
 
