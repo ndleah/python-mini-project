@@ -1,33 +1,35 @@
-import json
 from difflib import get_close_matches
+import json
+
 data = json.load(open("data.json"))
 
 def translate(word):
     word = word.lower()
+    close_matches = get_close_matches(word, data.keys())
+    
     if word in data:
         return data[word]
     elif word.title() in data:
-        return data[word.title()] 
+        return data[word.title()]
     elif word.upper() in data:
         return data[word.upper()]
-    elif len(get_close_matches(word, data.keys())) > 0:
-        print("did you mean %s instead" %get_close_matches(word, data.keys())[0])
-        decide = input("press y for yes or n for no: ")
+    elif close_matches:
+        suggestion = close_matches[0]
+        decide = input(f"Did you mean {suggestion} instead? Press 'y' for yes or 'n' for no: ")
         if decide == "y":
-            return data[get_close_matches(word, data.keys())[0]]
+            return data[suggestion]
         elif decide == "n":
-            return("pugger your paw steps on working keys ")
+            return "Sorry, your word is not found in the dictionary."
         else:
-            return("You have entered wrong input please enter just y or n")    
+            return "You have entered an incorrect input. Please enter 'y' or 'n."
     else:
-        print("You have entered wrong keys. Try again")
-        
-
+        return "You have entered a wrong word. Please try again."
 
 word = input("Enter the word you want to search: ")
 output = translate(word)
+
 if type(output) == list:
     for item in output:
         print(item)
-else:
-    print(output)
+    else:
+        print(output)
