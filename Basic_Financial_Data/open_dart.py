@@ -30,20 +30,32 @@ def GetReport(dart, corp_code: str, year: int) -> dict:
     key_info = {
         'EPS': {'current_EPS':0,'previous_EPS':0,'sprevious_EPS':0,}
     }
-    report = dart.report(corp_code, "배당", year, "11012")
+    try:
+        report = dart.report(corp_code, "배당", year, "11012")
+    except:
+        key_info = {
+            'EPS': np.nan
+        }
+        return key_info
 
-    if report is None:
+    # print(tb(report, headers='keys'))
+
+    #GETTING THE EPS
+    if report.empty:
         key_info = {
             'EPS': np.nan
         }
     else:
-        # print(tb(report, headers='keys'))
-
-        #GETTING THE EPS
         EPS = report[(report['se'].str.contains('주당순이익'))]
-        key_info['EPS']['current_EPS'] = EPS['thstrm'].str.replace(",","").astype(float).values[0]
-        key_info['EPS']['previous_EPS'] = EPS['frmtrm'].str.replace(",","").astype(float).values[0]
-        key_info['EPS']['sprevious_EPS'] = EPS['lwfr'].str.replace(",","").astype(float).values[0]
+        try:
+            key_info['EPS']['current_EPS'] = EPS['thstrm'].str.replace(",","").astype(float).values[0]
+            key_info['EPS']['previous_EPS'] = EPS['frmtrm'].str.replace(",","").astype(float).values[0]
+            key_info['EPS']['sprevious_EPS'] = EPS['lwfr'].str.replace(",","").astype(float).values[0]
+        except:
+            key_info = {
+                'EPS': np.nan
+            }
+
 
     return key_info
 
@@ -56,7 +68,29 @@ def GetFinState(dart, corp_code: str, year: int) -> dict:
         'Operating_Income': {'3month':0, 'add':0},
         'Net_Income':{'3month':0, 'add':0}
     }
-    finstate = dart.finstate(corp_code, year, "11012")
+    try:
+        finstate = dart.finstate(corp_code, year, "11012")
+    except:
+        key_info = {
+            'Debt_Equity_Ratio' : np.nan,
+            'Total_Assets' : np.nan,
+            'Total_Equity':np.nan,
+            'Total_Debt':np.nan,
+            'Operating_Income': {'3month':np.nan, 'add':np.nan},
+            'Net_Income':{'3month':np.nan, 'add':np.nan}
+        }
+        return key_info
+
+    if finstate.empty:
+        key_info = {
+            'Debt_Equity_Ratio' : np.nan,
+            'Total_Assets' : np.nan,
+            'Total_Equity':np.nan,
+            'Total_Debt':np.nan,
+            'Operating_Income': {'3month':np.nan, 'add':np.nan},
+            'Net_Income':{'3month':np.nan, 'add':np.nan}
+        }
+        return key_info
 
     #getting the total assets
     finstate_debt = finstate.loc[(finstate["account_nm"] == "자산총계") & (finstate["fs_nm"] == '재무제표')]
@@ -86,11 +120,11 @@ def GetFinState(dart, corp_code: str, year: int) -> dict:
     BasicInfo['Operating_Income']['add'] = finstate_OI['thstrm_add_amount'].str.replace(",","").astype(float).values[0]
 
     #getting the total assets
+    print(tb(finstate, headers='keys'))
     finstate_debt = finstate.loc[(finstate["account_nm"] == "당기순이익") & (finstate["fs_nm"] == '재무제표')]
     finstate_debt = finstate_debt[['fs_nm', 'frmtrm_dt', 'frmtrm_amount', 'frmtrm_add_amount', 'thstrm_dt', 'thstrm_amount', 'thstrm_add_amount']]
     BasicInfo['Net_Income']['3month'] = finstate_debt['thstrm_amount'].str.replace(",","").astype(float).values[0]
     BasicInfo['Net_Income']['add'] = finstate_debt['thstrm_add_amount'].str.replace(",","").astype(float).values[0]
-
 
     return BasicInfo
 
@@ -104,11 +138,17 @@ def main():
     KOP_list = KOP_list.loc[0:100, ['Code', 'Name']]
     name_code = dict(zip(KOP_list['Name'], KOP_list['Code']))
 
-    GetFinState(dart, name_code['삼성전자'], 2023)
-    GetReport(dart, name_code['삼성전자'], 2023)
+    # for names in name_code:
+    #     print("RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR")
+    #     print(name_code[names])
+    #     GetFinState(dart, name_code[names], 2023)
+    #     print(GetReport(dart, name_code[names], 2023))
 
-    sp_data = fdr.DataReader("005380", "2020-10-01", "2023-10-28")
-    print(GetStockPrice(sp_data, "2023-10-25"))
+    print(GetFinState(dart, "008770", 2023))
+    print(GetReport(dart, "008770", 2023))
+
+    # sp_data = fdr.DataReader("005380", "2020-10-01", "2023-10-28")
+    # GetStockPrice(sp_data, "2023-10-25")
 
     return 0
 
