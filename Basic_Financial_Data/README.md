@@ -2,7 +2,7 @@
 
 ## 🛠️ Description
 
-This code provides you with basic financial data of KOSPI companies. The Basic financial datas are: Total debt amount, PER, EPS, ROE, equity amount, and so on.
+This code provides you with basic financial data of KOSPI companies. The Basic financial datas are: Total debt amount, PER, EPS, equity amount, and so on.
 
 ## ⚙️ Languages or Frameworks Used
 
