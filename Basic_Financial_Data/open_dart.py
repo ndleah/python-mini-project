@@ -4,8 +4,19 @@ import FinanceDataReader as fdr
 import numpy as np
 import pandas as pd
 from tabulate import tabulate as tb
+from datetime import datetime
+from datetime import date
 
 # from IPython.display import display
+
+def GetDateToday():
+    today = date.today()
+    x = today.weekday()
+    today = pd.to_datetime(today)
+    while x > 4:
+        today -= pd.to_timedelta(1, 'D')
+        x -= 1
+    return today
 
 def GetStockPrice(sp_data, date):
     sp_data.reset_index(inplace=True) #HAVE TO DO THIS CUZ THE sp_data returns Date as default index. So changing it back to column
@@ -13,47 +24,51 @@ def GetStockPrice(sp_data, date):
 
     #If the there isn't any stock value equivalent
     #NOTE: we are assuming that the date inputed is NEVER a weekend.
-
     if sp_data['Date'].max() < date:
+        print(sp_data['Date'].max())
         return np.nan
     else:
         while True:
             if sum(sp_data['Date'] == date) > 0:
-                value = sp_data[sp_data['Date'] == date]
+                sp_data = sp_data[sp_data['Date'] == date]
                 value = sp_data['Close'].iloc[0]
                 break
             else:
                 date += pd.to_timedelta(1, 'day')
         return value
 
-def GetReport(dart, corp_code: str, year: int) -> dict:
+def GetReport(dart, corp_code: str, year: int, today) -> dict:
     key_info = {
         'EPS': {'current_EPS':0,'previous_EPS':0,'sprevious_EPS':0,}
     }
     try:
         report = dart.report(corp_code, "배당", year, "11012")
+        sp_data = fdr.DataReader(corp_code, "2020-10-01", today)
     except:
         key_info = {
-            'EPS': np.nan
+            'EPS': np.nan,
+            'PER': np.nan
         }
         return key_info
 
     # print(tb(report, headers='keys'))
 
-    #GETTING THE EPS
     if report.empty:
         key_info = {
             'EPS': np.nan
         }
     else:
+        #GETTING THE EPS
         EPS = report[(report['se'].str.contains('주당순이익'))]
         try:
             key_info['EPS']['current_EPS'] = EPS['thstrm'].str.replace(",","").astype(float).values[0]
             key_info['EPS']['previous_EPS'] = EPS['frmtrm'].str.replace(",","").astype(float).values[0]
             key_info['EPS']['sprevious_EPS'] = EPS['lwfr'].str.replace(",","").astype(float).values[0]
+            key_info['PER'] = GetStockPrice(sp_data, today) / key_info['EPS']['current_EPS']
         except:
             key_info = {
-                'EPS': np.nan
+                'EPS': np.nan,
+                'PER': np.nan
             }
 
 
@@ -113,43 +128,57 @@ def GetFinState(dart, corp_code: str, year: int) -> dict:
     #Then this return an ARRAY. the real float value is in the [0]
     BasicInfo['Debt_Equity_Ratio'] = debt_equity_ratio[0]
 
-    #getting the total assets
+    #getting the total Operating Income
     finstate_OI = finstate.loc[(finstate["account_nm"] == "영업이익") & (finstate["fs_nm"] == '재무제표')]
     finstate_OI = finstate_OI[['fs_nm', 'frmtrm_dt', 'frmtrm_amount', 'frmtrm_add_amount', 'thstrm_dt', 'thstrm_amount', 'thstrm_add_amount']]
     BasicInfo['Operating_Income']['3month'] = finstate_OI['thstrm_amount'].str.replace(",","").astype(float).values[0]
     BasicInfo['Operating_Income']['add'] = finstate_OI['thstrm_add_amount'].str.replace(",","").astype(float).values[0]
 
-    #getting the total assets
-    print(tb(finstate, headers='keys'))
+    #getting the total Net_Income
     finstate_debt = finstate.loc[(finstate["account_nm"] == "당기순이익") & (finstate["fs_nm"] == '재무제표')]
     finstate_debt = finstate_debt[['fs_nm', 'frmtrm_dt', 'frmtrm_amount', 'frmtrm_add_amount', 'thstrm_dt', 'thstrm_amount', 'thstrm_add_amount']]
-    BasicInfo['Net_Income']['3month'] = finstate_debt['thstrm_amount'].str.replace(",","").astype(float).values[0]
-    BasicInfo['Net_Income']['add'] = finstate_debt['thstrm_add_amount'].str.replace(",","").astype(float).values[0]
+    try:
+        BasicInfo['Net_Income']['3month'] = finstate_debt['thstrm_amount'].str.replace(",","").astype(float).values[0]
+        BasicInfo['Net_Income']['add'] = finstate_debt['thstrm_add_amount'].str.replace(",","").astype(float).values[0]
+    except:
+        BasicInfo['Net_Income']['3month'] = np.nan
+        BasicInfo['Net_Income']['add'] = np.nan
+
 
     return BasicInfo
 
 def main():
     #INITIALIZING THE API KEY.
-    my_api = "d846275c00eff1f16dc3b0b724da1327a00141b8" #PUT YOU OWN API KEY HERE
+    my_api = "" #PUT YOU OWN API KEY HERE
     dart = OpenDartReader(my_api)
-    
+
+    # today = GetDate()
+    today = GetDateToday()
+
     #GETTING THE LIST OF NAMES AND THEIR CORPORATE CODES IN THE KOSPI
     KOP_list = fdr.StockListing('KOSPI')
     KOP_list = KOP_list.loc[0:100, ['Code', 'Name']]
     name_code = dict(zip(KOP_list['Name'], KOP_list['Code']))
 
-    # for names in name_code:
-    #     print("RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR")
-    #     print(name_code[names])
-    #     GetFinState(dart, name_code[names], 2023)
-    #     print(GetReport(dart, name_code[names], 2023))
+    #AN PRACTICAL EXAMPLE:
+    #I WANT THE LIST OF ALL THE COMPANIES WITH DEBT_EQUITY_RATIO OF OVER 400%
+    companies_with_DER_bigger_than_400 = {
+        # 'Name':dbr
+    }
 
-    print(GetFinState(dart, "008770", 2023))
-    print(GetReport(dart, "008770", 2023))
-
-    # sp_data = fdr.DataReader("005380", "2020-10-01", "2023-10-28")
-    # GetStockPrice(sp_data, "2023-10-25")
-
+    count = 1
+    for names in name_code:
+        # print(f"count: {count}")
+        # print(names)
+        finstate = GetFinState(dart, name_code[names], 2023)
+        # GetReport(dart, name_code[names], 2023)
+        count += 1
+        try:
+            if 100 > finstate['Debt_Equity_Ratio'] > 50:
+                companies_with_DER_bigger_than_400[names] = finstate['Debt_Equity_Ratio']
+        except:
+            pass
+    print(companies_with_DER_bigger_than_400)
     return 0
 
 if __name__ == "__main__":
