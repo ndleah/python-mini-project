@@ -6,9 +6,9 @@ This code provides you with basic financial data of KOSPI companies. The Basic f
 
 ## ⚙️ Languages or Frameworks Used
 
-Modules required are `pandas`.
+Modules required are `pandas`, OpenDataReader, FinanceDataReader, and many more.
 
-These are listed in `requirements.txt` . USe the below command to install these dependencies.
+These are listed in `requirements.txt` . Use the below command to install these dependencies.
 
 ```pip install requirements.txt```
  
@@ -17,7 +17,7 @@ These are listed in `requirements.txt` . USe the below command to install these 
 - You need to request an API from the openDart website.
 -   https://opendart.fss.or.kr/
 - Then you have to inirialize the API key in the file
-- No you just have to '''python bfd.py'''
+- No you just have to '''python open_dart.py'''
 
 
 ## 🤖 Author
