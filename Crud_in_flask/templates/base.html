@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>SQLite using Flask</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename='styles/style.css') }}"
+    />
+  </head>
+  <body>
+    <nav>
+      <a href="{{ url_for('index') }}">SQLite using Flask</a>
+      <a href="#"></a>
+    </nav>
+    <hr />
+    <a class="create" href="{{ url_for('create') }}">Create</a>
+
+    <div class="price">
+      {% for message in get_flashed_messages() %}
+      <div class="alert">{{ message }}</div>
+      {% endfor %} {% block price %} {% endblock %}
+    </div>
+  </body>
+</html>

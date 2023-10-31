@@ -1,0 +1,9 @@
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+.idea
+/.vs/PythonSettings.json
+/.vs/VSWorkspaceState.json
+/.vs/python-mini-project/v17
+/.vs/python-mini-project/FileContentIndex
+/.vs
+/Tic_Tac_Toe/tic_tac_toe -OOP.py
