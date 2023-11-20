@@ -1,22 +1,20 @@
-import math
-
 import pandas as pd
 from nltk import bigrams
 from nltk.lm.preprocessing import pad_both_ends
-
 from nltk.tokenize import WordPunctTokenizer
-from nltk.probability import FreqDist
 from nltk.lm import Vocabulary
 from nltk.lm import Laplace
 
 
 def remove_html_tags(text):
+    # Function to remove HTML tags from text
     import re
     clean = re.compile('<.*?>')
     return re.sub(clean, '', text)
 
 
 def remap_corpus(path):
+    # Read CSV file, preprocess the 'Body' column, and tokenize the text
     df_corpus = pd.read_csv(path)
     df_corpus['Body'] = df_corpus['Body'].apply(lambda x: remove_html_tags(x))
     df_corpus['Body_tokenized'] = df_corpus['Body'].apply(lambda x: WordPunctTokenizer().tokenize(x))
@@ -24,6 +22,7 @@ def remap_corpus(path):
 
 
 def padding_corpus(corpus):
+    # Pad both ends of each sentence in the corpus
     corpus_padding = []
     for sentence in corpus:
         corpus_padding.append(
@@ -33,6 +32,7 @@ def padding_corpus(corpus):
 
 
 def remap_bigram(corpus):
+    # Extract bigrams from each sentence in the corpus
     corpus_bigram = []
     for sentence in corpus:
         corpus_bigram.append(list(bigrams(sentence)))
@@ -40,6 +40,7 @@ def remap_bigram(corpus):
 
 
 def vocab(corpus):
+    # Create a vocabulary list from the corpus
     voc_list = []
     for sentence in corpus:
         for word in sentence:
@@ -48,6 +49,7 @@ def vocab(corpus):
 
 
 def prediction(train, prefix):
+    # Perform next-word prediction using Laplace smoothing
     train = padding_corpus(train)
     voc = vocab(train)
     LaplaceModel = Laplace(2, vocabulary=voc)
@@ -62,10 +64,20 @@ def prediction(train, prefix):
 
 
 if __name__ == '__main__':
-    path_train = "./train.csv"
-    corpus_train = remap_corpus(path_train)['Body_tokenized']
-    user_input = input("Enter a prefix for next-word prediction: ")
-    prediction = prediction(corpus_train, user_input)
-    for i in prediction:
-        print(f"Next word predictionc can be : {i}")
+    # Main execution
+    print("Text Prediction using Laplace Smoothing")
+    print("--------------------------------------")
+    print("Reading training data...")
 
+    path_train = "corpus/train.csv"
+    corpus_train = remap_corpus(path_train)['Body_tokenized']
+    print("Training data is ready!")
+    print("--------------------------------------")
+    user_input = input("Enter a prefix for next-word prediction: ")
+    print("--------------------------------------")
+    print("Performing next-word prediction...")
+
+    prediction_result = prediction(corpus_train, user_input)
+    print("------- Result of Prediction ---------")
+    for i in prediction_result:
+        print(f"Next word predictionc can be : {i}")
