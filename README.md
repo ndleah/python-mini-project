@@ -281,4 +281,4 @@ If you have any feedback or ideas to improve this project, feel free to contact 
 <a href="https://github.com/ndleah">
   <img align="left" alt="Reeha's Github" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/github.svg" />
 </a>
-# CPU Usage GUI
+
