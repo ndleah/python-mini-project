@@ -6,7 +6,7 @@
 # Tower of Hanoi
 
 <p align="center">
-<img src="https://en.wikipedia.org/wiki/Tower_of_Hanoi#/media/File:Tower_of_Hanoi.jpeg" width=50% height=50%>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Tower_of_Hanoi.jpeg/300px-Tower_of_Hanoi.jpeg" width=50% height=50%>
 
 <!--An image is an illustration for your project, the tip here is using your sense of humour as much as you can :D 
 
