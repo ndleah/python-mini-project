@@ -3,7 +3,7 @@
 ![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)
 [![View My Profile](https://img.shields.io/badge/View-My_Profile-green?logo=GitHub)](https://github.com/JaronWenger)
 
-# Caesar Cipher
+# Tower of Hanoi
 
 <p align="center">
 <img src="https://en.wikipedia.org/wiki/Tower_of_Hanoi#/media/File:Tower_of_Hanoi.jpeg" width=50% height=50%>
