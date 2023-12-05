@@ -30,3 +30,6 @@ To check if the trie contains a prefix, run `trie.starts_with("w")`
 ## 🤖 Author
 
 [Tim Vuong](https://github.com/Tim-Vuong)
+
+Credits to LeetCode problem:
+https://leetcode.com/problems/implement-trie-prefix-tree/description/
