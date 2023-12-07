@@ -1,0 +1,31 @@
+public class FindGreatestNumber {
+    public static void main(String[] args) {
+        // Sample array
+        int[] numbers = {10, 5, 8, 20, 15};
+
+        // Find the greatest number
+        int greatestNumber = findGreatestNumber(numbers);
+
+        // Print the result
+        System.out.println("The greatest number is: " + greatestNumber);
+    }
+
+    // Method to find the greatest number in an array
+    public static int findGreatestNumber(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            throw new IllegalArgumentException("Array is empty or null");
+        }
+
+        // Assume the first element is the greatest
+        int greatest = arr[0];
+
+        // Iterate through the array to find the greatest number
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] > greatest) {
+                greatest = arr[i];
+            }
+        }
+
+        return greatest;
+    }
+}

@@ -1,0 +1,77 @@
+Ada
+Algol 68
+AWK
+Bash Shell
+BC
+Befunge
+Blockly
+Brainf**k
+C
+C-99
+CLISP
+Clojure
+COBOL
+CoffeeScript
+C++
+C++ 14
+C++ 17
+C#
+D
+Dart
+Elixir
+Erlang
+Factor
+Falcon
+Fantom
+FASM
+Forth
+Fortran
+FREE BASIC
+F#
+Assembler - GCC
+GO Lang
+Groovy
+Hack
+Haskell
+Haxe
+Icon
+Intercal
+Java
+JBang
+J Language
+Kotlin
+LOLCODE
+Lua
+OZ Mozart
+Assembler - NASM
+Nemerle
+Nim
+NodeJS
+Objective C
+Ocaml
+Octave
+Pascal
+Perl
+PHP
+Picolisp
+Pike
+Prolog
+Python 2
+Python 3
+R Language
+Racket
+Rhino JS
+Ruby
+RUST
+Scala
+Scheme
+SmallTalk
+SpiderMonkey
+SQL
+Swift
+TCL
+Unlambda
+VB.Net
+VERILOG
+Whitespace
+YaBasic
