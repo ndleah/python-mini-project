@@ -58,8 +58,9 @@ def calculate():
             list.delete(0,END)
             list.insert(END,'something went wrong please enter again')
 
+
 operations = {'ADD':add,'ADDITION':add, 'SUM':add, 'PLUS':add,
-            'SUB':sub, 'DIFFERENCE':sub, 'MINUS': sub, 'SUBTRACT':sub, 'DIFF':sub, 'SUBTRACTION':sub,
+            'SUB':sub, 'DIFFERENCE':sub, 'MINUS': sub, 'SUBTRACT':sub, 'DIFF':sub,'SUBTRACTION':sub,
             'LCM':lcm, 'HCF':hcf, 'PRODUCT':mul, 'MULTIPLICATION':mul,
             'MULTIPLY':mul, 'DIVISION':div, 'DIV':div, 'DIVIDE':div,
             'MOD':mod,'REMAINDER':mod, 'MODULUS':mod}
