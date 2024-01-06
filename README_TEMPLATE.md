@@ -4,34 +4,41 @@
 
 # Script Title
 
-Add a jpeg/png/gif file here if applicable
-
-<!--An image is an illustration for your project, the tip here is using your sense of humour as much as you can :D 
-
-You can copy paste my markdown photo insert as following:
 <p align="center">
-<img src="your-source-is-here" width=40% height=40%>
--->
+<img src="assests/main.png" width=40% height=40%>
 
 ## 🛠️ Description
-<!--Remove the below lines and add yours -->
-A short description about the script must be mentioned here.
+
+This open-source project contains mini python projects which you can create as a beginner. If you want, you can get the python files and edit them as you want. Feel free to contribute to this repository. You can,
+    1. Improve functionaly
+    2. Fix a bug
+    3. Or add a new cool feature
+
+Try to contribute as much as you can. Even a small contribution is enough.
 
 ## ⚙️ Languages or Frameworks Used
-<!--Remove the below lines and add yours -->
-Modules required to be able to use the script successfully
-and how to install them.
-(If there are a lot of them, including a `requirements.txt` file will work better.)
+
+You can see the modules required to be able to use the following scripts in the `requirement.txt` file and also you can see how to install them so that you can run the scripts successfully. Run the command given in the file on your terminal.
 
 ## 🌟 How to run
-<!--Remove the below lines and add yours -->
-Steps on how to run the script along with suitable examples.
+
+You can type this command on your teminal to run the scripts.
+`python <the path of the python file>`
+
+if this doesn't work try,
+`python3 <the path of the python file>`
+
+To stop it you can press CTRL + C
 
 ## 📺 Demo
-Add a Screenshot/GIF showing the sample use of the script (jpeg/png/gif).
+
+Some demos of the scripts.
+
+<img src="assests/colorgame.png" width=40% height=40%>
 
 ## 🤖 Author
-<!--Remove the below lines and add yours -->
-The name of the author of the code goes here.
-If you have a web site or a Git user name, feel free to link.
 
+This script is by ndleah.
+
+Dulneth Fernando -> https://github.com/DulnethFernando
+This is my github profile.
