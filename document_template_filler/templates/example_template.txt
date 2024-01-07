@@ -1,0 +1,8 @@
+Date: {{ date }}
+
+To whom it may concern,
+
+This is to certify that {{ name }} is employed with {{ company }}.
+
+Sincerely,
+{{ company }}
