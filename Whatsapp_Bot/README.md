@@ -2,7 +2,7 @@
 ![Star Badge](https://img.shields.io/static/v1?label=%F0%9F%8C%9F&message=If%20Useful&style=style=flat&color=BC4E99)
 ![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)
 
-# Script Title
+# Whatsapp Bot
 
 <!--An image is an illustration for your project, the tip here is using your sense of humour as much as you can :D 
 
@@ -16,6 +16,8 @@ You can copy paste my markdown photo insert as following:
 ## 🛠️ Description
 <!--Remove the below lines and add yours -->
 A Simple Bot made using Python to Send WhatsApp Message.
+
+The used library is pywhatkit, and it can be found [here](https://github.com/Ankit404butfound/PyWhatKit).
 
 ## ⚙️ Languages or Frameworks Used
 <!--Remove the below lines and add yours -->
@@ -33,6 +35,29 @@ Just open a terminal in the folder where your script is located and run the foll
 python main.py
 ```
 
+There are several options to send a message:
+
+```sh
+# Send a WhatsApp Message to a Contact at 1:30 PM
+pywhatkit.sendwhatmsg("+910123456789", "Hi", 13, 30)
+
+# Same as above but Closes the Tab in 2 Seconds after Sending the Message
+pywhatkit.sendwhatmsg("+910123456789", "Hi", 13, 30, 15, True, 2)
+
+# Send an Image to a Group with the Caption as Hello
+pywhatkit.sendwhats_image("AB123CDEFGHijklmn", "Images/Hello.png", "Hello")
+
+# Send an Image to a Contact with the no Caption
+pywhatkit.sendwhats_image("+910123456789", "Images/Hello.png")
+
+# Send a WhatsApp Message to a Group at 12:00 AM
+pywhatkit.sendwhatmsg_to_group("AB123CDEFGHijklmn", "Hey All!", 0, 0)
+
+# Send a WhatsApp Message to a Group instantly
+pywhatkit.sendwhatmsg_to_group_instantly("AB123CDEFGHijklmn", "Hey All!")
+```
+
+
 ## 📺 Demo
 
 ![demo](https://user-images.githubusercontent.com/87910771/147886979-a12cd79a-8f49-4603-b568-4991dde28feb.jpg)
@@ -41,4 +66,5 @@ python main.py
 
 ## 🤖 Author
 <!--Remove the below lines and add yours -->
-[AnishLohiya](https://github.com/AnishLohiya)
+[AnishLohiya](https://github.com/AnishLohiya),
+[Yurnero-cyber](https://github.com/Yurnero-cyber)
