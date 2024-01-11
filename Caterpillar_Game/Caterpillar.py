@@ -28,6 +28,25 @@ score_turtle = t.Turtle()
 score_turtle.hideturtle()
 score_turtle.speed(0)
 
+obstacle = t.Turtle()
+obstacle.shape('circle')  # You can choose any shape
+obstacle.color('red')  # Choose a distinct color for obstacles
+obstacle.penup()
+obstacle.hideturtle()
+
+num_obstacles = 5  # Number of obstacles
+obstacles = []
+
+for _ in range(num_obstacles):
+    new_obstacle = t.Turtle()
+    new_obstacle.shape('circle')
+    new_obstacle.color('red')
+    new_obstacle.penup()
+    new_obstacle.setposition(rd.randint(-200, 200), rd.randint(-200, 200))
+    new_obstacle.showturtle()
+    obstacles.append(new_obstacle)
+
+
 def outside_window():
     left_wall = -t.window_width()/2
     right_Wall = t.window_width()/2
@@ -77,16 +96,20 @@ def start_game():
 
     while True:
         caterpillar.forward(caterpillar_speed)
-        if caterpillar.distance(leaf) < 20:
-            place_leaf()
-            caterpillar_length = caterpillar_length + 1
-            caterpillar.shapesize(1,caterpillar_length,1)
-            caterpillar_speed = caterpillar_speed + 1
-            score = score + 10
-            display_score(score)
+        for obstacle in obstacles:
+            if caterpillar.distance(leaf) < 20:
+                place_leaf()
+                caterpillar_length = caterpillar_length + 1
+                caterpillar.shapesize(1,caterpillar_length,1)
+                caterpillar_speed = caterpillar_speed + 1
+                score = score + 10
+                display_score(score)
+                game_over()
+                break
         if outside_window():
             game_over()
             break
+        
 
 def move_up():
         caterpillar.setheading(90)
