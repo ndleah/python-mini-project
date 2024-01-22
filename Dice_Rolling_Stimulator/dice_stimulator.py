@@ -1,50 +1,71 @@
 import random
+#CATEGORIZING OUTCOME INTO A LIST
+
+one =   """ 
+            ("===========")
+            ("|         |")
+            ("|    O    |")
+            ("|         |")
+            ("===========")\n  
+        
+        """
+
+two =   """ 
+            ("===========")
+            ("|         |")
+            ("| O     O |")
+            ("|         |")
+            ("===========")\n  
+        
+        """
+
+
+
+three =   """ 
+            ("===========")
+            ("|    O    |")
+            ("|    O    |")
+            ("|    O    |")
+            ("===========")\n  
+        
+        """
+
+four =   """ 
+            ("===========")
+            ("|  O    O |")
+            ("|     0   |")
+            ("|  O    O |")
+            ("===========")\n  
+        
+        """
+
+five =   """ 
+            ("===========")
+            ("| O     O |")
+            ("|    0    |")
+            ("| O     O |")
+            ("===========")\n  
+        
+        """
+
+six =  """
+            ("===========") 
+            ("| O     O |")
+            ("| O     O |")
+            ("| O     O |")
+            ("===========") \n      
+        """
+
+
+
+outcomes_list = [one, two, three, four, five, six]
+
 
 print("This is a dice stimulator")
 x = "y"
 while x == "y":
-    number = random.randint(1,6)
-
-    if number == 1:
-        print("===========")
-        print("|         |")
-        print("|    O    |")
-        print("|         |")
-        print("===========")
-
-    if number == 2:
-        print("===========")
-        print("|         |")
-        print("| O     O |")
-        print("|         |")
-        print("===========")
-
-    if number == 3:
-        print("===========")
-        print("|    O    |")
-        print("|    O    |")
-        print("|    O    |")
-        print("===========")
-        
-    if number == 4:
-        print("===========")
-        print("| O     O |")
-        print("|         |")
-        print("| O     O |")
-        print("===========")
-        
-    if number == 5:
-        print("===========")
-        print("| O     O |")
-        print("|    O    |")
-        print("| O     O |")
-        print("===========")
-        
-    if number == 6:
-        print("===========")
-        print("| O     O |")
-        print("| O     O |")
-        print("| O     O |")
-        print("===========")
+    randon_outcome = random.sample(outcomes_list, 2)
+    for outcome in randon_outcome:
+        print(outcome)
     
     x =  input("Press y to roll again ")
