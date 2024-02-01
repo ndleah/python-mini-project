@@ -50,6 +50,11 @@ second : sec
 week : w
 year : y
 
+TEMPERATURE : temp ----------------------------------------------------------------
+kelvin : K
+Celsius : C
+Fahrenheit : F
+
 ''',
 
 "help":'''
@@ -117,3 +122,6 @@ T= {"y":0.0027397 ,
     "min":1440  ,
     "sec":86400 }
 
+temp= {"K":310.15 ,
+    "C":37 ,
+    "F":98.6 }
