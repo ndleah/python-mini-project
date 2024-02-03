@@ -14,6 +14,8 @@ You can copy paste my markdown photo insert as following:
 ## 🛠️ Description
 Simple Snake game created using pygame
 
+#adding some interface updates of my own.
+
 ## ⚙️  Languages or Frameworks Used
 <!--Remove the below lines and add yours -->
 The program was created with Python3 and pygame.
