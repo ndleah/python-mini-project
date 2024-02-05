@@ -1,0 +1,18 @@
+Hello World!!
+
+This CLI Application allows you to avoid the continious time setting while your exercising.
+Simply input your exercise requirements via the terminal.
+
+example, You want to do leg lifts for 10 second in 10 reps. All you want to do is type
+        "python exercise_cli.py -t 10 -i 2 -r 10"
+
+        (-t/--time = The time you want to hold,
+         -i/--interval = The interval you want between the reps,
+         -r/-rep = The number of reps you wish to do
+        )
+
+You can also --help for help
+
+We hope this tool helps you with your workout routine!
+
+github : https://github.com/hisham-slm
