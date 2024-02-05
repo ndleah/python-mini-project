@@ -18,9 +18,9 @@ def play_audio_stop():
     
     
 @click.command()
-@click.option('--time', '-t', default=10, prompt='Enter the Time', help='Time you want to exercise')
-@click.option('--interval', '-i', default=3, prompt='Enter the Interval', help='Interval you want for exercise')
-@click.option('--reps', '-r', default=5, prompt='Enter the Reps', help='Reps you want to do')
+@click.option('--time', '-t', default=10, help='Time you want to exercise')
+@click.option('--interval', '-i', default=3, help='Interval you want for exercise')
+@click.option('--reps', '-r', default=5, help='Reps you want to do')
 def exercise(time:int, interval:int, reps:int):
     for _ in range(reps):
         print('Interval')
