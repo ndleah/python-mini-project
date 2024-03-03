@@ -6,3 +6,5 @@ sseclient==0.0.27
 pycryptodome==3.18.0
 requests-toolbelt==0.10.1
 urllib3==1.26.15
+Werkzeug==2.2.2
+setuptools

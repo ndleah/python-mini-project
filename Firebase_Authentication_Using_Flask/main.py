@@ -4,7 +4,7 @@ from flask import Flask, render_template, request, redirect, abort, flash, sessi
 from db import auth
 
 app = Flask(__name__)
-app.secret_key = "MBSAIADITYA"
+app.secret_key = "somesecretkey"
 
 exempted_endpoints = ['signup','login','static']
 
