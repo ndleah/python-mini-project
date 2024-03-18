@@ -13,9 +13,12 @@ green = (0, 255, 0)
 display_width = 600
 display_height = 500
 
+icon = pygame.image.load("snakeicon.ico")
+pygame.display.set_icon(icon)
+
 display = pygame.display.set_mode(
     (display_width, display_height))  # Apply size to the game
-pygame.display.set_caption('Snake')  # Set title of game window
+pygame.display.set_caption('Snake Game')  # Set title of game window
 
 clock = pygame.time.Clock()
 

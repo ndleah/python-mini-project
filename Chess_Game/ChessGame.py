@@ -7,6 +7,12 @@ SQ_SIZE = HEIGHT// DIMENSIONS
 MAX_FPS = 15
 IMAGES = {}
 
+
+icon = p.image.load("images\icon.ico")
+p.display.set_icon(icon)
+
+p.display.set_caption("Chess Game")
+
 def loadImages():
     pieces = ['wp', 'wR', 'wN', 'wB', 'wQ', 'wK', 'bp', 'bR', 'bN', 'bB', 'bQ', 'bK' ]
     for piece in pieces: 
