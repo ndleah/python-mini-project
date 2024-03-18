@@ -74,6 +74,7 @@ def start_game(event):
 window = tk.Tk()
 font = 'Helvetica'
 window.title("Color Game")
+window.iconbitmap("color_game_icon.ico")
 window.geometry("375x250")
 window.resizable(False, False)
 

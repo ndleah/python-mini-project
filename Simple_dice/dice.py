@@ -16,6 +16,7 @@ def on_leave(event):
 
 root = Tk()
 root.geometry("99x117+1153+210")
+root.title("Dice")
 label = Label(root, text="Simple Dice" ,wraplength=100)
 e = Entry(root, width=5)
 button1 = Button(root, text="Roll", command=roll,wraplength=100)
