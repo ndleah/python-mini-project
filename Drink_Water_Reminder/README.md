@@ -3,11 +3,7 @@
 [![View My Profile](https://img.shields.io/badge/View-My_Profile-green?logo=GitHub)](https://github.com/rmondal-official)
 [![View Repositories](https://img.shields.io/badge/View-My_Repositories-blue?logo=GitHub)](https://github.com/rmondal-official?tab=repositories)
 
-
 <h1 align="center">Drink Water Reminder</h1>
-
-<p align="center">
-<img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fchibird.com%2Fpost%2F180359694859%2Fdaily-reminder-to-drink-enough-water-you-cant&psig=AOvVaw0uDgh2LyaegHLEiAeKYfdA&ust=1710945745033000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCKCe8N7HgIUDFQAAAAAdAAAAABAE" width=40% height=40%>
 
 ## 🛠️ Description
 
@@ -25,11 +21,11 @@ You only need Python to run this script. You can visit [here](https://www.python
 
 ## 🚀  How to run
 
-First install dependency using `pip`
+First, install dependency using `pip`
 ```bash
 pip install plyer
 ```
-Now for running the script direct to the folder where your script is located and run the following command:
+Now to run the script directly to the folder where your script is located run the following command:
 ```bash
 python reminder.py
 ```
