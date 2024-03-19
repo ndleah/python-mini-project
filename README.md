@@ -263,6 +263,7 @@ please make sure to add a `README.md` file that follow the same construction as 
 | 69    | <a href="https://github.com/ndleah/python-mini-project/Download%20Audio/">Download Audio | This is a python script that downloads audio files directly from youtube videos. | [Muhammad Abdullah]((https://github.com/Muhammad-Abdullah3)) |
 | 70    | <a href="https://github.com/ndleah/python-mini-project/Expense_Tracker/">Expense Tracker | Expense Tracker is a Python application designed to help users keep track of their daily expenses | [Darshan Patil](https://github.com/darshan8850) |
 | 71    | <a href="https://github.com/ndleah/python-mini-project/Lazy_Pong/">Lazy Pong | This is a simple implementation of the classic Pong game in Python using the Pygame library | [dar8900](https://github.com/dar8900) |
+| 72    | <a href="https://github.com/ndleah/python-mini-project/tree/main/Drink_Water_Reminder">Drink Water Reminder | This is a python script remind you to drink water at regular interval | [Rajesh Mondal](https://github.com/rmondal-official) |
 
 ## ![image](IMG/like.svg) Our Contributors
 
