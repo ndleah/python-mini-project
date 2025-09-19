@@ -34,7 +34,7 @@ As a Python newbie, I understand the problems that people face when they first b
 
 My goal is to build a common playground where everyone, from beginners to experts, can learn and share knowledge, and I hope you enjoy your stay here!
 
-Let's "folk-ing" create amazing things together! 👉
+Let's "folk-ing" create amazing things together! 👉letsss
 
 ## ![image](IMG/game-ps.svg) Contributing
 
