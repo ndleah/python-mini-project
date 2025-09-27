@@ -10,7 +10,7 @@ def Etopo(lon_area, lat_area, resolution):
   
   Output
   Mesh type longitude, latitude, and topography data
-  
+  ....
   
   Read NetCDF data
   data = Dataset("ETOPO1_Ice_g_gdal.grd", "r")
