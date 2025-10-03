@@ -19,6 +19,7 @@ def validate_email(email: str) -> bool:
         return False
 
     if domain.startswith('.') or domain.endswith('.'):
+        print("You placed the period at the incorrect location!")
         return False
 
     split_domain = domain.split(".")
