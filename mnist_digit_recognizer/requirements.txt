@@ -1,2 +1,0 @@
-tensorflow==2.15.0
-keras=3.0.2
