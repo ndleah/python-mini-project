@@ -15,8 +15,9 @@ P.S: As you can see a part of the code is commented, this is because https://www
 ### Screenshot/GIF showing the sample use of the script  
 How to run the script:  
 ![Run the code](screenshots/web_scraping_before.png)  
+  
 How to see the results:  
-![See the results](screenshots/web_scraping_before.png)  
+![See the results](screenshots/web_scraping_after.png)  
   
 ## *Author Name*  
 [Alexei Luchian](https://github.com/AlexeiLuchian)  
