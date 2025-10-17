@@ -1,0 +1,22 @@
+[project]
+name = "bulk-file-organizer"
+version = "0.1.0"
+description = "A CLI tool to organize files into subfolders based on file extensions."
+authors = [{ name = "Shravan" }]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "ruff",  # optional linter
+    "black", # formatter
+]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["bulk_organizer"]

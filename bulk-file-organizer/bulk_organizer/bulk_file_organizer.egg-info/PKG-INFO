@@ -1,0 +1,11 @@
+Metadata-Version: 2.4
+Name: bulk-file-organizer
+Version: 0.1.0
+Summary: A CLI tool to organize files into subfolders based on file extensions.
+Author: Shravan
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: ruff; extra == "dev"
+Requires-Dist: black; extra == "dev"

@@ -1,0 +1,8 @@
+README.md
+pyproject.toml
+bulk_organizer/bulk_file_organizer.egg-info/PKG-INFO
+bulk_organizer/bulk_file_organizer.egg-info/SOURCES.txt
+bulk_organizer/bulk_file_organizer.egg-info/dependency_links.txt
+bulk_organizer/bulk_file_organizer.egg-info/requires.txt
+bulk_organizer/bulk_file_organizer.egg-info/top_level.txt
+tests/test_mapper.py
