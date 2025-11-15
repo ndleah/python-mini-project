@@ -8,3 +8,6 @@
 /.vs
 /Tic_Tac_Toe/tic_tac_toe -OOP.py
 /.vscode
+.venv
+.log
+/__pycache__/
