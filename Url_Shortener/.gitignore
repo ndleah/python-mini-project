@@ -1,0 +1,6 @@
+config.json
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+url_history.db
