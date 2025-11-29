@@ -6,13 +6,14 @@ colours = ['Red', 'Blue', 'Green', 'Yellow', 'Orange', 'Purple', 'Pink', 'Black'
 score = 0
 timeleft = 30
 
+# BUG: Score doesn't update when user enters wrong color
+# FIX:
 def next_colour():
     global score, timeleft
-
     if timeleft > 0:
-        user_input = e.get().lower()
+        user_input = e.get().strip().lower()
         correct_color = colours[1].lower()
-
+        
         if user_input == correct_color:
             score += 1
 
@@ -20,8 +21,6 @@ def next_colour():
         random.shuffle(colours)
         label.config(fg=colours[1], text=colours[0])
         score_label.config(text=f"Score: {score}")
-
-
 def countdown():
     global timeleft
     if timeleft > 0:
@@ -95,5 +94,6 @@ window.bind('<Return>', start_game)
 e.pack()
 
 e.focus_set()
+
 
 window.mainloop()
