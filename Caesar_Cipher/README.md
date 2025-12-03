@@ -26,8 +26,12 @@ The script was created with Python3 and the built-in functions in it
 <!--Remove the below lines and add yours -->
 ```bash
 python3 caesarcypher.py 
-Enter string to decrypt: hello
+Enter string to encrypt: hello
 khoor
+
+Enter string to decrypt: khoor
+hello
+
 ```
 ## 📺 Demo
 <p align="center">
