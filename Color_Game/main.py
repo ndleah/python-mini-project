@@ -21,7 +21,6 @@ def next_colour():
         label.config(fg=colours[1], text=colours[0])
         score_label.config(text=f"Score: {score}")
 
-
 def countdown():
     global timeleft
     if timeleft > 0:
@@ -38,6 +37,11 @@ def record_highest_score():
     if score > highest_score:
         with open("highest_score.txt", "w") as file:
             file.write(str(score))
+    elif score <= highest_score:
+        with open("highest_score1.txt", "w") as file:
+            file.write(str(score))
+        
+
     
 
 
@@ -49,20 +53,36 @@ def load_highest_score():
                 return int(data)
             else:
                 return 0
+            
     except FileNotFoundError:
         return 0
+
+def load_your_score():
+    try:
+        with open("highest_score1.txt", "r") as file:
+            data = file.read()
+            if data:
+                return int(data)
+            else:
+                return 0
+    except FileNotFoundError:
+        return 0
+    
 
 
 def scoreshow():
     record_highest_score()
-    window2 = tk.Tk()
+    window2 = tk.Toplevel()
     window2.title("HIGH SCORE")
     window2.geometry("300x200")
 
-    label = tk.Label(window2, text=f"Highest Score: {load_highest_score()}",font=(font, 12))
+    highest_label = tk.Label(window2, text=f"Highest Score: {load_highest_score()}",font=(font, 12))
    
-    label.pack()
+    your_label = tk.Label(window2, text=f"Your Score:{load_your_score()}", font=(font, 12))
 
+    highest_label.pack()
+    your_label.pack()
+    
     window2.mainloop()
 
 def start_game(event):
@@ -74,8 +94,8 @@ def start_game(event):
 window = tk.Tk()
 font = 'Helvetica'
 window.title("Color Game")
-window.iconbitmap("color_game_icon.ico")
-window.geometry("375x250")
+# window.iconbitmap("color_game_icon.ico")
+window.geometry("375x350")
 window.resizable(False, False)
 
 instructions = tk.Label(window, text="Enter the color of the text, not the word!", font=(font, 12))
@@ -97,3 +117,4 @@ e.pack()
 e.focus_set()
 
 window.mainloop()
+
