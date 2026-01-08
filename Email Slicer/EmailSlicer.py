@@ -1,21 +1,26 @@
 import re
 
-def isValidEmail(email):
+def is_valid_email(email):
+    """
+    Checks whether the given email address is valid.
+    Returns True if valid, otherwise False.
+    """
+    regex = r'^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$'
+    return re.fullmatch(regex, email) is not None
 
-    # Regular expression for validating an Email
-    regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
- 
-    if(re.fullmatch(regex, email)):
-        return True
-    else:
-        return False
 
-email = input("Enter your email id - ")
+def extract_email_parts(email):
+    """
+    Extracts username and domain from a valid email.
+    """
+    return email.split('@', 1)
 
-if isValidEmail(email):
-    username = email[0:email.index('@')]
-    domain = email[email.index('@')+1: ]
-    print("Username - ", username)
-    print("Domain - ", domain)
+
+email = input("Enter your email id: ")
+
+if is_valid_email(email):
+    username, domain = extract_email_parts(email)
+    print("Username:", username)
+    print("Domain:", domain)
 else:
     print("Invalid Email!")
