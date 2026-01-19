@@ -5,25 +5,28 @@
 # Image Compressor
 
 ## 🛠️ Description
-<!--Remove the below lines and add yours -->
-The image resizer takes in an image and reduces it's disk size according to the quality you choose, the compressed image is saved in the folder of the orignal image
+This is a simple Python script that reduces the file size of an image by lowering its quality.  
+The compressed image is saved in the same folder as the original image.
 
+## ⚙️ Modules Used
+The following modules are required:
+- pillow  
+- os  
+- easygui  
 
+All required modules are listed in `requirements.txt`.
 
-## ⚙️ Languages or Frameworks Used
-<!--Remove the below lines and add yours -->
-Modules required to be able to use the script successfully
-`pillow`, `os`, `easygui`
-
-These modules are listed in `requirements.txt` and can be installed by running the following command `pip install requirements.txt`
+Install them using:
+pip install -r requirements.txt
 
 ## 🌟 How to run
-<!--Remove the below lines and add yours -->
-:Simply run the script
+Run the script using:
+python image_compressor.py
 
+A file selection window will open where you can choose the image to compress.
 
 ## 🤖 Author
-<!--Remove the below lines and add yours -->
-If you have any doubts or tips feel free to ping me on discord
-dumb_potato#1734
+Original project by Yuv-glitch 
+
+README improvements by aanyacloud
 
