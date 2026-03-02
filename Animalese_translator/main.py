@@ -16,7 +16,7 @@ from scipy.io.wavfile import write
 import numpy as np
 # if you pip install scipy numpy will come too
 
-voice_path = "/home/wilson/Documentos/git_repo/python-mini-project/Animalese_translator/voices/guy3"
+voice_path = "/app/voices/guy3"
 files = os.listdir(voice_path)
 # lists the containing names of the entries of the specified directory
 
@@ -59,7 +59,7 @@ space_skip = 0.4 * advance
 # say_this = "pastee luuk at des"
 # say_this = "kil haw es yor de goeng"
 # say_this = "weleam haw was yor de"
-say_this = "i med somteng kul"
+say_this = "Hello World"
 # say_this = "ame  i lov yuu vere alat"
 # say_this = "ef yu wurk hard yu wel hav a gud lif"
 
@@ -106,6 +106,7 @@ name = say_this.replace(" ", "_")
 file_path = os.path.join(output_dir, name + '.wav')
 write_rate = int(sample_rate*speed_multiplier)
 write(file_path, write_rate, base.astype(np.int16))
-playsound(file_path)
+#playsound(file_path)
+print(f"Audio saved to {file_path}")
 # for file in files:
 #     playsound(voice_path + "/" + file)

@@ -1,0 +1,3 @@
+playsound==1.2.2
+scipy
+numpy
