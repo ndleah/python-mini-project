@@ -8,4 +8,9 @@ sp=(s1+s2+s3)/2
 #Calculate the area
 area=(sp*(sp-s1)*(sp-s2)*(sp-s3))**0.5
 
+#Calculate the perimeter
+perimeter = s1 + s2 + s3
+
 print('The area of the triangle is %0.4f'%area)
+
+print('The perimeter of the triangle is %0.4f'%perimeter) 

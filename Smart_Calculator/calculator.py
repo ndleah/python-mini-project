@@ -1,4 +1,6 @@
 from tkinter import *
+PI = 3.14159
+
 
 def add(a,b):
     return a + b
@@ -57,6 +59,21 @@ def calculate():
         elif word.upper() not in operations.keys():
             list.delete(0,END)
             list.insert(END,'something went wrong please enter again')
+
+
+def fact(n):
+    if n == 1 or n == 0:
+        return 1
+    return n * fact(n - 1)
+
+
+def circle_area(radius):
+    return PI * (radius ** 2)
+
+
+def circle_perimeter(radius):
+    return PI * radius * 2
+    
 
 operations = {'ADD':add,'ADDITION':add, 'SUM':add, 'PLUS':add,
             'SUB':sub, 'DIFFERENCE':sub, 'MINUS': sub, 'SUBTRACT':sub, 'DIFF':sub,
