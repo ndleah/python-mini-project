@@ -84,7 +84,31 @@ class BST:
         if root == None:
             return "deletion failed: deleting from an empty tree"
         return self.removeHelper(root,data)
-            
+
+    def search(self, root, data):
+
+        if root == None:
+            return "value not found"
+
+        if root.val == data:
+            return "value found"
+
+        elif data < root.val:
+            return self.search(root.left, data)
+
+        else:
+            return self.search(root.right, data)
+
+root = BST(50,None,None)
+
+root.add(root,30)
+root.add(root,70)
+root.add(root,20)
+root.add(root,40)
+
+print(root.search(root,70))
+print(root.search(root,100))
+   
         
     
     
