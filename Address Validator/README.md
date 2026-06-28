@@ -5,17 +5,28 @@
 # Address Validator
 
 
+# Email Address Validator
 
-## 🛠️ Description
+A simple Python program that checks whether a given input follows basic email address formatting rules.
 
-This program checks if your email adress is valid by looking for an '@' symbol and a '.'
+The program validates an email address by checking the presence and position of important characters like `@` and `.`.
 
-## ⚙️ Languages or Frameworks Used
-Python
+## Features
 
-## 🌟 How to run
-Open the file AddressValidator.py file with the python IDE and hit run.
+- Removes extra spaces from input
+- Checks if email contains `@`
+- Checks if email contains `.`
+- Ensures `@` appears before `.`
+- Prevents empty username before `@`
+- Prevents missing domain after `.`
+- Allows multiple email checks until the user exits
 
+## How It Works
+
+The program uses a function:
+
+```python
+addressVal(address)
 
 ## 🤖 Author
 tommcgurn10
