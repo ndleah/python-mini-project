@@ -1,0 +1,5 @@
+gradio
+google-generativeai
+pymupdf
+matplotlib
+numpy
