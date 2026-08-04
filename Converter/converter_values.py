@@ -7,7 +7,7 @@ foot : ft
 inch : in
 kilometer : km
 meter : m
-micrometer ; um
+micrometer : um
 mile : mi
 millimeter : mm
 nanometer : nm
@@ -21,7 +21,7 @@ sq ft : ft2
 sq inch : in2
 sq km : km2
 sq m : m2
-sq mile : mi
+sq mile : mi2
 sq yard : yd2
 
 VOLUME : V ----------------------------------------------------------------
@@ -114,4 +114,13 @@ T= {"y":0.0027397 ,
     "hr":24  ,
     "min":1440  ,
     "sec":86400 }
+
+CATEGORIES = {
+    "L": L,
+    "A": A,
+    "V": V,
+    "M": M,
+    "T": T
+}
+
 
