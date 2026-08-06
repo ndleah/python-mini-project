@@ -1,15 +1,5 @@
 import sys
-
-if len(sys.argv) > 1:
-    romanStr = sys.argv[1]
-else:
-    romanStr = input("Enter a Roman numeral: ")
-
-romanStr = str(romanStr).strip().upper()
-
-if not romanStr:
-    print("Error: No Roman numeral provided.")
-    sys.exit(1)
+import re
 
 ROMAN_VALUES = {
     'I': 1,
@@ -21,21 +11,78 @@ ROMAN_VALUES = {
     'M': 1000
 }
 
-invalid_chars = [char for char in romanStr if char not in ROMAN_VALUES]
-if invalid_chars:
-    print(f"Error: Invalid Roman numeral character(s) '{''.join(set(invalid_chars))}'.")
-    sys.exit(1)
+INT_TO_ROMAN_MAP = [
+    (1000, 'M'), (900, 'CM'), (500, 'D'), (400, 'CD'),
+    (100, 'C'), (90, 'XC'), (50, 'L'), (40, 'XL'),
+    (10, 'X'), (9, 'IX'), (5, 'V'), (4, 'IV'), (1, 'I')
+]
 
-num = 0
+def validate_roman_sequence(roman_str: str) -> bool:
+    """Validate Roman numeral sequence formatting rules."""
+    if re.search(r'(V{2,}|L{2,}|D{2,})', roman_str):
+        return False
+    if re.search(r'(I{4,}|X{4,}|C{4,}|M{4,})', roman_str):
+        return False
+    return True
 
-romanStr = romanStr.replace("IV", "IIII")
-romanStr = romanStr.replace("IX", "VIIII")
-romanStr = romanStr.replace("XL", "XXXX")
-romanStr = romanStr.replace("XC", "LXXXX")
-romanStr = romanStr.replace("CD", "CCCC")
-romanStr = romanStr.replace("CM", "DCCCC")
+def roman_to_int(roman_str: str) -> int:
+    roman_str = roman_str.strip().upper()
+    if not roman_str:
+        raise ValueError("No Roman numeral provided.")
 
-for char in romanStr:
-    num += ROMAN_VALUES[char]
+    invalid_chars = [char for char in roman_str if char not in ROMAN_VALUES]
+    if invalid_chars:
+        raise ValueError(f"Invalid Roman numeral character(s): '{''.join(set(invalid_chars))}'.")
 
-print(num)
+    if not validate_roman_sequence(roman_str):
+        raise ValueError(f"Invalid Roman numeral sequence: '{roman_str}'.")
+
+    temp_str = roman_str
+    temp_str = temp_str.replace("IV", "IIII")
+    temp_str = temp_str.replace("IX", "VIIII")
+    temp_str = temp_str.replace("XL", "XXXX")
+    temp_str = temp_str.replace("XC", "LXXXX")
+    temp_str = temp_str.replace("CD", "CCCC")
+    temp_str = temp_str.replace("CM", "DCCCC")
+
+    num = sum(ROMAN_VALUES[char] for char in temp_str)
+    return num
+
+def int_to_roman(num: int) -> str:
+    if not (1 <= num <= 3999):
+        raise ValueError("Integer out of range (must be 1 to 3999).")
+
+    result = []
+    for value, symbol in INT_TO_ROMAN_MAP:
+        while num >= value:
+            result.append(symbol)
+            num -= value
+    return "".join(result)
+
+def main():
+    if len(sys.argv) > 1:
+        user_input = sys.argv[1]
+    else:
+        user_input = input("Enter a Roman numeral or Integer: ")
+
+    user_input = str(user_input).strip()
+
+    if not user_input:
+        print("Error: No input provided.")
+        sys.exit(1)
+
+    try:
+        if user_input.isdigit():
+            val = int(user_input)
+            roman_res = int_to_roman(val)
+            print(f"Integer: {val} -> Roman: {roman_res}")
+        else:
+            int_res = roman_to_int(user_input)
+            print(f"Roman: {user_input.upper()} -> Integer: {int_res}")
+    except ValueError as e:
+        print(f"Error: {e}")
+        sys.exit(1)
+
+if __name__ == "__main__":
+    main()
+
