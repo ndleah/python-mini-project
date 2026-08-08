@@ -1,105 +1,105 @@
+import os
+import sys
 import json
 import tkinter as tk 
 from tkinter import messagebox
 from difflib import get_close_matches
 
+DATA_FILE = os.path.join(os.path.dirname(__file__), "data.json")
 
-data = json.load(open("data.json"))
-
-# Use the absolute path to the data.json file
-file_path = "Enter the path of json file "
-
-
-
-def access_data(file_path):
+def access_data(file_path=DATA_FILE):
     try:
-        with open(file_path, 'r') as file:
+        with open(file_path, 'r', encoding='utf-8') as file:
             return json.load(file)
     except FileNotFoundError:
-        print(f"Error: !!Oops... I guess you missed to keep things in same folder!!")
+        print("Error: data.json file not found in script directory.")
         return {}
     except json.JSONDecodeError:
-        print(f"Error: !!Oops... I think I am old i cant decode this file is it really json file you programi...!!")
+        print("Error: Unable to decode data.json file.")
         return {}
-    
- 
-        
-#finding correct match 
-def translate(word, file):
-    word = word.lower()
-    if word in file:
-        return file[word], None
-    elif word.title() in file:
-        return file[word.title()], None
-    elif word.upper() in file:
-        return file[word.upper()], None
+
+def translate(word, file_data):
+    if not file_data:
+        return "Dictionary data is empty or missing.", None
+
+    word = word.lower().strip()
+    if word in file_data:
+        return file_data[word], None
+    elif word.title() in file_data:
+        return file_data[word.title()], None
+    elif word.upper() in file_data:
+        return file_data[word.upper()], None
     else:
-        matches = get_close_matches(word, file.keys())
+        matches = get_close_matches(word, file_data.keys())
         if len(matches) > 0:
             return f"Did you mean '{matches[0]}' instead?", matches[0]
         else:
             return "The word does not exist. Please double-check it.", None
 
-def on_search():
-    word = entry.get().strip()
-    if word:
-        output, suggestion = translate(word, file)
-        if isinstance(output, list):
-            result_text = ' \n'.join(output)
-        else:
-            result_text = output
-        result_label.config(text=result_text)
-        
-        if suggestion:
-            def suggest():
-                suggested_output = translate(suggestion, file)[0]
-                result_label.config(text=suggested_output)
+def run_gui(file_data):
+    root = tk.Tk()
+    root.title("Dictionary")
+
+    frame = tk.Frame(root, padx=10, pady=10)
+    frame.pack(padx=10, pady=10)
+
+    label = tk.Label(frame, text="Enter a word:")
+    label.pack()
+
+    entry = tk.Entry(frame, width=50)
+    entry.pack(pady=5)
+    entry.focus_set()
+
+    result_label = tk.Label(frame, text="", wraplength=400, justify="left")
+    suggest_button = tk.Button(frame, text="", wraplength=400, justify="left")
+
+    def on_search():
+        word = entry.get().strip()
+        if word:
+            output, suggestion = translate(word, file_data)
+            if isinstance(output, list):
+                result_text = '\n'.join(output)
+            else:
+                result_text = output
+            result_label.config(text=result_text)
+
+            if suggestion:
+                def suggest():
+                    suggested_output, _ = translate(suggestion, file_data)
+                    if isinstance(suggested_output, list):
+                        result_label.config(text='\n'.join(suggested_output))
+                    else:
+                        result_label.config(text=suggested_output)
+                    suggest_button.pack_forget()
+
+                suggest_button.config(command=suggest, text=f"Search for '{suggestion}'")
+                suggest_button.pack(pady=5)
+            else:
                 suggest_button.pack_forget()
-
-            suggest_button.config(command=suggest, text=f"Search for '{suggestion}'")
-            suggest_button.pack()
         else:
-            suggest_button.pack_forget()
+            messagebox.showwarning("Input Error", "Please enter a word to search.")
+
+    search_button = tk.Button(frame, text="Search", command=on_search)
+    search_button.pack(pady=5)
+
+    result_label.pack(pady=10)
+
+    root.bind('<Return>', lambda e: on_search())
+    root.mainloop()
+
+def main():
+    file_data = access_data(DATA_FILE)
+    if len(sys.argv) > 1:
+        word = ' '.join(sys.argv[1:])
+        output, _ = translate(word, file_data)
+        if isinstance(output, list):
+            for item in output:
+                print(item)
+        else:
+            print(output)
     else:
-        messagebox.showwarning("Input Error", "Please enter a word to search.")
+        run_gui(file_data)
 
-#for data access
-file = access_data(file_path)
-
-#setting up GUI
-root = tk.Tk()
-root.title("Dictionary")
-
-frame= tk.Frame(root, padx=10, pady=10)
-frame.pack(padx=10, pady=10)
-
-label=  tk.Label(frame, text="Enter a word:")
-label.pack()
-
-entry = tk.Entry(frame, width=50)
-entry.pack(pady=5)
-
-search_button = tk.Button(frame, text="Search", command=on_search)
-search_button.pack(pady=5)
-
-result_label = tk.Label(frame, text="", wraplength=400, justify="left")
-result_label.pack(pady=10)
-
-suggest_button = tk.Button(frame, text="", wraplength=400, justify= "left")
-
-root.mainloop()
-
-#main body of the program
-def main():    
-      
-    word = input("Enter the word you want to search: ")
-    output = translate(word, file)
-    if type(output) == list:
-        for item in output:
-            print(item)
-    else:
-        print(output)
-        
-#setting default focus to main function
 if __name__ == "__main__":
     main()
+
