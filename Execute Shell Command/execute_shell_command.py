@@ -8,11 +8,11 @@ def execute_shell_command(command):
         out, err = proc.communicate()
         return_code = proc.returncode
         if err:
-            print(str(err))
+            print(err.decode('utf8', errors='ignore'))
         return out, return_code
     except Exception as err:
-        print("Exception Occurred while executing module : %s", str(err))
-        return 105
+        print(f"Exception Occurred while executing module : {err}")
+        return b'', 105
 
 if __name__ == '__main__':
     command ='echo Deepak'
