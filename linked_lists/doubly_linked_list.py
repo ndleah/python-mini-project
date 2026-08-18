@@ -26,6 +26,9 @@ class _DoublyLinkedList:
         newest = self._Node(element, predecessor, sucessor)
         predecessor._next = newest
         sucessor._previous = newest
+        self._size += 1
+        return newest
+
 
     def _delete_node(self, node):
         predecessor = node._previous
