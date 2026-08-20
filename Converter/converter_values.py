@@ -7,7 +7,7 @@ foot : ft
 inch : in
 kilometer : km
 meter : m
-micrometer ; um
+micrometer : um
 mile : mi
 millimeter : mm
 nanometer : nm
@@ -114,4 +114,13 @@ T= {"y":0.0027397 ,
     "hr":24  ,
     "min":1440  ,
     "sec":86400 }
+
+CATEGORIES = {
+    'L': L,
+    'A': A,
+    'V': V,
+    'M': M,
+    'T': T
+}
+
 
