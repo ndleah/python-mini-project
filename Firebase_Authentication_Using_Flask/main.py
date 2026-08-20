@@ -6,7 +6,24 @@ from db import auth
 app = Flask(__name__)
 app.secret_key = "somesecretkey"
 
-exempted_endpoints = ['signup','login','static']
+exempted_endpoints = ['signup','login','reset_password','static']
+
+'''
+Reset Password Route
+'''
+@app.route("/reset-password", methods=['GET', 'POST'])
+def reset_password():
+    if request.method == 'POST':
+        email = request.form.get("email")
+        try:
+            auth.send_password_reset_email(email)
+            flash("Password reset email sent! Check your inbox.")
+            return redirect("/login")
+        except Exception as e:
+            flash(f"Error: {str(e)}")
+            return redirect("/reset-password")
+    return render_template("reset_password.html")
+
 
 '''
 Signup Route

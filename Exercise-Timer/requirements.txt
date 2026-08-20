@@ -1,3 +1,2 @@
-pygame
-click
-time
+pygame>=2.0.0
+click>=8.0.0

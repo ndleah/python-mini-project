@@ -24,9 +24,13 @@ This script is written in Python language. So make sure you have python installe
 3. write "pip install pytube" 
 ## 🌟 How to run
 <!--Remove the below lines and add yours -->
-- Open the Download Audio.py script
-- Add your own youtube video url instead of the default one in line 6.
-- In Line 17, in the path section write your own path and in name section write the name You want your file to have.
+- Run the `Download Audio.py` script:
+  ```bash
+  python "Download Audio.py"
+  ```
+- Enter the YouTube URL when prompted.
+- Enter the destination folder path (or press Enter to save in the current directory).
+- Enter your desired filename (or press Enter for default `audio.mp3`).
 
 
 ## 🤖 Author
