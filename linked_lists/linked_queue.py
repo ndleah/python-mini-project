@@ -15,10 +15,17 @@ class LinkedQueue:
         self._head = None
         self._size = 0
         self._tail = None
+
+    def __len__(self):
+        return self._size
     
     def is_empty(self):
         return self._size == 0
     
+    def first(self):
+        if self.is_empty():
+            raise Empty("Queue is empty")
+        return self._head._element
 
     def enqueue(self, element):
         new_tail = self._Node(element, None)
@@ -35,5 +42,7 @@ class LinkedQueue:
         target = self._head._element
         self._head = self._head._next
         self._size -= 1
-
+        if self.is_empty():
+            self._tail = None
         return target
+
