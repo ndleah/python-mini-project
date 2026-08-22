@@ -5,22 +5,26 @@
 # CSV TO JSON
 
 ## 🛠️ Description
-<!--Remove the below lines and add yours -->
-This script helps to convert a csv file to a json file.
+This script converts CSV files to formatted JSON files.
 
-## ⚙️ Languages or Frameworks Used
-<!--Remove the below lines and add yours -->
-language used - python3.
-Packages required - csv and json.
-if not already installed use pip3 install csv and pip3 install json.
-(If there are a lot of them, including a `requirements.txt` file will work better.)
+## 🚀 Features
+- **Dynamic Output Naming**: Automatically derives JSON filename from input (e.g. `users.csv` -> `users.json`).
+- **CLI & Interactive Mode**: Accepts command-line arguments or prompts interactively.
+- **Smart Data Parsing**: Auto-parses numeric and boolean values into native JSON types.
+- **UTF-8 Encoding**: Handles special characters and UTF-8 BOM encoding.
 
 ## 🌟 How to run
-<!--Remove the below lines and add yours -->
-python3 csv_to_json.py.
 
+### Command Line
+```bash
+python csv_to_json.py input.csv [output.json]
+```
 
+### Interactive Mode
+```bash
+python csv_to_json.py
+```
 
 ## 🤖 Author
-<!--Remove the below lines and add yours -->
 Rajit Gupta.
+
