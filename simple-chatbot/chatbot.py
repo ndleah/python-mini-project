@@ -1,62 +1,85 @@
+import sys
 import tkinter as tk
 from tkinter import Entry, scrolledtext
-from transformers import AutoTokenizer, AutoModelForCausalLM
 
-# Load the model and tokenizer
-tokenizer = AutoTokenizer.from_pretrained("microsoft/phi-1_5")
-model = AutoModelForCausalLM.from_pretrained(
-    "microsoft/phi-1_5", trust_remote_code=True)
+_model = None
+_tokenizer = None
 
-# Function to generate a response from the model
+def load_model():
+    global _model, _tokenizer
+    if _model is not None:
+        return True
+    try:
+        from transformers import AutoTokenizer, AutoModelForCausalLM
+        print("Loading Transformer model...")
+        _tokenizer = AutoTokenizer.from_pretrained("microsoft/phi-1_5")
+        _model = AutoModelForCausalLM.from_pretrained("microsoft/phi-1_5", trust_remote_code=True)
+        return True
+    except Exception as e:
+        print(f"Notice: Transformer model unavailable ({e}). Using rule-based fallback.")
+        return False
 
+def generate_fallback_response(message: str) -> str:
+    msg = message.lower().strip()
+    if any(w in msg for w in ["hello", "hi", "hey"]):
+        return "Hello! How can I help you today?"
+    elif "name" in msg:
+        return "I am WebIdeasBot, your helpful AI assistant!"
+    elif "help" in msg:
+        return "I can assist you with answering questions, drafting ideas, or brainstorming."
+    elif any(w in msg for w in ["bye", "exit", "quit"]):
+        return "Goodbye! Have a wonderful day!"
+    else:
+        return f"Thank you for your message: '{message}'. How else can I assist you?"
 
-def generate_response(message):
-    inputs = tokenizer(message, return_tensors='pt', truncation=True)
-    outputs = model.generate(
-        **inputs,
-        max_length=150,
-        pad_token_id=tokenizer.eos_token_id
-    )
-    response = tokenizer.decode(outputs[0], skip_special_tokens=True)
-    return response
+def generate_response(message: str) -> str:
+    if load_model():
+        try:
+            inputs = _tokenizer(message, return_tensors='pt', truncation=True)
+            outputs = _model.generate(**inputs, max_length=150, pad_token_id=_tokenizer.eos_token_id)
+            response = _tokenizer.decode(outputs[0], skip_special_tokens=True)
+            return response
+        except Exception:
+            return generate_fallback_response(message)
+    else:
+        return generate_fallback_response(message)
 
-# Function to handle when the user sends a message
+def run_gui():
+    window = tk.Tk()
+    window.title("WebIdeasBot")
 
+    chat_window = scrolledtext.ScrolledText(window, width=80, height=20, state=tk.DISABLED)
+    chat_window.pack(padx=10, pady=10)
 
-def on_send(event=None):  # event is passed by binders.
-    message = user_input.get()
-    if message:  # Only process if there's a message
-        # Display user message in the chat window
-        chat_window.configure(state=tk.NORMAL)  # Temporarily make it editable
-        chat_window.insert(tk.END, f"You: {message}\n")
-        chat_window.configure(state=tk.DISABLED)  # Make it read-only again
+    user_input = Entry(window, width=80)
+    user_input.pack(padx=10, pady=10)
+    user_input.focus_set()
 
-        # Clear the user input field
-        user_input.delete(0, tk.END)
+    def on_send(event=None):
+        message = user_input.get().strip()
+        if message:
+            chat_window.configure(state=tk.NORMAL)
+            chat_window.insert(tk.END, f"You: {message}\n")
+            chat_window.configure(state=tk.DISABLED)
+            user_input.delete(0, tk.END)
 
-        # Generate and display chatbot response
-        response = generate_response(message)
-        chat_window.configure(state=tk.NORMAL)
-        chat_window.insert(tk.END, f"WebIdeasBot: {response}\n")
-        chat_window.configure(state=tk.DISABLED)
+            response = generate_response(message)
+            chat_window.configure(state=tk.NORMAL)
+            chat_window.insert(tk.END, f"WebIdeasBot: {response}\n\n")
+            chat_window.configure(state=tk.DISABLED)
+            chat_window.see(tk.END)
 
+    user_input.bind("<Return>", on_send)
+    window.mainloop()
 
-# Create the main window
-window = tk.Tk()
-window.title("WebIdeasBot")
+def main():
+    if len(sys.argv) > 1:
+        query = " ".join(sys.argv[1:])
+        print(f"Query: {query}")
+        print("Response:", generate_response(query))
+    else:
+        run_gui()
 
-# Create the chat window
-chat_window = scrolledtext.ScrolledText(
-    window, width=80, height=20, state=tk.DISABLED)
-chat_window.pack()
+if __name__ == "__main__":
+    main()
 
-# Create the user input field
-user_input = Entry(window, width=80)
-user_input.pack()
-user_input.focus_set()  # Set focus to the input field
-
-# Bind the Enter key to the on_send function
-user_input.bind("<Return>", on_send)
-
-# Start the Tkinter event loop
-window.mainloop()
