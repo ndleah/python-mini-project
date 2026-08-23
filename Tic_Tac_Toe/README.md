@@ -18,7 +18,7 @@ You only need Python to run this script. You can visit [here](https://www.python
 Running the script is really simple! Just open a terminal in the folder where your script is located and run the following command:
 
 ```sh
-python Tic_Tac_Toe.py
+python tic_tac_toe.py
 ```
 ## 📺 Demo
 <p align="center">

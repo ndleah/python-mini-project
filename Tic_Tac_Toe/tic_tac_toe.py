@@ -1,180 +1,183 @@
-#cheat : high chance Win Strategy =>   1 - 8 - 6 - 5 - 4
-#new version
+# Cheat : High chance Win Strategy => 1 - 8 - 6 - 5 - 4
 import os
+import random
 
-#initialize 
-board = [' ' for x in range(10)]
-FirstRun = True
+# Global board initialization (index 0 is unused, indices 1-9 represent board positions)
+board = [' ' for _ in range(10)]
+scorecount = 0
 
-#insert tic tac toe symbol to screen
-def insertLetter(letter,pos):
-    if(board.count(' ') >= 1):
+
+def insertLetter(letter, pos):
+    """Inserts a letter ('X' or 'O') at the specified position if valid."""
+    if 1 <= pos <= 9 and spaceIsFree(pos):
         board[pos] = letter
 
+
 def spaceIsFree(pos):
+    """Returns True if the position on the board is free."""
     return board[pos] == ' '
 
+
 def printBoard(board):
+    """Prints the 3x3 board to standard output."""
     print(' ' + board[1] + ' | ' + board[2] + ' | ' + board[3])
     print('-----------')
     print(' ' + board[4] + ' | ' + board[5] + ' | ' + board[6])
     print('-----------')
     print(' ' + board[7] + ' | ' + board[8] + ' | ' + board[9])
 
+
 def isBoardFull(board):
-    if board.count(' ') >= 2:
-        return False
-    else:
-        return True
+    """Checks if all playable spaces (1-9) are occupied."""
+    return board[1:].count(' ') == 0
 
 
-def IsWinner(b,l):
-    return(
-    (b[1] == l and b[2] == l and b[3] == l) or
-    (b[4] == l and b[5] == l and b[6] == l) or
-    (b[7] == l and b[8] == l and b[9] == l) or
-    (b[1] == l and b[4] == l and b[7] == l) or
-    (b[2] == l and b[5] == l and b[8] == l) or
-    (b[3] == l and b[6] == l and b[9] == l) or
-    (b[1] == l and b[5] == l and b[9] == l) or
-    (b[3] == l and b[5] == l and b[7] == l)
+def IsWinner(b, l):
+    """Checks if the specified letter 'l' has won on board 'b'."""
+    return (
+        (b[1] == l and b[2] == l and b[3] == l) or
+        (b[4] == l and b[5] == l and b[6] == l) or
+        (b[7] == l and b[8] == l and b[9] == l) or
+        (b[1] == l and b[4] == l and b[7] == l) or
+        (b[2] == l and b[5] == l and b[8] == l) or
+        (b[3] == l and b[6] == l and b[9] == l) or
+        (b[1] == l and b[5] == l and b[9] == l) or
+        (b[3] == l and b[5] == l and b[7] == l)
     )
 
+
 def playerMove():
+    """Prompts the player to input their move and validates it."""
     run = True
     while run:
-        move = input("please select a position to enter the X between 1 to 9: ")
+        move = input("Please select a position to enter 'X' (1-9): ")
         try:
             move = int(move)
-            if move > 0 and move < 10:
+            if 1 <= move <= 9:
                 if spaceIsFree(move):
                     run = False
                     insertLetter('X', move)
                 else:
-                    print('Sorry, this space is occupied')
+                    print('Sorry, this space is occupied!')
             else:
-                print('please type a number between 1 and 9')
-        
-        except:
-            print('Please type a number')
+                print('Please type a number between 1 and 9.')
+        except ValueError:
+            print('Please type a valid number.')
+
 
 def computerMove():
-    possibleMoves = [ x for x, letter in enumerate(board) if letter == ' ' and x != 0]
-    move = 0
+    """Determines the best move for the computer."""
+    possibleMoves = [x for x, letter in enumerate(board) if letter == ' ' and x != 0]
+    if not possibleMoves:
+        return 0
 
+    # 1. Check if computer can win or needs to block player win
     for let in ['O', 'X']:
         for i in possibleMoves:
             boardcopy = board[:]
             boardcopy[i] = let
             if IsWinner(boardcopy, let):
-                move = i
-                return move
+                return i
 
-    cornersOpen = []
-    for i in possibleMoves:
-        if i in [1, 3, 7, 9]:
-            cornersOpen.append(i)
+    # 2. Take open corners
+    cornersOpen = [i for i in possibleMoves if i in [1, 3, 7, 9]]
+    if cornersOpen:
+        return selectRandom(cornersOpen)
 
-    if len(cornersOpen) > 0:
-        move = selectRandom(cornersOpen)
-        return move
-
+    # 3. Take center
     if 5 in possibleMoves:
-        move = 5
-        return move
+        return 5
 
-    edgesOpen = []
-    for i in possibleMoves:
-        if i in [2, 4, 6, 8]:
-            edgesOpen.append(i)
+    # 4. Take open edges
+    edgesOpen = [i for i in possibleMoves if i in [2, 4, 6, 8]]
+    if edgesOpen:
+        return selectRandom(edgesOpen)
 
-    if len(edgesOpen) > 0:
-        move = selectRandom(edgesOpen)
-        return move
+    return selectRandom(possibleMoves)
+
 
 def selectRandom(li):
-    import random
-    ln = len(li)
-    r = random.randrange(0, ln)
-    return li[r]
+    """Selects a random item from a given list."""
+    return random.choice(li)
+
+
+def CleanScreen():
+    """Clears terminal screen across platforms."""
+    if os.name == 'posix':
+        os.system('clear')
+    else:
+        os.system('cls')
+
+
+def TieGame():
+    """Checks if the current game is a tie."""
+    return isBoardFull(board) and not IsWinner(board, 'X') and not IsWinner(board, 'O')
+
+
+def GamePlay():
+    """Main gameplay loop for a single round."""
+    global scorecount
+    if scorecount == 0:
+        print("Welcome to the game!")
+    elif scorecount < 0:
+        scorecount = 0
+    printBoard(board)
+
+    while not isBoardFull(board):
+        # --- Player's Turn ---
+        playerMove()
+        CleanScreen()
+        printBoard(board)
+
+        # Check if Player won
+        if IsWinner(board, 'X'):
+            scorecount += 1
+            print(f"\nYou win! Your Score is {scorecount}")
+            return
+
+        # Check for tie after Player move
+        if isBoardFull(board):
+            print("\nIt's a tie!")
+            return
+
+        # --- Computer's Turn ---
+        move = computerMove()
+        if move != 0:
+            insertLetter('O', move)
+            CleanScreen()
+            print(f"Computer placed an 'O' on position {move}:\n")
+            printBoard(board)
+
+        # Check if Computer won
+        if IsWinner(board, 'O'):
+            scorecount = max(0, scorecount - 1)
+            print(f"\nSorry, you lose! Your Score is {scorecount}")
+            return
+
+        # Check for tie after Computer move
+        if isBoardFull(board):
+            print("\nIt's a tie!")
+            return
+
 
 def StartTheGame():
+    """Resets the board and starts a new round."""
     global board
-    board = [' ' for x in range(10)]
+    board = [' ' for _ in range(10)]
     CleanScreen()
     print('-------------------------')
     GamePlay()
 
-#clean Old data in screen when event occur
-def CleanScreen():
-    #Linux and macOS
-    if(os.name == 'posix'):
-         os.system('clear') 
-    #windows
-    else:
-         os.system('cls')
 
-
-
-#check Tie Game condition
-def TieGame():
-    
-    if isBoardFull(board) and (not((IsWinner(board, 'X')) or (IsWinner(board, 'O')))):
-        return True
-    else:
-        return False
-
-#Score Count
-scorecount = 0
-#gameplay design here
-def GamePlay():
-    global scorecount
-    if scorecount == 0:
-        #if the game is first time ran
-        print("Welcome to the game!")
-    if scorecount < 0:
-        #if the score is negative, set it to 0
-        scorecount = 0
-    printBoard(board)
-
-    while not(isBoardFull(board)):
-        
-        if not(IsWinner(board, 'O')) :
-            playerMove()
-            CleanScreen()
-            printBoard(board)
-        else:
-            scorecount -= 1
-            print(f"Sorry, you lose 😢! Your Score is {scorecount}")
-            break
-
-        if (not(IsWinner(board, 'X'))) :
-            move = computerMove()
-            if move == 0:
-                print(" ")
-            elif not(isBoardFull(board)):
-                insertLetter('O', move)
-                print('computer placed an o on position', move, ':')
-                CleanScreen()
-                printBoard(board)
-        else:
-            scorecount += 1
-            print(f"You win! Your Score is {scorecount}")
-            break     
-        
-
-while True:
-    if FirstRun:
-        FirstRun=False
+def main():
+    """Main application loop handling game rounds and replay prompt."""
+    while True:
         StartTheGame()
-
-    else :
-        if TieGame():
-            print("It's a tie!")
-        x = input("Do you want to play again? (y/n)")
-        if x.lower() == 'y' or x.lower() =='yes':
-            StartTheGame()
-        
-        else:
-            print("GLHF")
+        play_again = input("\nDo you want to play again? (y/n): ").strip().lower()
+        if play_again not in ('y', 'yes'):
+            print("\nGLHF!")
             break
+
+
+if __name__ == '__main__':
+    main()
