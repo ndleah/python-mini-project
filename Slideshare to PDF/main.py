@@ -1,90 +1,132 @@
-# Built in modules
 import io
-from tkinter import *
+import os
+import sys
 import pathlib
+import tkinter as tk
+from tkinter import messagebox
 
-# External Modules
 import requests
 from bs4 import BeautifulSoup
 import PIL.Image
 import validators
 
-# Get Current Working Directory path
 path = pathlib.Path().resolve()
 
+def get_pdf(URL: str, info_label_2=None):
+    if not URL or not validators.url(URL):
+        msg = "Please provide a valid presentation link."
+        if info_label_2:
+            info_label_2.configure(text=msg)
+        else:
+            print(msg)
+        return False
 
-def get_pdf():
-    URL = url_var.get()
+    try:
+        r = requests.get(URL, timeout=10)
+        r.raise_for_status()
+    except Exception as e:
+        msg = f"Connection error: {e}"
+        if info_label_2:
+            info_label_2.configure(text="Connection ERROR")
+        else:
+            print(msg)
+        return False
 
-    # Only perform scraping if the url is valid.
-    if validators.url(URL):
-        r = requests.get(URL)
+    try:
         soup = BeautifulSoup(r.content, "html5lib")
-        imgs = soup.find_all("img", class_="slide-image")
+    except Exception:
+        soup = BeautifulSoup(r.content, "html.parser")
 
-        # Get every image with class slide-image
-        imgs = soup.find_all("img", class_="slide-image")
+    imgs = soup.find_all("img", class_="slide-image")
+    if not imgs:
+        msg = "No slide images found on the provided page."
+        if info_label_2:
+            info_label_2.configure(text=msg)
+        else:
+            print(msg)
+        return False
 
-        # Strip out preferred image resolution from the srcset of the img tag
-        imgSRC = [
-            x.get("srcset").split(",")[-1].strip().split(" ")[0].split("?")[0]
-            for x in imgs
-        ]
+    img_src = []
+    for x in imgs:
+        srcset = x.get("srcset")
+        if srcset:
+            parts = srcset.split(",")
+            if parts:
+                src_link = parts[-1].strip().split(" ")[0].split("?")[0]
+                img_src.append(src_link)
+        elif x.get("src"):
+            img_src.append(x.get("src").split("?")[0])
 
-        # List to store all the image objects
-        imagesJPG = []
+    if not img_src:
+        msg = "Could not extract image source links."
+        if info_label_2:
+            info_label_2.configure(text=msg)
+        return False
 
-        for index, link in enumerate(imgSRC):
-            try:
-                # Get image content from the image url
-                im = requests.get(link)
+    imagesJPG = []
+    for link in img_src:
+        try:
+            im = requests.get(link, timeout=10)
+            f = io.BytesIO(im.content)
+            imgJPG = PIL.Image.open(f)
+            imagesJPG.append(imgJPG)
+        except Exception:
+            pass
 
-                # Convert that image content to a BytesIO file object which is in-memory object,
-                # so we don't have to download the image.
-                f = io.BytesIO(im.content)
+    if not imagesJPG:
+        msg = "Failed to download slide images."
+        if info_label_2:
+            info_label_2.configure(text=msg)
+        else:
+            print(msg)
+        return False
 
-                # Converting that BytesIO object to Image Object for PIL to convert it in PDF
-                imgJPG = PIL.Image.open(f)
-                imagesJPG.append(imgJPG)
+    page_title = soup.title.string.strip() if (soup.title and soup.title.string) else "presentation"
+    filename = f"{page_title}.pdf"
 
-            except Exception as e:
-                # Program will fail if the request isn't able to make a proper connection
-                info_label_2.configure(text="Some Connection ERROR")
+    try:
+        imagesJPG[0].save(filename, save_all=True, append_images=imagesJPG[1:])
+        msg = f"Downloaded to:\n{os.path.abspath(filename)}"
+        if info_label_2:
+            info_label_2.configure(text=msg)
+        else:
+            print(msg)
+        return True
+    except Exception as err:
+        msg = f"Save Error: {err}"
+        if info_label_2:
+            info_label_2.configure(text=msg)
+        return False
 
-        # Appending all the images object after the first image and exporting it as a PDF in cwd.
-        imagesJPG[0].save(
-            f"{soup.title.string}.pdf", save_all=True, append_images=imagesJPG[1:]
-        )
-        info_label_2.configure(text=f"File Downloaded to\n{path}")
+def run_gui():
+    base = tk.Tk()
+    base.geometry("350x320")
+    base.title("Slideshare to PDF")
+    base.resizable(False, False)
+    base.configure(background="aliceblue")
+
+    url_var = tk.StringVar()
+    val_entry = tk.Entry(base, textvariable=url_var, width="35")
+    val_entry.place(x=50, y=50)
+    val_entry.focus_set()
+
+    info_label_2 = tk.Label(base, text="", bg="aliceblue", fg="navy")
+    info_label_2.place(x=35, y=230)
+
+    button = tk.Button(base, text="Get PDF", command=lambda: get_pdf(url_var.get().strip(), info_label_2), width="25", height="2", bg="grey", fg="white")
+    button.place(x=50, y=90)
+
+    info_label = tk.Label(base, text="Enter presentation link.\nRequires active internet connection.", bg="aliceblue")
+    info_label.place(x=35, y=160)
+
+    base.mainloop()
+
+def main():
+    if len(sys.argv) > 1:
+        get_pdf(sys.argv[1])
     else:
-        info_label_2.configure(text=f"Please provide a valid link")
+        run_gui()
 
+if __name__ == '__main__':
+    main()
 
-# Basic Tkinter window setup
-base = Tk()
-base.geometry("300x300")
-base.title("Slideshare to PDF")
-base.resizable(False, False)
-base.configure(background="aliceblue")
-
-# Variable to store user's link and a  entry field,
-# a button and a label
-url_var = StringVar()
-val_entry = Entry(base, textvariable=url_var, width="30")
-val_entry.place(x=50, y=50)
-
-button = Button(
-    base, text="Get PDF", command=get_pdf, width="25", height="2", bg="grey"
-)
-button.place(x=50, y=100)
-info_label = Label(
-    base,
-    text="Enter the presentaion link\nMake sure to have a good internet connection.",
-)
-
-# label to show error and success message to the user
-info_label_2 = Label(base, text="")
-
-info_label.place(x=35, y=200)
-info_label_2.place(x=50, y=250)
-base.mainloop()
