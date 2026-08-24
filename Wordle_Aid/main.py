@@ -49,30 +49,36 @@ def find_possible_words(guessed, colors_list, answer_words):
 
 
     possible_answers = answer_words
-for i in range(6):
+    return possible_words
 
-    guessed = list(input("Enter guess: "))
-    first_letter = input("first letter:  ")
-    second_letter = input("second letter:  ")
-    third_letter = input("third letter:  ")
-    fourth_letter = input("fourth letter:  ")
-    fifth_letter = input("fifth letter:  ")
+def main():
+    possible_answers = answer_words
+    print("=== Wordle Solver Aid ===")
+    print("Color instructions: enter 'green', 'yellow', or 'gray' for each position.")
 
-    colors_list = []
-    colors_list.append(first_letter)
-    colors_list.append(second_letter)
-    colors_list.append(third_letter)
-    colors_list.append(fourth_letter)
-    colors_list.append(fifth_letter)
+    for i in range(6):
+        print(f"\n--- Attempt {i+1} of 6 ---")
+        guessed_raw = input("Enter 5-letter guess: ").strip().lower()
+        if len(guessed_raw) != 5:
+            print("Error: Guess must be exactly 5 letters.")
+            continue
+        guessed = list(guessed_raw)
 
+        colors_list = []
+        positions = ["first", "second", "third", "fourth", "fifth"]
+        for pos in positions:
+            color = input(f"Enter color for {pos} letter (green/yellow/gray): ").strip().lower()
+            colors_list.append(color)
 
+        possible_answers = find_possible_words(guessed, colors_list, possible_answers)
+        print(f"\nPossible words remaining ({len(possible_answers)}):")
+        print(possible_answers[:20])
+        if len(possible_answers) <= 1:
+            break
+        time.sleep(1)
 
-    possible_answers = (find_possible_words(guessed, colors_list, possible_answers))
-    print(possible_answers)
-    print(len(possible_answers))
-    time.sleep(2)
-    print()
-    print()
-    print()
+if __name__ == "__main__":
+    main()
+
 
 
