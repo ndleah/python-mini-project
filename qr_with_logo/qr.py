@@ -1,53 +1,57 @@
+import os
+import sys
 import qrcode
 from PIL import Image
 
+def generate_qr_with_logo(url: str = 'https://github.com/shashank-amireddy', logo_path: str = None, output_path: str = None) -> str:
+    """Generate QR code with embedded logo image."""
+    script_dir = os.path.dirname(__file__)
+    if logo_path is None:
+        logo_path = os.path.join(script_dir, "github-logo.png")
 
-#import requests
+    if output_path is None:
+        output_path = os.path.join(script_dir, "qr_with_logo.png")
 
-# Load the logo image
-# Logo_link = 'https://cdn.pixabay.com/photo/2022/01/30/13/33/github-6980894_1280.png'
-# logo_response = requests.get(Logo_link, stream=True)
-# logo_response.raise_for_status()  # Raise an exception for HTTP errors
-# logo_img = Image.open(logo_response.raw)
+    if not os.path.exists(logo_path):
+        print(f"Error: Logo file '{logo_path}' not found.")
+        return None
 
-'''
-if you want to take an image which is already hosted on web comment lines 18,19 and use the above method
-'''
+    try:
+        logo_img = Image.open(logo_path).convert("RGBA")
 
-# Path to the logo image file on user's machine
-logo_path = "github-logo.png"
-logo_img = Image.open(logo_path)
+        # Resize logo to fit nicely inside QR code center
+        basewidth = 100
+        wpercent = basewidth / float(logo_img.size[0])
+        hsize = int(float(logo_img.size[1]) * float(wpercent))
+        logo_img = logo_img.resize((basewidth, hsize), Image.LANCZOS)
 
-url = 'https://github.com/shashank-amireddy'
+        # Generate QR code with high error correction
+        qr = qrcode.QRCode(
+            error_correction=qrcode.constants.ERROR_CORRECT_H
+        )
+        qr.add_data(url)
+        qr.make()
 
-# Ensure the logo has an alpha channel (transparency)
-logo_img = logo_img.convert("RGBA")
+        qr_img = qr.make_image(fill_color="black", back_color="white").convert("RGBA")
 
-# Resize the logo to fit within the QR code
-basewidth = 100
-wpercent = basewidth / float(logo_img.size[0])
-hsize = int(float(logo_img.size[1]) * float(wpercent))
-logo_img = logo_img.resize((basewidth, hsize), Image.LANCZOS)
+        # Calculate center position
+        logo_position = (
+            (qr_img.size[0] - logo_img.size[0]) // 2,
+            (qr_img.size[1] - logo_img.size[1]) // 2
+        )
 
-# Generate QR code
-QRcode = qrcode.QRCode(
-    error_correction=qrcode.constants.ERROR_CORRECT_H
-)
-QRcode.add_data(url)
-QRcode.make()
+        qr_img.paste(logo_img, logo_position, logo_img)
+        qr_img.save(output_path)
+        print(f"QR code with logo generated successfully: {output_path}")
+        return output_path
+    except Exception as e:
+        print(f"Error generating QR code with logo: {e}")
+        return None
 
-# Create QR code image with a mode that supports color
-QRimg = QRcode.make_image(fill_color="black", back_color="white").convert("RGBA")
+def main():
+    target_url = sys.argv[1] if len(sys.argv) > 1 else 'https://github.com/shashank-amireddy'
+    generate_qr_with_logo(url=target_url)
 
-# Calculate position to paste the logo
-logo_position = (
-    (QRimg.size[0] - logo_img.size[0]) // 2,
-    (QRimg.size[1] - logo_img.size[1]) // 2
-)
+if __name__ == '__main__':
+    main()
 
-# Paste the logo onto the QR code
-QRimg.paste(logo_img, logo_position, logo_img)
-
-# Save the final QR code image
-QRimg.save('qr_with_logo.png')
-print('QR code generated!')
