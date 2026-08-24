@@ -6,104 +6,80 @@ import random
 # Lizard eats Paper, Paper disproves Spock, Spock vaporizes Rock,
 # Rock crushes Scissors
 
-win = [("scissors","paper"), ("paper","rock"), ("rock","lizard"),
-       ("lizard","Spock"), ("Spock","scissors"), ("scissors","lizard"),
-       ("lizard","paper"), ("paper","Spock"), ("Spock","rock"),
-       ("rock","scissors")]
+WINNING_RULES = {
+    ("scissors", "paper"): "Scissors cuts paper",
+    ("paper", "rock"): "Paper covers rock",
+    ("rock", "lizard"): "Rock crushes lizard",
+    ("lizard", "spock"): "Lizard poisons Spock",
+    ("spock", "scissors"): "Spock smashes scissors",
+    ("scissors", "lizard"): "Scissors decapitates lizard",
+    ("lizard", "paper"): "Lizard eats paper",
+    ("paper", "spock"): "Paper disproves Spock",
+    ("spock", "rock"): "Spock vaporizes rock",
+    ("rock", "scissors"): "Rock crushes scissors",
+}
 
-# INSTRUCTIONS
-print("There are 6 rounds.\nYou are playing against Computron.\nYou will win if you have a higher point.\nEnter scissors, paper, rock, lizard or Spock.\nLIVE LONG AND PROSPER🖖\n")
+CHOICES = ["scissors", "paper", "rock", "lizard", "spock"]
 
-# CHOICES FOR THE COMPUTRON TO CHOOSE FROM
-choices = ["scissors", "paper", "rock", "lizard", "Spock"]
+def determine_winner(player_move: str, computer_move: str):
+    """Determine outcome between player and computer moves."""
+    p_move = player_move.strip().lower()
+    c_move = computer_move.strip().lower()
 
-# TO COUNT THE NUMBER OF ROUNDS
-count = 0
-# TO COUNT THE PLAYER'S POINTS
-playerPoints = 0
-# TO COUNT THE COMPUTRONS' POINTS
-computerPoints = 0
+    if p_move not in CHOICES:
+        return "invalid", "Invalid response. Computron Wins!"
 
-# WHILE LOOP TO SET THE NUMBER OF ROUNDS
-while count != 6:
-    # INPUT FOR PLAYER'S CHOICE
-    player = input("What is your move? ")
-    # COMPUTRON RANDOMLY SELECT CHOICE FROM CHOICES LIST
-    computer = random.choice(choices)
-    # UNCOMMENT THE LINE BELOW IF YOU WISH TO SEE COMPUTRONS' CHOICE
-    #print(computer)
+    if p_move == c_move:
+        return "draw", "Draw, Player and Computron get 1 point each."
 
-    # DIFFERENT CHOICES
-    if player != computer:
-        # CHECK FOR PATTERNS
-        playerWins = (player,computer)
-        computerWins = (computer,player)
-        if playerWins in win:
-            if playerWins == win[0]:
-                #print("✂ cuts 📃 \nYou Won!")
-                print("Scissors cuts paper \nYou Won!")
-            elif playerWins == win[1]:
-                print("Paper covers rock \nYou Won!")
-            elif playerWins == win[2]:
-                print("Rock crushes lizard \nYou Won!")
-            elif playerWins == win[3]:
-                print("Lizard poisons Spock \nYou Won!")
-            elif playerWins == win[4]:
-                print("Spock smashes scissors \nYou Won!")
-            elif playerWins == win[5]:
-                print("Scissors decapitates lizard \nYou Won!")
-            elif playerWins == win[6]:
-                print("Lizard eats paper \nYou Won!")
-            elif playerWins == win[7]:
-                print("Paper disproves Spock \nYou Won!")
-            elif playerWins == win[8]:
-                print("Spock vapourizes rock \nYou Won!")
-            elif playerWins == win[9]:
-                print("Rock crushes scissors \nYou Won!")
-            playerPoints += 1
-        elif computerWins in win:
-            if computerWins == win[0]:
-                print("Scissors cuts paper \nComputron Wins!")
-            elif computerWins == win[1]:
-                print("Paper covers rock \nComputron Wins!")
-            elif computerWins == win[2]:
-                print("Rock crushes lizard \nComputron Wins!")
-            elif computerWins == win[3]:
-                print("Lizard poisons Spock \nComputron Wins!")
-            elif computerWins == win[4]:
-                print("Spock smashes scissors \nComputron Wins!")
-            elif computerWins == win[5]:
-                print("Scissors decapitates lizard \nComputron Wins!")
-            elif computerWins == win[6]:
-                print("Lizard eats paper \nComputron Wins!")
-            elif computerWins == win[7]:
-                print("Paper disproves Spock \nComputron Wins!")
-            elif computerWins == win[8]:
-                print("Spock vapourizes rock \nComputron Wins!")
-            elif computerWins == win[9]:
-                print("Rock crushes scissors \nComputron Wins!")
-            computerPoints += 1
-        # PLAYER DID NOT INPUT scissors, paper, rock, lizard or Spock
+    if (p_move, c_move) in WINNING_RULES:
+        rule_desc = WINNING_RULES[(p_move, c_move)]
+        return "player", f"{rule_desc}! You Won!"
+    elif (c_move, p_move) in WINNING_RULES:
+        rule_desc = WINNING_RULES[(c_move, p_move)]
+        return "computer", f"{rule_desc}! Computron Wins!"
+
+    return "invalid", "Invalid response. Computron Wins!"
+
+def play_game(total_rounds: int = 6):
+    print("There are 6 rounds.\nYou are playing against Computron.\nYou will win if you have higher points.\nEnter scissors, paper, rock, lizard or Spock.\nLIVE LONG AND PROSPER 🖖\n")
+
+    count = 0
+    player_points = 0
+    computer_points = 0
+
+    while count < total_rounds:
+        raw_player = input(f"Round {count + 1}/{total_rounds} - What is your move? ").strip()
+        computer_choice = random.choice(CHOICES)
+
+        result, msg = determine_winner(raw_player, computer_choice)
+        print(f"Computron chose: {computer_choice.capitalize()}")
+        print(msg)
+
+        if result == "player":
+            player_points += 1
+        elif result == "computer":
+            computer_points += 1
+        elif result == "draw":
+            player_points += 1
+            computer_points += 1
         else:
-            print("Invalid response \nComputron Wins!")
-            computerPoints += 1
+            computer_points += 1
 
-    # DRAW, SAME CHOICES
-    elif player == computer:
-        print("Draw, Player and Computron gets 1 point")
-        playerPoints += 1
-        computerPoints += 1
+        print(f"Score -> You: {player_points} | Computron: {computer_points}\n")
+        count += 1
 
-    # EMPTY LINE FOR A NEATER/CLEARER VIEW
-    print("")
+    print("--- Final Result ---")
+    if player_points > computer_points:
+        print("You are the champion! 🏆")
+    elif player_points == computer_points:
+        print("You are both champions!! 🏆🏆")
+    else:
+        print("Computron is the champion, Try Again! 💻")
 
-    # INCREMENT TO CONTROL THE NUMBER OR ROUNDS
-    count += 1
+def main():
+    play_game()
 
-# COMPARISON TO DETERMINE WHO IS THE CHAMPION
-if playerPoints > computerPoints:
-    print("You are the champion! 🏆")
-elif playerPoints == computerPoints:
-    print("You are both champions!! 🏆🏆")
-else:
-    print("Computron is the champion, Try Again! 💻")
+if __name__ == '__main__':
+    main()
+

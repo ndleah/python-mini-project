@@ -62,13 +62,14 @@ def for_all_pages(page_no):
 #Below is our helper function to add all data frames.
 
 def all_info(num_of_page):
-    # define an empty list
     all_df = []
-    # Run a loop from 1 to n+1
-    for i in range(1, num_of_page+1):
+    for i in range(1, num_of_page + 1):
         all_df.append(for_all_pages(page_no=i))
-        # Outside the loop variable you can directly merge the df and return it in the same line.
-        merge = pd.concat(all_df)
-        csv = merge.to_csv('all info.csv',index=None)
-    return csv
+
+    if all_df:
+        merge = pd.concat(all_df, ignore_index=True)
+        merge.to_csv('all info.csv', index=False)
+        return 'all info.csv'
+    return None
+
 
