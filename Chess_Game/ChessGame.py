@@ -8,11 +8,6 @@ MAX_FPS = 15
 IMAGES = {}
 
 
-icon = p.image.load("images\icon.ico")
-p.display.set_icon(icon)
-
-p.display.set_caption("Chess Game")
-
 def loadImages():
     pieces = ['wp', 'wR', 'wN', 'wB', 'wQ', 'wK', 'bp', 'bR', 'bN', 'bB', 'bQ', 'bK' ]
     for piece in pieces: 
@@ -20,6 +15,12 @@ def loadImages():
 
 def main():
     p.init()
+    try:
+        icon = p.image.load("images/icon.ico")
+        p.display.set_icon(icon)
+    except Exception:
+        pass
+    p.display.set_caption("Chess Game")
     screen = p.display.set_mode((WIDTH, HEIGHT))
     clock = p.time.Clock()
     screen.fill(p.Color("white"))
@@ -66,6 +67,7 @@ def main():
                     gs.undoMove()
                     moveMade = True
                     animate = False
+                    gameOver = False
                 if e.key == p.K_r:
                     gs = ChessEngine.GameState()
                     validMoves = gs.getValidMoves()
@@ -73,6 +75,7 @@ def main():
                     playerClicks = []
                     moveMade = False
                     animate = False
+                    gameOver = False
         if moveMade:
             if animate:
                 animatedMoves(gs.moveLog[-1], screen, gs.board,clock)
