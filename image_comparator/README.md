@@ -1,24 +1,34 @@
 # Welcome to Image Comparator Tool 
-This is a tool for coparing two Images and getting their difference image as output<br>
+This tool compares two images, calculates a similarity percentage, and generates a visual difference image.
 
 # Version
-1.0.0
+1.1.0
 
-# Motivation and Description
-We.Contribute -> You.Levegage ; You.Contribute -> We.Leverage ; All -> Grow
+# Features
+- **CLI & Interactive Mode**: Run via command-line arguments or interactive prompts.
+- **Similarity Percentage**: Calculates quantitative similarity metric between image pairs.
+- **Visual Difference Mask**: Generates red-highlighted difference image output (`diff.png`).
 
-# Languages and Libraries used
-Python and cv2<br>
+# Languages & Libraries
+- Python 3
+- OpenCV (`opencv-python`) & NumPy
 
-Installation
-====================
-Deploy the folder structure to the required location.
+# Installation
+```bash
+pip install opencv-python numpy
+```
 
-Execution
-====================
-Call python3 image_comparision.py.
-  
-# FAQ
-mail us - Rajit.Gupta@aexp.com 
+# Execution
+
+### Command Line
+```bash
+python image_comparison.py image1.jpg image2.jpg [diff_output.png]
+```
+
+### Interactive Mode
+```bash
+python image_comparison.py
+```
+ 
 
 	

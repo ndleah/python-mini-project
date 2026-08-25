@@ -1,35 +1,97 @@
-from tkinter import *
-from pytube import YouTube
+import os
+import sys
+import threading
+import tkinter as tk
+from tkinter import messagebox
 
-root = Tk()
-root.geometry('450x300')
-#root.resizable(0, 0)
-root.title("Youtube Video Downloader")  # Title of the program
+def download_video_cli(url: str, output_path: str = "."):
+    try:
+        from pytube import YouTube
+    except ImportError:
+        print("Error: 'pytube' is required. Install it via 'pip install pytube'.")
+        return False
 
-Label(root, text='Youtube Video Downloader',
-      font='arial 15 bold').pack()  # Title of the program
+    if not url or not url.strip():
+        print("Error: YouTube URL cannot be empty.")
+        return False
 
-link = StringVar()  # Variable for save link of video
-filename = StringVar()  # Variable for save link of video
+    print(f"Fetching video info for: {url}")
+    try:
+        yt = YouTube(url.strip())
+        stream = yt.streams.get_highest_resolution()
+        if not stream:
+            print("Error: No downloadable stream found.")
+            return False
 
-Label(root, text='Paste Link Here:', font='arial 13 bold').place(x=160, y=40)
-link_enter = Entry(root, width=45, textvariable=link).place(
-    x=50, y=90)  # Input for add the link
+        os.makedirs(output_path, exist_ok=True)
+        print(f"Downloading '{yt.title}'...")
+        file_path = stream.download(output_path=output_path)
+        print(f"Successfully downloaded to: {file_path}")
+        return True
+    except Exception as e:
+        print(f"Download failed: {e}")
+        return False
 
-def Download():  # Function for download video
+def run_gui():
+    root = tk.Tk()
+    root.geometry('450x300')
+    root.title("YouTube Video Downloader")
+    root.configure(bg="#F0F0F0")
 
-    Label(root, text='Downloading', font='arial 13').place(x=180, y=210)
+    tk.Label(root, text='YouTube Video Downloader', font=('Arial', 15, 'bold'), bg="#F0F0F0").pack(pady=10)
 
-    url = YouTube(str(link.get()))
+    link = tk.StringVar()
 
-    video = url.streams.get_highest_resolution()
+    tk.Label(root, text='Paste Link Here:', font=('Arial', 12, 'bold'), bg="#F0F0F0").pack(pady=5)
+    link_enter = tk.Entry(root, width=50, textvariable=link, font=('Arial', 10))
+    link_enter.pack(pady=5)
+    link_enter.focus_set()
 
-    video.download()
+    status_label = tk.Label(root, text='', font=('Arial', 12), bg="#F0F0F0")
+    status_label.pack(pady=10)
 
-    Label(root, text='Downloaded', font='arial 15').place(x=180, y=210)
+    def start_download_thread():
+        url_text = link.get().strip()
+        if not url_text:
+            messagebox.showwarning("Input Error", "Please paste a YouTube URL before downloading.")
+            return
 
+        download_btn.config(state=tk.DISABLED)
+        status_label.config(text="Downloading... Please wait.", fg="blue")
 
-Button(root, text='Download', font='arial 15 bold',
-       padx=2, command=Download).place(x=180, y=150)
+        def worker():
+            try:
+                from pytube import YouTube
+                yt = YouTube(url_text)
+                stream = yt.streams.get_highest_resolution()
+                if stream:
+                    stream.download()
+                    root.after(0, lambda: status_label.config(text="Downloaded Successfully!", fg="green"))
+                    root.after(0, lambda: messagebox.showinfo("Success", f"Video '{yt.title}' downloaded successfully!"))
+                else:
+                    root.after(0, lambda: status_label.config(text="Stream not found.", fg="red"))
+            except Exception as e:
+                root.after(0, lambda: status_label.config(text="Download Failed!", fg="red"))
+                root.after(0, lambda: messagebox.showerror("Download Error", f"Failed to download video:\n{e}"))
+            finally:
+                root.after(0, lambda: download_btn.config(state=tk.NORMAL))
 
-root.mainloop()
+        threading.Thread(target=worker, daemon=True).start()
+
+    download_btn = tk.Button(root, text='Download', font=('Arial', 12, 'bold'),
+                             bg="#4CAF50", fg="white", padx=10, pady=5, command=start_download_thread)
+    download_btn.pack(pady=10)
+
+    root.mainloop()
+
+def main():
+    if len(sys.argv) > 1:
+        url = sys.argv[1]
+        out_dir = sys.argv[2] if len(sys.argv) > 2 else "."
+        download_video_cli(url, out_dir)
+    else:
+        run_gui()
+
+if __name__ == '__main__':
+    main()
+
