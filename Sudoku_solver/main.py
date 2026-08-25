@@ -148,33 +148,36 @@ def solve(bo):
     return False
 
 
-# Fill your numbers in the board below or create a new array to solve the board you give.
-board = [
-    [0, 0, 0,   0, 0, 0,   0, 0, 0],
-    [0, 0, 0,   0, 0, 0,   0, 0, 0],
-    [0, 0, 0,   0, 0, 0,   0, 0, 0],
+def main():
+    # Fill your numbers in the board below or create a new array to solve the board you give.
+    board = [
+        [0, 0, 0,   0, 0, 0,   0, 0, 0],
+        [0, 0, 0,   0, 0, 0,   0, 0, 0],
+        [0, 0, 0,   0, 0, 0,   0, 0, 0],
 
-    [0, 0, 0,   0, 0, 0,   0, 0, 0],
-    [0, 0, 0,   0, 0, 0,   0, 0, 0],
-    [0, 0, 0,   0, 0, 0,   0, 0, 0],
+        [0, 0, 0,   0, 0, 0,   0, 0, 0],
+        [0, 0, 0,   0, 0, 0,   0, 0, 0],
+        [0, 0, 0,   0, 0, 0,   0, 0, 0],
 
-    [0, 0, 0,   0, 0, 0,   0, 0, 0],
-    [0, 0, 0,   0, 0, 0,   0, 0, 0],
-    [0, 0, 0,   0, 0, 0,   0, 0, 0]
-]
+        [0, 0, 0,   0, 0, 0,   0, 0, 0],
+        [0, 0, 0,   0, 0, 0,   0, 0, 0],
+        [0, 0, 0,   0, 0, 0,   0, 0, 0]
+    ]
 
-# use this function to generate a new board
-# comment and use the array above to solve manual preset boards.
-board = generate_board(0)
+    # use this function to generate a new board
+    board = generate_board(0)
 
+    # printing the unsolved board
+    print("======solvable board=====")
+    print_board(board)
 
-# printing the unsolved board
-print("======solvable board=====")
-print_board(board)
+    # solving the board
+    if solve(board):
+        print("======solved board=======")
+        print_board(board)
+    else:
+        print("No solution exists for the given board.")
 
-# solving the board
-solve(board)
+if __name__ == '__main__':
+    main()
 
-# printing the board
-print("======solved board=======")
-print_board(board)
