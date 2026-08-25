@@ -34,10 +34,11 @@ class LinkedStack:
 
     def pop(self):
         if self.is_empty():
-            raise Empty("stack is emoty")
+            raise Empty("Stack is empty")
         
         answer = self._head._element
         self._head = self._head._next
         self._size -= 1
         return answer
+
 
