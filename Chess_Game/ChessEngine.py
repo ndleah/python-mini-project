@@ -13,7 +13,7 @@ class GameState:
                         ["wR", "wN", "wB", "wQ", "wK", "wB", "wN", "wR"]]
                 self.moveFunctions = {'p': self.getPawnMoves, 'R': self.getRookMoves, 'N': self.getKnightMoves,
                                       'B': self.getBishopMoves, 'Q': self.getQueenMoves, 'K': self.getKingMoves}
-                self.whiteToMove = True,
+                self.whiteToMove = True
                 self.moveLog = []
                 self.whiteKingLocation = (7, 4)
                 self.blackKingLocation = (0, 4)
@@ -44,6 +44,8 @@ class GameState:
                                 self.whiteKingLocation = (move.startRow, move.startCol)
                         if move.pieceMoved == "bK":
                                 self.blackKingLocation = (move.startRow, move.startCol)
+                        self.checkMate = False
+                        self.staleMate = False
         """
         All move considering checks
         """
