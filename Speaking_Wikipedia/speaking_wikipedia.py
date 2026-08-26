@@ -1,56 +1,73 @@
+import sys
 import pyttsx3
 import wikipedia
-from pprint import pprint
 
-
-def page(title: str, sentences = 2):
+def page(title: str, sentences: int = 2) -> str:
     """
     :param title: (str) the title of the Wikipedia page to summarize
-    :param sentences: (int) the number of sentences to include in the summary (optional, default is 2)
+    :param sentences: (int) the number of sentences to include in the summary
     :return: (str) the summary of the Wikipedia page
     """
+    try:
+        sentences_count = int(sentences)
+    except (ValueError, TypeError):
+        sentences_count = 2
 
-    content = wikipedia.summary(title, sentences = sentences)
+    try:
+        content = wikipedia.summary(title, sentences=sentences_count)
+        return content
+    except wikipedia.exceptions.DisambiguationError as e:
+        return f"Ambiguous topic '{title}'. Options include: {', '.join(e.options[:5])}"
+    except wikipedia.exceptions.PageError:
+        return f"Page '{title}' not found on Wikipedia."
+    except Exception as e:
+        return f"Error fetching Wikipedia page: {e}"
 
-    return content
-
-
-def voicing_text(text):
+def voicing_text(text: str) -> str:
     """
     Speaks the given text using the text-to-speech engine
     :param text: (str) the text to speak
     :return: (str) the input text
     """
+    if not text:
+        return ""
 
-    # Initialize the engine
-    engine = pyttsx3.init()
+    try:
+        engine = pyttsx3.init()
+        voices = engine.getProperty('voices')
+        if voices:
+            engine.setProperty('voice', voices[0].id)
+        engine.say(text)
+        engine.runAndWait()
+    except Exception as e:
+        print(f"TTS Audio Notice: {text}")
 
-    # Set the voice to be used
-    voices = engine.getProperty('voices')
-    engine.setProperty('voice', voices[0].id)
-
-    # Speak the text
-    engine.say(text)
-
-    engine.runAndWait()
-
-    # returns the input text in order to provide subtitles for the spoken audio
     return text
 
 def main():
-    # Specify values:
-    wiki_page = input("Enter the name of the  wikipedia page: ")
+    wiki_page = input("Enter the name of the Wikipedia page: ").strip()
+    if not wiki_page:
+        print("Error: Page title cannot be empty.")
+        return
 
-    specify_num_of_sentences = input("Do you want to specify the number of sentences (default is 2)? (y/n): ")
+    specify_num_of_sentences = input("Do you want to specify the number of sentences (default is 2)? (y/n): ").strip().lower()
 
-    if specify_num_of_sentences == "y" or specify_num_of_sentences == "Y":
-
-        num_of_sentences = input("Enter the number of sentences to include in the summary: ")
-
-        print(voicing_text(page(wiki_page, num_of_sentences)))
+    if specify_num_of_sentences in ("y", "yes"):
+        raw_num = input("Enter the number of sentences to include in the summary: ").strip()
+        try:
+            num = int(raw_num)
+        except ValueError:
+            print("Invalid number. Defaulting to 2 sentences.")
+            num = 2
+        summary_text = page(wiki_page, num)
     else:
+        summary_text = page(wiki_page)
 
-        print(voicing_text(page(wiki_page)))
+    print("\n--- Wikipedia Summary ---")
+    print(summary_text)
+
+    voicing_text(summary_text)
 
 if __name__ == "__main__":
     main()
+
