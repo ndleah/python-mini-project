@@ -1,32 +1,59 @@
-import random
-from tkinter import *
+import secrets
+import string
+import tkinter as tk
 from tkinter import messagebox
-import pyperclip
 
-gui = Tk()
-gui.title('Password Generator')
-gui.geometry('250x200')
-gui.resizable(0,0)
+def generate_random_password(length: int) -> str:
+    """Generate cryptographically secure random password of arbitrary length."""
+    if length <= 0:
+        return ""
+    char_pool = string.ascii_lowercase + string.ascii_uppercase + string.digits + "@#$%&*"
+    return "".join(secrets.choice(char_pool) for _ in range(length))
 
-def process():
-    length = int(string_pass.get())
+def run_gui():
+    gui = tk.Tk()
+    gui.title('Password Generator')
+    gui.geometry('300x220')
+    gui.resizable(False, False)
 
-    lower = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-    upper = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-    num = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-    special = ['@', '#', '$', '%', '&', '*']
-    all = lower + upper + num + special
-    ran = random.sample(all,length)
-    password = "".join(ran)
-    messagebox.showinfo('Result', 'Your password {} \n\nPassword Copied to Clipboard'.format(password))
-    pyperclip.copy(password)
+    string_pass = tk.StringVar(value="12")
 
-string_pass = StringVar()
-label = Label(text="Password Length").pack(pady=10)
-txt = Entry(textvariable=string_pass).pack()
-btn = Button(text="Generator", command=process).pack(pady=10)
+    tk.Label(gui, text="Password Length:", font=("Arial", 11, "bold")).pack(pady=15)
+    txt = tk.Entry(gui, textvariable=string_pass, font=("Arial", 12), width=10, justify="center")
+    txt.pack(pady=5)
+    txt.focus_set()
 
-gui.mainloop()
+    def process():
+        raw_val = string_pass.get().strip()
+        try:
+            length = int(raw_val)
+            if length <= 0:
+                messagebox.showwarning("Input Error", "Please enter a positive length greater than 0.")
+                return
+        except ValueError:
+            messagebox.showwarning("Input Error", "Please enter a valid integer length.")
+            return
 
-a = "Pythyon"
-print(a)
+        password = generate_random_password(length)
+
+        copied_msg = ""
+        try:
+            import pyperclip
+            pyperclip.copy(password)
+            copied_msg = "\n(Password copied to clipboard!)"
+        except Exception:
+            pass
+
+        messagebox.showinfo("Generated Password", f"Your Password:\n{password}{copied_msg}")
+
+    btn = tk.Button(gui, text="Generate Password", font=("Arial", 11, "bold"), bg="navy", fg="white", command=process)
+    btn.pack(pady=15)
+
+    gui.mainloop()
+
+def main():
+    run_gui()
+
+if __name__ == '__main__':
+    main()
+
