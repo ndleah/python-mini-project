@@ -1,55 +1,34 @@
-import pygame
+import os
+import sys
 import time
 import random
-
-pygame.init()  # Initialize pygame.
+import pygame
 
 white = (255, 255, 255)
 black = (36, 36, 36)
 red = (213, 50, 80)
 green = (0, 255, 0)
 
-# Sizes for window of the game
 display_width = 600
 display_height = 500
-
-icon = pygame.image.load("snakeicon.ico")
-pygame.display.set_icon(icon)
-
-display = pygame.display.set_mode(
-    (display_width, display_height))  # Apply size to the game
-pygame.display.set_caption('Snake Game')  # Set title of game window
-
-clock = pygame.time.Clock()
-
 snake_block = 10
-snake_speed = 15  # Speed of snake (Player)
+snake_speed = 15
 
-
-# Render Score Label
-def score(score):
-    # Size and font of score label (Top-Left)
+def score(display, score_val):
     score_font = pygame.font.SysFont("arial", 15)
-    value = score_font.render(" Score: " + str(score), True, white)
+    value = score_font.render(" Score: " + str(score_val), True, white)
     display.blit(value, [0, 0])
 
-# Render Snake body
-def snake(snake_block, snake_list):
+def snake(display, snake_block_size, snake_list):
     for x in snake_list:
-        pygame.draw.rect(display, green, [
-                         x[0], x[1], snake_block, snake_block], border_radius=3)
+        pygame.draw.rect(display, green, [x[0], x[1], snake_block_size, snake_block_size], border_radius=3)
 
-
-# Render message in screen
-def message(msg, color, size=12):
+def message(display, msg, color, size=12):
     font_style = pygame.font.SysFont("bahnschrift", size)
     mesg = font_style.render(msg, True, color)
     display.blit(mesg, [display_width / 8, display_height / 5])
 
-# loop of game
-
-
-def gameLoop():
+def gameLoop(display, clock):
     game_over = False
     game_close = False
 
@@ -62,60 +41,46 @@ def gameLoop():
     snake_List = []
     Length_of_snake = 1
 
-    foodx = round(random.randrange(
-        0, display_width - snake_block) / 10.0) * 10.0
-
-    foody = round(random.randrange(
-        0, display_height - snake_block) / 10.0) * 10.0
+    foodx = round(random.randrange(0, display_width - snake_block) / 10.0) * 10.0
+    foody = round(random.randrange(0, display_height - snake_block) / 10.0) * 10.0
 
     while not game_over:
-
-        while game_close == True:
-            display.fill(black)  # Background color
-            message("You Lost! Press Space Again or Q to Quit", red, 35)
-
-            score(Length_of_snake - 1)
+        while game_close:
+            display.fill(black)
+            message(display, "You Lost! Press Space Again or Q to Quit", red, 25)
+            score(display, Length_of_snake - 1)
             pygame.display.update()
 
-            # If Q pressed
-            # The game will close
-
-            # If Space is pressed
-            # Are start new game
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_q:
                         game_over = True
                         game_close = False
-
                     if event.key == pygame.K_SPACE:
-                        gameLoop()
+                        gameLoop(display, clock)
+                        return
+                if event.type == pygame.QUIT:
+                    game_over = True
+                    game_close = False
 
-        # Keys to move the snake (W A S D)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 game_over = True
 
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_a:
+                # Prevent 180-degree instant reversal
+                if (event.key in (pygame.K_a, pygame.K_LEFT)) and x1_change == 0:
                     x1_change = -snake_block
                     y1_change = 0
-                    print("Left")
-
-                elif event.key == pygame.K_d:
+                elif (event.key in (pygame.K_d, pygame.K_RIGHT)) and x1_change == 0:
                     x1_change = snake_block
                     y1_change = 0
-                    print("Right")
-
-                elif event.key == pygame.K_w:
+                elif (event.key in (pygame.K_w, pygame.K_UP)) and y1_change == 0:
                     y1_change = -snake_block
                     x1_change = 0
-                    print("Up")
-
-                elif event.key == pygame.K_s:
+                elif (event.key in (pygame.K_s, pygame.K_DOWN)) and y1_change == 0:
                     y1_change = snake_block
                     x1_change = 0
-                    print("Down")
 
         if x1 >= display_width or x1 < 0 or y1 >= display_height or y1 < 0:
             game_close = True
@@ -124,12 +89,9 @@ def gameLoop():
         y1 += y1_change
 
         display.fill(black)
-        pygame.draw.rect(
-            display, red, [foodx, foody, snake_block, snake_block])
+        pygame.draw.rect(display, red, [foodx, foody, snake_block, snake_block])
 
-        snake_Head = []
-        snake_Head.append(x1)
-        snake_Head.append(y1)
+        snake_Head = [x1, y1]
         snake_List.append(snake_Head)
 
         if len(snake_List) > Length_of_snake:
@@ -139,24 +101,35 @@ def gameLoop():
             if x == snake_Head:
                 game_close = True
 
-        snake(snake_block, snake_List)
-        score(Length_of_snake - 1)
+        snake(display, snake_block, snake_List)
+        score(display, Length_of_snake - 1)
 
         pygame.display.update()
 
         if x1 == foodx and y1 == foody:
-            foodx = round(random.randrange(
-                0, display_width - snake_block) / 10.0) * 10.0
-
-            foody = round(random.randrange(
-                0, display_height - snake_block) / 10.0) * 10.0
-
+            foodx = round(random.randrange(0, display_width - snake_block) / 10.0) * 10.0
+            foody = round(random.randrange(0, display_height - snake_block) / 10.0) * 10.0
             Length_of_snake += 1
 
         clock.tick(snake_speed)
 
+def main():
+    pygame.init()
+    display = pygame.display.set_mode((display_width, display_height))
+    pygame.display.set_caption('Snake Game')
+
+    icon_path = os.path.join(os.path.dirname(__file__), "snakeicon.ico")
+    if os.path.exists(icon_path):
+        try:
+            icon = pygame.image.load(icon_path)
+            pygame.display.set_icon(icon)
+        except Exception:
+            pass
+
+    clock = pygame.time.Clock()
+    gameLoop(display, clock)
     pygame.quit()
-    quit()
 
+if __name__ == '__main__':
+    main()
 
-gameLoop()
