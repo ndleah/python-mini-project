@@ -1,91 +1,84 @@
-# Import necessary modules
+import os
+import sys
+import json
+import re
+import requests
 import subprocess
 import platform
-import requests
-import pyfiglet
-import json
-import os
-import re
 
+def print_banner(text: str):
+    """Print ASCII banner using pyfiglet or simple fallback."""
+    try:
+        import pyfiglet
+        print(pyfiglet.figlet_format(text))
+    except Exception:
+        print(f"\n=== {text} ===\n")
 
-def locate_ip():
-    """
-    Locate an IP address using an API.
-    """
-    # Clear the terminal
-    if platform.system().lower() == 'windows':
-        command = "cls"
-    else:
-        command = "clear"
-    subprocess.call(command, shell=True)
+def clear_screen():
+    """Clear terminal screen cross-platform."""
+    cmd = "cls" if platform.system().lower() == 'windows' else "clear"
+    try:
+        subprocess.call(cmd, shell=True)
+    except Exception:
+        pass
 
-    # Banner of the tool.
-    banner = pyfiglet.figlet_format("IP LOCATER")
-    print(banner)
+def locate_ip(ip_address: str = None) -> dict:
+    """Locate an IP address using ip-api.com and save data to files."""
+    clear_screen()
+    print_banner("IP LOCATER")
 
-    # A pattern to validate an IP address
     IP_PATTERN = r"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$"
 
-    # Get the IP address.
-    # if it matches the IP pattern, then it is valid.
-    # If not, raise an error message and try again.
-    while True:
-        IP_address = input("\nEnter a valid IP address: ")
-        if IP_address.lower() == 'q':
-            quit()
-        if not re.match(IP_PATTERN, IP_address):
-            print("Invalid IP address.")
-        else:
-            break
+    if ip_address is None:
+        while True:
+            ip_address = input("\nEnter a valid IP address (or 'q' to quit): ").strip()
+            if ip_address.lower() == 'q':
+                return None
+            if not re.match(IP_PATTERN, ip_address):
+                print("Invalid IP address format. Example: 8.8.8.8")
+            else:
+                break
 
-    # Change the current working directory to system's desktop
-    os.chdir(rf"C:\Users\{os.getlogin()}\Desktop")
+    script_dir = os.path.dirname(__file__)
+    filename_json = os.path.join(script_dir, "ip_data.json")
+    filename_text = os.path.join(script_dir, "ip_data.txt")
 
-    # Files to save IP data
-    filename_json = "ip_data.json"
-    filename_text = "ip_data.txt"
-
-    # The files containing IP data will have these fields
     fields = "status,message,continent,continentCode,country,countryCode,region,regionName,city,district,zip,lat,lon,timezone,currency,isp,org,as,mobile,proxy,hosting,query"
-    
-    # Send a request to the API
-    url = f"http://ip-api.com/json/{IP_address}?fields={fields}"
-    response = requests.get(url)
+    url = f"http://ip-api.com/json/{ip_address}?fields={fields}"
 
-    # Write the extracted data to files
-    with open(filename_json, 'w') as ip_data_file_json:
-        json.dump(response.json(), ip_data_file_json, indent=4)
-    
-    with open(filename_text, 'w') as ip_data_file_text:
-        ip_data_file_text.write(response.text)
-    
-    # Let the user know that files created on the system's desktop.
-    print("You got the files containing data about the given IP address.")
-    print("Please check your system desktop.")
-    input("\nPress any key to continue...")
+    print(f"Fetching IP data for '{ip_address}'...")
+    try:
+        response = requests.get(url, timeout=10)
+        data = response.json()
 
-def get_ip():
-    """
-    Get the IP of a certain domain name.
-    """
-    # Clear the terminal
-    if platform.system().lower() == 'windows':
-        command = "cls"
-    else:
-        command = "clear"
-    subprocess.call(command, shell=True)
-    
-    # Banner of the tool.
-    banner = pyfiglet.figlet_format("IP FINDER")
-    print(banner)
+        with open(filename_json, 'w', encoding='utf-8') as f:
+            json.dump(data, f, indent=4)
 
-    # Get the domain name
-    domain_name = input("Enter a domain name: ")
-    
+        with open(filename_text, 'w', encoding='utf-8') as f:
+            f.write(response.text)
+
+        print(f"Success! Data saved to:\n  JSON: {filename_json}\n  Text: {filename_text}")
+        print(f"Country: {data.get('country')}, City: {data.get('city')}, ISP: {data.get('isp')}")
+        return data
+    except Exception as e:
+        print(f"Error querying IP location API: {e}")
+        return None
+
+def get_ip(domain_name: str = None):
+    """Get IP of a domain name using nslookup."""
+    clear_screen()
+    print_banner("IP FINDER")
+
+    if domain_name is None:
+        domain_name = input("Enter a domain name (e.g. google.com or 'q' to quit): ").strip()
+
     if domain_name.lower() == 'q':
-        quit()
-    else:
+        return
+
+    print(f"Looking up IP for domain '{domain_name}'...")
+    try:
         command = f"nslookup {domain_name}"
-    
-    subprocess.call(command) == 0
-    input("\nPress any key to continue...")
+        subprocess.call(command, shell=True)
+    except Exception as e:
+        print(f"Error running nslookup: {e}")
+

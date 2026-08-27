@@ -1,94 +1,70 @@
 import random
 
-def hangman():
-    word = random.choice(["tiger", "superman", "thor", "doraemon", "avenger", "water", "stream"])
-    validletter = 'abcdefghijklmnopqrstuvwxyz'
-    turns = 10
-    guessmade = ''
-    while len(word) > 0:
-        main = ""
-        missed = 0
-        for letter in word:
-            if letter in guessmade:
-                main = main + letter
-            else:
-                main = main + "_" + " "
-        if main == word:
-            print(main)
-            print("You win!")
-            break
-        print("Guess the word:", main)
-        guess = input().casefold()
+HANGMAN_PICS = {
+    9: "  --------  ",
+    8: "  ---------  \n      O      ",
+    7: "  ---------  \n      O      \n      |      ",
+    6: "  ---------  \n      O      \n      |      \n     /       ",
+    5: "  ---------  \n      O      \n      |      \n     / \\     ",
+    4: "  ---------  \n    \\ O      \n      |      \n     / \\     ",
+    3: "  ---------  \n    \\ O /    \n      |      \n     / \\     ",
+    2: "  ---------  \n    \\ O /|   \n      |      \n     / \\     ",
+    1: "  ---------  \n    \\ O_|/   \n      |      \n     / \\     ",
+    0: "  ---------  \n      O_|    \n     /|\\     \n     / \\     "
+}
 
-        if guess in validletter:
-            guessmade = guessmade + guess
-        else:
-            print("Enter a valid character")
-            guess = input()
-        if guess not in word:
-            turns = turns - 1
-        if turns == 9:
-            print("9 turns left")
-            print("  --------  ")
-        if turns == 8:
-            print("8 turns left")
-            print("  ---------  ")
-            print("      O      ")
-        if turns == 7:
-            print("7 turns left")
-            print("  ---------  ")
-            print("      O      ")
-            print("      |      ")
-        if turns == 6:
-            print("6 turns left")
-            print("  ---------  ")
-            print("      O      ")
-            print("      |      ")
-            print("     /       ")
-        if turns == 5:
-            print("5 turns left")
-            print("  ---------  ")
-            print("       O      ")
-            print("       |      ")
-            print(r"     / \     ")
-        if turns == 4:
-            print("4 turns left")
-            print("  ---------  ")
-            print(r"     \ O      ")
-            print("        |      ")
-            print(r"      / \     ")
-        if turns == 3:
-            print("3 turns left")
-            print("  ---------  ")
-            print(r"    \ O /    ")
-            print("       |      ")
-            print(r"     / \     ")
-        if turns == 2:
-            print("2 turns left")
-            print("  ---------  ")
-            print(r"    \ O /|   ")
-            print("       |      ")
-            print(r"     / \     ")
+def print_stage(turns):
+    if turns in HANGMAN_PICS:
         if turns == 1:
-            print("1 turns left")
             print("Last breaths counting. Take care!")
-            print("  ---------  ")
-            print(r"    \ O_|/   ")
-            print("       |      ")
-            print(r"     / \     ")    
-        
-        if turns == 0:    
-            print("You lose")
-            print("You let a kind man die")
-            print("  ---------  ")
-            print("       O_|    ")
-            print(r"     /|\     ")
-            print(r"     / \     ")
-            break
+        print(f"{turns} turns left")
+        print(HANGMAN_PICS[turns])
 
-name = input("Enter your name: ")
-print(f"Welcome {name}")
-print("=====================")
-print("Try to guess it less than 10 attempts")
-hangman()
-print()
+def hangman():
+    words = ["tiger", "superman", "thor", "doraemon", "avenger", "water", "stream"]
+    word = random.choice(words)
+    turns = 10
+    guessed_letters = set()
+
+    while turns > 0:
+        display_word = " ".join([letter if letter in guessed_letters else "_" for letter in word])
+        print("\nGuess the word:", display_word)
+
+        if all(letter in guessed_letters for letter in word):
+            print(f"\nCongratulations! You guessed the word '{word}'!")
+            print("You win!")
+            return True
+
+        guess = input("Enter a letter: ").strip().lower()
+
+        if len(guess) != 1 or not guess.isalpha():
+            print("Invalid input! Please enter a single alphabetic character.")
+            continue
+
+        if guess in guessed_letters:
+            print(f"You have already guessed '{guess}'. Try another letter!")
+            continue
+
+        guessed_letters.add(guess)
+
+        if guess not in word:
+            turns -= 1
+            print_stage(turns)
+
+    print("\nYou lose!")
+    print("You let a kind man die.")
+    print(f"The word was: '{word}'")
+    return False
+
+def main():
+    name = input("Enter your name: ").strip()
+    if not name:
+        name = "Player"
+    print(f"Welcome {name}")
+    print("=====================")
+    print("Try to guess the word in 10 attempts or less!")
+    hangman()
+
+if __name__ == "__main__":
+    main()
+
