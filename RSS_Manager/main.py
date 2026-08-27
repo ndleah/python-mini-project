@@ -39,7 +39,7 @@ async def delete_feed_page(request: Request):
 @app.post("/deletefeed")
 async def delete_feed_submit(url: str = Form(...)):
     delete_feed_from_db(url)
-    return {"message": "add successfully"}
+    return {"message": "deleted successfully"}
 
 
 @app.get("/feeds_list")
@@ -52,11 +52,15 @@ async def get_rss_feeds(request: Request):
 
 @app.get("/feeds_list/{feed_id}")
 async def get_feed_articles(request: Request, feed_id: int):
-    # feed = get_feed_by_id(feed_id)
     articles = get_articles_for_feed(feed_id)
     articles_sorted = sorted(
-        articles, key=lambda x: x["published_parsed"], reverse=True
+        articles, key=lambda x: x.get("published_parsed"), reverse=True
     )
     return template_dir.TemplateResponse(
         "articles_list.html", {"request": request, "articles_sorted": articles_sorted}
     )
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
+
