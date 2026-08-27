@@ -1,63 +1,87 @@
-# mHTTP - A simple HTTP server
-# Written by M.V.Harish Kumar on 24/10/2023
-
-import sys, socket
+import os
+import sys
+import socket
 from pathlib import Path
 
 HOST = "0.0.0.0"
 PORT = 1997
-FOLDER = '.' if len(sys.argv) < 2 else sys.argv[1]
 
-def get_content(path):
-    ext = "html"
-    if path == "/":
-        try:
-            with open(FOLDER + "/index.html", "r") as f:
-                content = f.read()
-        except FileNotFoundError:
-            content = "The Server is working! but there is no index.html file to render"
+def get_content(base_folder: str, req_path: str):
+    """Retrieve content safely preventing directory traversal."""
+    root = Path(base_folder).resolve()
+
+    if req_path == "/":
+        target = root / "index.html"
+        if not target.exists():
+            return 200, b"The Server is working! but there is no index.html file to render", "text/plain; charset=utf-8"
     else:
-        try:
-            with open(FOLDER + path, "r") as f:
-                if Path(FOLDER + path).suffix != ".html":
-                    ext = "plain"
-                content = f.read()
-        except FileNotFoundError:
-            return 404, "File not found", ext
-    return 200, content, ext
+        # Strip leading slash to resolve relative to root
+        rel_path = req_path.lstrip("/")
+        target = (root / rel_path).resolve()
 
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    # Directory Traversal Security Guard
     try:
-        s.bind((HOST, PORT))
+        if not target.is_relative_to(root):
+            return 403, b"403 Forbidden: Directory Traversal Denied", "text/plain; charset=utf-8"
+    except AttributeError:
+        # Fallback for Python versions before 3.9
+        if not str(target).startswith(str(root)):
+            return 403, b"403 Forbidden: Directory Traversal Denied", "text/plain; charset=utf-8"
+
+    if not target.exists() or not target.is_file():
+        return 404, b"404 File Not Found", "text/plain; charset=utf-8"
+
+    suffix = target.suffix.lower()
+    content_type = "text/html; charset=utf-8" if suffix == ".html" else \
+                   "text/plain; charset=utf-8" if suffix in (".txt", ".py", ".md") else \
+                   "image/png" if suffix == ".png" else \
+                   "image/jpeg" if suffix in (".jpg", ".jpeg") else \
+                   "application/octet-stream"
+
+    try:
+        with open(target, "rb") as f:
+            data = f.read()
+        return 200, data, content_type
+    except Exception as e:
+        return 500, f"500 Internal Server Error: {e}".encode(), "text/plain; charset=utf-8"
+
+def run_server(folder=".", host=HOST, port=PORT):
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        s.bind((host, port))
         s.listen()
 
         print("mHTTP: The Micro-HTTP Server")
-        print(f"Server Started running at {HOST}:{PORT}\n")
+        print(f"Server Started running at {host}:{port}\n")
         print("mhttp: waiting for connections...")
 
-        while True:
-            clnt, caddr = s.accept()
-            with clnt:
-                print(f"mhttp: got connection from {caddr[0]}:{caddr[1]}")
-                req = clnt.recv(1024).decode()
-                if not req:
-                    print("mhttp: connection closed unexpectedly", file=sys.stderr)
-                    break
+        try:
+            while True:
+                clnt, caddr = s.accept()
+                with clnt:
+                    req_raw = clnt.recv(1024)
+                    if not req_raw:
+                        continue
 
-                req = req.split("\r\n")
-                print(f"mhttp: got request: {req[0]}")
-                path = req[0].split(" ")[1]
+                    req = req_raw.decode('utf-8', errors='replace').split("\r\n")
+                    if not req or len(req[0].split(" ")) < 2:
+                        continue
 
-                sts_cd, content, ftype = get_content(path)
+                    path = req[0].split(" ")[1]
+                    sts_cd, body, ctype = get_content(folder, path)
 
-                resp = f"HTTP/1.1 {sts_cd}\r\n" \
-                       f"Content-Type: text/{ftype}\r\n" \
-                       "\r\n" + content
+                    header = f"HTTP/1.1 {sts_cd}\r\nContent-Type: {ctype}\r\nContent-Length: {len(body)}\r\n\r\n"
+                    clnt.sendall(header.encode() + body)
+                    print(f"mhttp: sent response({sts_cd}) to {caddr[0]}:{caddr[1]} for {path}")
+        except KeyboardInterrupt:
+            print("\nmhttp: Got Keyboard Interrupt. Closing Server.", file=sys.stderr)
 
-                clnt.sendall(resp.encode())
-                print(f"mhttp: sent response({sts_cd}) to {caddr[0]}:{caddr[1]}")
-    except KeyboardInterrupt:
-        print("mhttp: Got Keyboard Interrupt", file=sys.stderr)
-        print("mhttp: Closing Connection.", file=sys.stderr)
+def main():
+    folder = '.' if len(sys.argv) < 2 else sys.argv[1]
+    run_server(folder)
+
+if __name__ == '__main__':
+    main()
+
             
 
