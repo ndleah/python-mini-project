@@ -1,6 +1,0 @@
-# Python specific ignores
-__pycache__/
-*.pyc
-*.pyo
-.env
-# Other files or directories you want to ignore...
