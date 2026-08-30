@@ -5,25 +5,31 @@
 # Image Compressor
 
 ## 🛠️ Description
-<!--Remove the below lines and add yours -->
-The image resizer takes in an image and reduces it's disk size according to the quality you choose, the compressed image is saved in the folder of the orignal image
+The image compressor takes JPEG or PNG images and reduces their file size by applying quality and palette optimizations.
 
+## 🚀 Features
+- **Path Bug Fixes**: Correctly resolves file paths returned by picker without `FileNotFoundError`.
+- **PNG Palette Optimization**: Uses adaptive 256-color palette and `compress_level=9` for effective PNG compression.
+- **CLI & GUI Modes**: Run via command-line arguments or GUI file picker.
 
-
-## ⚙️ Languages or Frameworks Used
-<!--Remove the below lines and add yours -->
-Modules required to be able to use the script successfully
-`pillow`, `os`, `easygui`
-
-These modules are listed in `requirements.txt` and can be installed by running the following command `pip install requirements.txt`
+## ⚙️ Requirements
+```bash
+pip install pillow easygui
+```
 
 ## 🌟 How to run
-<!--Remove the below lines and add yours -->
-:Simply run the script
 
+### Command Line
+```bash
+python image_compressor.py input_image.jpg [quality_10_to_100]
+```
+
+### GUI Mode
+```bash
+python image_compressor.py
+```
 
 ## 🤖 Author
-<!--Remove the below lines and add yours -->
-If you have any doubts or tips feel free to ping me on discord
-dumb_potato#1734
+Discord: dumb_potato#1734
+
 
