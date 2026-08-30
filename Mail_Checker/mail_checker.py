@@ -1,49 +1,78 @@
-#This script gives you the subject of mails received from a given list of mail addresses
+import os
+import sys
 import imaplib
+import email
+from email.header import decode_header
 
+def decode_mime_header(header_value: str) -> str:
+    """Decode MIME encoded email subject headers."""
+    if not header_value:
+        return "(No Subject)"
+    decoded_fragments = decode_header(header_value)
+    subject_parts = []
+    for bytes_or_str, encoding in decoded_fragments:
+        if isinstance(bytes_or_str, bytes):
+            subject_parts.append(bytes_or_str.decode(encoding or 'utf-8', errors='replace'))
+        else:
+            subject_parts.append(str(bytes_or_str))
+    return "".join(subject_parts)
 
+def fetch_latest_email_subject(mail, sender_address: str) -> str:
+    """Search inbox for latest email from sender_address and return decoded Subject header."""
+    sender_address = sender_address.strip()
+    status, data = mail.search(None, f'(FROM "{sender_address}")')
 
-user = 'Your Gamil address'
-password = 'Your password'
+    if status != 'OK' or not data or not data[0]:
+        print(f"No emails found from: {sender_address}")
+        return None
 
-mail = imaplib.IMAP4_SSL('imap.gmail.com')
-mail.login(user, password)
-mail.list()
+    id_list = data[0].split()
+    latest_email_id = id_list[-1]
 
-mail.select("inbox")  # connects to your inbox, change the argument to access different categories.
+    status, msg_data = mail.fetch(latest_email_id, "(RFC822)")
+    if status != 'OK' or not msg_data:
+        print(f"Failed to fetch email ID {latest_email_id}")
+        return None
 
+    raw_email_bytes = msg_data[0][1]
+    msg = email.message_from_bytes(raw_email_bytes)
+    raw_subject = msg.get('Subject')
+    decoded_subject = decode_mime_header(raw_subject)
 
-def readMails(address):
-    result, data = mail.search(None, '(FROM '+'"'+address+'")')         #If you would like to view mails that are sent to another mail, change FROM into TO 
+    print(f"------- FROM: {sender_address} -------")
+    print(f"Latest Subject: {decoded_subject}\n")
+    return decoded_subject
 
-    ids = data[0]  # data is a list.
-    id_list = ids.split()  
-    latest_email_id = id_list[-1]  # gets the latest mail from the particular user
+def check_emails(user: str = None, password: str = None, list_of_mails: list = None):
+    """Connect to IMAP server and fetch latest email subjects from given addresses."""
+    if not user:
+        user = os.getenv("IMAP_USER", "user@gmail.com")
+    if not password:
+        password = os.getenv("IMAP_PASSWORD", "password")
+    if list_of_mails is None:
+        list_of_mails = ["example1@gmail.com", "example2@gmail.com"]
 
-   
-    result, data = mail.fetch(latest_email_id, "(RFC822)")
+    if user in ("Your Gamil address", "user@gmail.com") or password in ("Your password", "password"):
+        print("Notice: Dummy credentials configured. Set IMAP_USER and IMAP_PASSWORD environment variables or arguments.")
+        return
 
-    
-    basic_email = data[0][1]
-    # contains all information including payloads and html content
+    print(f"Connecting to IMAP server (imap.gmail.com) for '{user}'...")
+    try:
+        mail = imaplib.IMAP4_SSL('imap.gmail.com')
+        mail.login(user, password)
+        mail.select("inbox")
 
-    index_start1 = basic_email.index(b'Subject')           #Starting index for your subject
-    index_end1 = index_start1 + 40                         # Change the value of 40 into any other value to suit your preferences
-    
+        for addr in list_of_mails:
+            fetch_latest_email_subject(mail, addr)
 
-    subject = basic_email[index_start1:index_end1]           #seperating the subject alone from the rest of the basic email
-    
+        mail.logout()
+    except Exception as e:
+        print(f"IMAP Connection / Authentication error: {e}")
 
-    
-    subject = subject.strip(b'b\'Subject:')               #removing additional unneccessary data from the subject
-    subject_end = subject.index(b'\r')
+def main():
+    target_user = sys.argv[1] if len(sys.argv) > 1 else None
+    target_pass = sys.argv[2] if len(sys.argv) > 2 else None
+    check_emails(target_user, target_pass)
 
-    print('-------FROM '+address+'-------\n\n')                        #Printing the emails
-    print("Subject: ", subject[0:subject_end], '\n\n')
-   
-
-
-listOfMails = ['mail1@gmail.com','mail2@gmail.com']           #Modify the list contents here to suit you. If you would like to view mails 
-                                                                                                    #  from say, 'abc@gmail.com' change 'mail1@gmail.com' to 'abc@gmail.com'
-for addresses in listOfMails:
-    readMails(addresses)
+if __name__ == '__main__':
+    main()
