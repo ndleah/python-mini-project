@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, redirect, url_for
 from .routes import portfolio_routes
 from config import DevelopmentConfig, ProductionConfig
 
@@ -15,6 +15,9 @@ def create_app():
     app.register_blueprint(portfolio_routes.portfolio_bp,
                            url_prefix='/portfolio')
 
-    # Other app configuration and routes...
+    @app.route('/')
+    def index():
+        return redirect(url_for('portfolio.create_portfolio'))
 
     return app
+
