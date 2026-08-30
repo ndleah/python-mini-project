@@ -1,13 +1,12 @@
-from tkinter import ttk
-from tkinter import *
-
+import os
 from pathlib import Path
-
 import sqlite3
+import tkinter as tk
+from tkinter import ttk, LabelFrame, Label, Entry, Button, StringVar, Toplevel, W, E, CENTER, END
 
 class Product:
     # connection dir property
-    db_name = 'database.db'
+    db_name = os.path.join(os.path.dirname(__file__), 'database.db')
 
     def __init__(self, window):
         # Initializations 
@@ -55,8 +54,8 @@ class Product:
     # Else create the table
     def exits_db_file(self):
         if not Path(self.db_name).exists():
-            sql ='''CREATE TABLE product(
-                id INTEGER  PRIMARY KEY,
+            sql = '''CREATE TABLE product(
+                id INTEGER PRIMARY KEY,
                 name CHAR(60) NOT NULL,
                 price FLOAT
                 )'''
@@ -91,7 +90,7 @@ class Product:
     def add_product(self):
         if self.validation():
             query = 'INSERT INTO product VALUES(NULL, ?, ?)'
-            parameters =  (self.name.get(), self.price.get())
+            parameters = (self.name.get(), self.price.get())
             self.run_query(query, parameters)
             self.message['text'] = 'Product {} added Successfully'.format(self.name.get())
             self.name.delete(0, END)
@@ -103,7 +102,7 @@ class Product:
     def delete_product(self):
         self.message['text'] = ''
         try:
-           self.tree.item(self.tree.selection())['text'][0]
+            self.tree.item(self.tree.selection())['text'][0]
         except IndexError as e:
             self.message['text'] = 'Please select a Record'
             return
@@ -123,36 +122,40 @@ class Product:
             return
         name = self.tree.item(self.tree.selection())['text']
         old_price = self.tree.item(self.tree.selection())['values'][0]
+
         self.edit_wind = Toplevel()
-        self.edit_wind.title = 'Edit Product'
+        self.edit_wind.title('Edit Product')
+
         # Old Name
         Label(self.edit_wind, text = 'Old Name:').grid(row = 0, column = 1)
         Entry(self.edit_wind, textvariable = StringVar(self.edit_wind, value = name), state = 'readonly').grid(row = 0, column = 2)
+
         # New Name
-        Label(self.edit_wind, text = 'New Price:').grid(row = 1, column = 1)
+        Label(self.edit_wind, text = 'New Name:').grid(row = 1, column = 1)
         new_name = Entry(self.edit_wind)
         new_name.grid(row = 1, column = 2)
 
         # Old Price 
         Label(self.edit_wind, text = 'Old Price:').grid(row = 2, column = 1)
         Entry(self.edit_wind, textvariable = StringVar(self.edit_wind, value = old_price), state = 'readonly').grid(row = 2, column = 2)
+
         # New Price
-        Label(self.edit_wind, text = 'New Name:').grid(row = 3, column = 1)
-        new_price= Entry(self.edit_wind)
+        Label(self.edit_wind, text = 'New Price:').grid(row = 3, column = 1)
+        new_price = Entry(self.edit_wind)
         new_price.grid(row = 3, column = 2)
 
         Button(self.edit_wind, text = 'Update', command = lambda: self.edit_records(new_name.get(), name, new_price.get(), old_price)).grid(row = 4, column = 2, sticky = W)
-        self.edit_wind.mainloop()
 
     def edit_records(self, new_name, name, new_price, old_price):
         query = 'UPDATE product SET name = ?, price = ? WHERE name = ? AND price = ?'
-        parameters = (new_name, new_price,name, old_price)
+        parameters = (new_name, new_price, name, old_price)
         self.run_query(query, parameters)
         self.edit_wind.destroy()
-        self.message['text'] = 'Record {} updated successfylly'.format(name)
+        self.message['text'] = 'Record {} updated successfully'.format(name)
         self.get_products()
 
 if __name__ == '__main__':
-    window = Tk()
+    window = tk.Tk()
     application = Product(window)
     window.mainloop()
+

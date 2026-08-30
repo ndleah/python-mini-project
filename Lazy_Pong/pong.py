@@ -1,3 +1,4 @@
+from __future__ import annotations
 from time import sleep
 import os
 import pygame
@@ -5,6 +6,7 @@ import sys
 import random
 import argparse
 import logging
+from typing import Union
 
 rgb_colors = {
 		"red": (255, 0, 0),
@@ -54,35 +56,36 @@ rgb_colors = {
 }
 
 log_file = "pong_log.log"
-
-if os.path.exists(os.path.abspath(log_file)):
-	os.remove(os.path.abspath(log_file))
-
-# Configure main logger
 pong_log = logging.getLogger("Pong logger")
-pong_log.setLevel(logging.DEBUG)
 
-# Configure console handler
-console_handler = logging.StreamHandler()
-console_handler.setLevel(logging.DEBUG)  # Imposta il livello a INFO o altro a tuo piacere
+def setup_logger():
+	"""Setup logger file and console handlers at runtime."""
+	global pong_log
+	pong_log.setLevel(logging.DEBUG)
+	if not pong_log.handlers:
+		console_handler = logging.StreamHandler()
+		console_handler.setLevel(logging.DEBUG)
+		try:
+			file_handler = logging.FileHandler(log_file)
+			file_handler.setLevel(logging.DEBUG)
+		except Exception:
+			file_handler = None
 
-# Configure file handler
-file_handler = logging.FileHandler(log_file)
-file_handler.setLevel(logging.DEBUG)
+		formatter = logging.Formatter('[%(asctime)s] - [%(levelname)s] - %(message)s')
+		console_handler.setFormatter(formatter)
+		if file_handler:
+			file_handler.setFormatter(formatter)
 
-# Set format
-formatter = logging.Formatter('[%(asctime)s] - [%(levelname)s] - %(message)s')
-console_handler.setFormatter(formatter)
-file_handler.setFormatter(formatter)
-
-# Add handler to logger
-pong_log.addHandler(console_handler)
-pong_log.addHandler(file_handler)
+		pong_log.addHandler(console_handler)
+		if file_handler:
+			pong_log.addHandler(file_handler)
 
 def get_random(limit: int):
 	num_rand = random.randint(-limit, limit)
 	while num_rand == 0:
 		num_rand = random.randint(-limit, limit)
+	return num_rand
+
 	return num_rand
 
 
@@ -397,8 +400,14 @@ class PongGame:
 
 
 def main():
-	os.remove(os.path.abspath(log_file))
+	if os.path.exists(os.path.abspath(log_file)):
+		try:
+			os.remove(os.path.abspath(log_file))
+		except Exception:
+			pass
+	setup_logger()
 	parser = argparse.ArgumentParser(description='Pong Game')
+
 	parser.add_argument('-dw','--width', type=int, default=320, help='Width of the display (dflt 320)')
 	parser.add_argument('-dh','--height', type=int, default=240, help='Height of the display (dflt 240)')
 	parser.add_argument('-n','--name', type=str, default="player 1", help='Player name')

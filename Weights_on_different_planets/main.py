@@ -1,91 +1,95 @@
-from tkinter import *
+import sys
+import tkinter as tk
+from tkinter import messagebox
 
+GRAVITY_FACTORS = {
+    "Mercury": 3.7 / 9.798,
+    "Venus": 8.87 / 9.798,
+    "Mars": 3.71 / 9.798,
+    "Jupiter": 24.92 / 9.798,
+    "Saturn": 10.44 / 9.798,
+    "Uranus": 8.87 / 9.798,
+    "Neptune": 11.15 / 9.798,
+    "Pluto": 0.58 / 9.798,
+    "Sun": 274.0 / 9.798,
+    "Moon": 1.625 / 9.798,
+}
 
-root = Tk()
-root.configure(bg="black")
-root.title("Weights in different planet")
+def calculate_planet_weight(earth_weight: float, planet: str) -> float:
+    """Calculate equivalent weight on target celestial body."""
+    if planet not in GRAVITY_FACTORS:
+        raise ValueError(f"Unknown planet '{planet}'")
+    return round(earth_weight * GRAVITY_FACTORS[planet], 2)
 
-mylabel=Label(root,text="Enter Weight in earth: ",font=("Algerian",12),bg="black",fg="red")
-e=Entry(root,width=50,borderwidth=15)
-mylabel.grid(row=0 ,column=0, columnspan=1)
-e.grid(row=0, column=1, columnspan=2)
-e.get()
+def run_gui():
+    root = tk.Tk()
+    root.configure(bg="black")
+    root.title("Weights on Different Planets")
 
-def myclickmerc():
-    weight_merc = round((int(e.get()) / 9.798) * 3.7, 2)
-    mylabel1 = Label(root, text="Your Weight In Mercury: " + str(weight_merc), padx=20, pady=20)
-    mylabel1.grid(row=5, column=0, columnspan=3)
+    mylabel = tk.Label(root, text="Enter Weight on Earth (kg): ", font=("Algerian", 12), bg="black", fg="red")
+    e = tk.Entry(root, width=50, borderwidth=5)
+    mylabel.grid(row=0, column=0, columnspan=1, pady=10, padx=10)
+    e.grid(row=0, column=1, columnspan=2, pady=10, padx=10)
+    e.focus_set()
 
-def myclickven():
-    weight_ven = round((int(e.get()) / 9.798) * 8.87, 2)
-    mylabel2 = Label(root, text="Your Weight In Venus: " + str(weight_ven), padx=20, pady=20)
-    mylabel2.grid(row=5, column=0, columnspan=3)
+    result_label = tk.Label(root, text="", font=("Arial", 14, "bold"), bg="black", fg="yellow", padx=20, pady=20)
+    result_label.grid(row=5, column=0, columnspan=3)
 
-def myclickmars():
-    weight_mars = round((int(e.get()) / 9.798) * 3.71, 2)
-    mylabel3 = Label(root, text="Your Weight In Mars: " + str(weight_mars), padx=20, pady=20)
-    mylabel3.grid(row=5, column=0, columnspan=3)
+    def calculate_for_planet(planet_name):
+        raw_val = e.get().strip()
+        if not raw_val:
+            messagebox.showwarning("Input Error", "Please enter your weight on Earth first.")
+            return
 
-def myclickjupi():
-    weight_jupi = round((int(e.get()) / 9.798) * 24.92, 2)
-    mylabel4 = Label(root, text="Your Weight In Jupiter: " + str(weight_jupi), padx=20, pady=20)
-    mylabel4.grid(row=5, column=0, columnspan=3)
+        try:
+            earth_w = float(raw_val)
+            if earth_w <= 0:
+                messagebox.showwarning("Input Error", "Weight must be a positive number.")
+                return
+            planet_w = calculate_planet_weight(earth_w, planet_name)
+            result_label.config(text=f"Your Weight on {planet_name}: {planet_w} kg")
+        except ValueError:
+            messagebox.showerror("Input Error", "Please enter a valid numeric value for weight.")
 
-def myclicksat():
-    weight_sat = round((int(e.get()) / 9.798) * 10.44, 2)
-    mylabel5 = Label(root, text="Your Weight In Saturn: " + str(weight_sat), padx=20, pady=20)
-    mylabel5.grid(row=5, column=0, columnspan=3)
+    buttons_config = [
+        ("Mercury", 1, 0, "green", "white"),
+        ("Venus", 1, 1, "blue", "white"),
+        ("Mars", 1, 2, "red", "white"),
+        ("Jupiter", 2, 0, "green", "white"),
+        ("Saturn", 2, 1, "blue", "white"),
+        ("Uranus", 2, 2, "red", "white"),
+        ("Neptune", 3, 0, "green", "white"),
+        ("Pluto", 3, 1, "blue", "white"),
+        ("Sun", 3, 2, "red", "white"),
+        ("Moon", 4, 1, "yellow", "blue"),
+    ]
 
-def myclickuran():
-    weight_uran = round((int(e.get()) / 9.798) * 8.87, 2)
-    mylabel6 = Label(root, text="Your Weight In Uranus: " + str(weight_uran), padx=20, pady=20)
-    mylabel6.grid(row=5, column=0, columnspan=3)
+    for name, r, c, bg_c, fg_c in buttons_config:
+        btn = tk.Button(
+            root,
+            text=name,
+            font=("Arial", 12),
+            padx=30,
+            pady=15,
+            command=lambda p=name: calculate_for_planet(p),
+            bg=bg_c,
+            fg=fg_c
+        )
+        btn.grid(row=r, column=c, padx=5, pady=5)
 
-def myclicknept():
-    weight_nept = round((int(e.get()) / 9.798) * 11.15, 2)
-    mylabel7 = Label(root, text="Your Weight In Neptune: " + str(weight_nept), padx=20, pady=20)
-    mylabel7.grid(row=5, column=0, columnspan=3)
+    root.mainloop()
 
-def myclickplut():
-    weight_plut = round((int(e.get()) / 9.798) * 0.58, 2)
-    mylabel8 = Label(root, text="Your Weight In Pluto: " + str(weight_plut), padx=20, pady=20)
-    mylabel8.grid(row=5, column=0, columnspan=3)
+def main():
+    if len(sys.argv) > 2:
+        try:
+            w = float(sys.argv[1])
+            p = sys.argv[2].capitalize()
+            res = calculate_planet_weight(w, p)
+            print(f"Weight of {w} kg on Earth = {res} kg on {p}")
+        except Exception as err:
+            print(f"Error: {err}")
+    else:
+        run_gui()
 
-def myclicksun():
-    weight_sun = round((int(e.get()) / 9.798) * 274, 2)
-    mylabel9 = Label(root, text="Your Weight In Sun: " + str(weight_sun), padx=20, pady=20)
-    mylabel9.grid(row=5, column=0, columnspan=3)
-
-def myclickmoon():
-    weight_moon = round((int(e.get()) / 9.798) * 1.625, 2)
-    mylabel9 = Label(root, text="Your Weight In Moon: " + str(weight_moon), padx=20, pady=20)
-    mylabel9.grid(row=5, column=0, columnspan=3)
-
-
-
-
-mybutton1= Button(root,text="Mercury",font=("arial", 12),padx=70,pady=25,command=myclickmerc,bg="green",fg="white")
-mybutton2= Button(root,text="Venus",font=("arial", 12),padx=81,pady=25,command=myclickven,bg="blue",fg="white")
-mybutton3= Button(root,text="Mars",font=("arial", 12),padx=75,pady=25,command=myclickmars,bg="red",fg="white")
-mybutton4= Button(root,text="Jupiter",font=("arial", 12),padx=75,pady=25,command=myclickjupi,bg="green",fg="white")
-mybutton5= Button(root,text="Saturn",font=("arial", 12),padx=80,pady=25,command=myclicksat,bg="blue",fg="white")
-mybutton6= Button(root,text="Uranus",font=("arial", 12),padx=70,pady=25,command=myclickuran,bg="red",fg="white")
-mybutton7= Button(root,text="Neptune",font=("arial", 12),padx=70,pady=25,command=myclicknept,bg="green",fg="white")
-mybutton8= Button(root,text="Pluto",font=("arial", 12),padx=85,pady=25,command=myclickplut,bg="blue",fg="white")
-mybutton9= Button(root,text="Sun",font=("arial", 12),padx=80,pady=25,command=myclicksun,bg="red",fg="white")
-mybutton10= Button(root,text="Moon",font=("arial", 12),padx=80,pady=25,command=myclickmoon,bg="yellow",fg="blue")
-mybutton1.grid(row=1 ,column=0)
-mybutton2.grid(row=1 ,column=1)
-mybutton3.grid(row=1,column=2)
-mybutton4.grid(row=2 ,column=0)
-mybutton5.grid(row=2 ,column=1)
-mybutton6.grid(row=2 ,column=2)
-mybutton7.grid(row=3 ,column=0)
-mybutton8.grid(row=3 ,column=1)
-mybutton9.grid(row=3 ,column=2)
-mybutton10.grid(row=4 ,column=1)
-
-
-
-
-root.mainloop()
+if __name__ == '__main__':
+    main()
