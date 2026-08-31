@@ -1,75 +1,98 @@
-import pyperclip  # Clipboard module
-import re  # Regular expression module
+import os
+import sys
+import re
 
-# Get the text from the clipboard
-text = str(pyperclip.paste())
+PHN_REGEX = re.compile(
+    r"""
+    (\(?(\+?\d{1,3})\)?  # area / country code
+    [\s_.-]?)             # separator or space
+    (\d{3})                # first three digits
+    [\s_.-]?               # separator or space
+    (\d{3})                # second three digits
+    [\s_.-]?               # separator or space
+    (\d{4,5})              # last four/five digits
+""",
+    re.VERBOSE,
+)
 
-# Empty list to store matches
-matches = []
+EMAIL_REGEX = re.compile(
+    r"""
+    ([a-zA-Z0-9._%-]+        # username
+    @                        # @ character
+    [a-zA-Z0-9_-]+           # domain name
+    \.                       # .(dot)
+    [a-zA-Z]{2,6}            # domain TLD
+    (\.[a-zA-Z]{2,3})?)      # second level domain like co.uk
+""",
+    re.VERBOSE,
+)
 
+def extract_phone_and_email(text_data: str) -> dict:
+    """Extract phone numbers and email addresses from raw text data."""
+    phones = []
+    emails = []
 
-def PhoneNumCheck():
-    # Regular expression for matching phone numbers
-    PhnNumregex = re.compile(
-        r"""
-        (\(?(\+?\d{1,3})\)?  # area code
-        [\s_.-]?)             # separator or space
-        (\d{3})                # first three digits
-        [\s_.-]?               # separator or space
-        (\d{3})                # second three digits
-        [\s_.-]?               # separator or space
-        (\d{4,5})              # last four/five digits
-    """,
-        re.VERBOSE,
-    )  # VERBOSE is used to ignore whitespace and comments inside the regex string
+    if not text_data:
+        return {"phones": phones, "emails": emails}
 
-    # Loop through the phone numbers found in the text
-    for num in PhnNumregex.findall(text):
-        if num[1] != "":
-            PhoneNum = "(" + num[1] + ")"  # Add area code in brackets
-        else:
-            PhoneNum = ""
-        PhoneNum += "-".join([num[2], num[3], num[4]])  # Join the digits with dashes
-        matches.append(PhoneNum)
+    for num in PHN_REGEX.findall(text_data):
+        country_code = f"({num[1]})" if num[1] else ""
+        formatted_phone = f"{country_code}{num[2]}-{num[3]}-{num[4]}"
+        phones.append(formatted_phone)
 
+    for email_match in EMAIL_REGEX.findall(text_data):
+        emails.append(email_match[0])
 
-def EmailCheck():
-    # Regular expression for matching email addresses
-    emailCheck = re.compile(
-        r"""
-        ([a-zA-Z0-9._%-]+        # username
-        @                        # @ character
-        [a-zA-Z0-9_-]+           # domain name
-        \.                       # .(dot)
-        [a-zA-Z]{2,3}            # domain type
-        (\.[a-zA-Z]{2,3})?)      # second domain type like co.in 
-    """,
-        re.VERBOSE,
-    )
+    return {"phones": sorted(list(set(phones))), "emails": sorted(list(set(emails)))}
 
-    # Loop through the email addresses found in the text
-    for emails in emailCheck.findall(text):
-        matches.append(emails[0])
+def get_input_text(file_path: str = None) -> str:
+    """Get input text from file, CLI argument, clipboard, or default file."""
+    if file_path and os.path.exists(file_path):
+        with open(file_path, 'r', encoding='utf-8') as f:
+            return f.read()
 
+    script_dir = os.path.dirname(__file__)
+    default_txt = os.path.join(script_dir, "Input-Data.txt")
+    if os.path.exists(default_txt):
+        with open(default_txt, 'r', encoding='utf-8') as f:
+            return f.read()
 
-# Print the output from matches list
-def PrintMatches():
-    if len(matches) > 0:
-        print("Found matches: " + str(len(matches)))
-        for i in range(0, len(matches)):
-            print(matches[i])
-    else:
-        print("***No Phone Number or Email Address found.***")
+    try:
+        import pyperclip
+        paste_text = str(pyperclip.paste())
+        if paste_text.strip():
+            print("Reading input text from system clipboard...")
+            return paste_text
+    except Exception:
+        pass
 
+    return ""
 
 def main():
-    # Call functions to check for phone numbers and email addresses
-    PhoneNumCheck()
-    EmailCheck()
+    target_file = sys.argv[1] if len(sys.argv) > 1 else None
+    text_content = get_input_text(target_file)
 
-    # Print the matches
-    PrintMatches()
+    if not text_content:
+        print("No text data found from file or clipboard.")
+        return
 
+    results = extract_phone_and_email(text_content)
+    total = len(results["phones"]) + len(results["emails"])
+
+    if total > 0:
+        print(f"=== Extraction Results ({total} matches found) ===")
+        if results["phones"]:
+            print("\n📞 Phone Numbers:")
+            for p in results["phones"]:
+                print(f"  - {p}")
+
+        if results["emails"]:
+            print("\n📧 Email Addresses:")
+            for e in results["emails"]:
+                print(f"  - {e}")
+    else:
+        print("*** No Phone Number or Email Address found in text. ***")
 
 if __name__ == "__main__":
     main()
+
