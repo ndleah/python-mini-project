@@ -1,21 +1,37 @@
+import sys
 import re
 
-def isValidEmail(email):
+EMAIL_REGEX = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b'
 
-    # Regular expression for validating an Email
-    regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
- 
-    if(re.fullmatch(regex, email)):
-        return True
+def is_valid_email(email: str) -> bool:
+    """Validate email address using regex."""
+    email = email.strip()
+    return bool(re.fullmatch(EMAIL_REGEX, email))
+
+def slice_email(email: str) -> dict:
+    """Slice email address into username and domain components."""
+    email = email.strip()
+    if not is_valid_email(email):
+        return {"username": None, "domain": None, "is_valid": False}
+
+    at_idx = email.index('@')
+    username = email[:at_idx]
+    domain = email[at_idx + 1:]
+    return {"username": username, "domain": domain, "is_valid": True}
+
+def main():
+    if len(sys.argv) > 1:
+        user_input = sys.argv[1]
     else:
-        return False
+        user_input = input("Enter your email id: ").strip()
 
-email = input("Enter your email id - ")
+    res = slice_email(user_input)
+    if res["is_valid"]:
+        print(f"\n✅ Valid Email Address: '{user_input}'")
+        print(f"  • Username: {res['username']}")
+        print(f"  • Domain:   {res['domain']}")
+    else:
+        print(f"\n❌ Error: '{user_input}' is not a valid email address.")
 
-if isValidEmail(email):
-    username = email[0:email.index('@')]
-    domain = email[email.index('@')+1: ]
-    print("Username - ", username)
-    print("Domain - ", domain)
-else:
-    print("Invalid Email!")
+if __name__ == '__main__':
+    main()
