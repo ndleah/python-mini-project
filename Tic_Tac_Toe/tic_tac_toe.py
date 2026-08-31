@@ -22,22 +22,18 @@ def printBoard(board):
     print(' ' + board[7] + ' | ' + board[8] + ' | ' + board[9])
 
 def isBoardFull(board):
-    if board.count(' ') >= 2:
-        return False
-    else:
-        return True
+    return board[1:].count(' ') == 0
 
-
-def IsWinner(b,l):
-    return(
-    (b[1] == l and b[2] == l and b[3] == l) or
-    (b[4] == l and b[5] == l and b[6] == l) or
-    (b[7] == l and b[8] == l and b[9] == l) or
-    (b[1] == l and b[4] == l and b[7] == l) or
-    (b[2] == l and b[5] == l and b[8] == l) or
-    (b[3] == l and b[6] == l and b[9] == l) or
-    (b[1] == l and b[5] == l and b[9] == l) or
-    (b[3] == l and b[5] == l and b[7] == l)
+def IsWinner(b, l):
+    return (
+        (b[1] == l and b[2] == l and b[3] == l) or
+        (b[4] == l and b[5] == l and b[6] == l) or
+        (b[7] == l and b[8] == l and b[9] == l) or
+        (b[1] == l and b[4] == l and b[7] == l) or
+        (b[2] == l and b[5] == l and b[8] == l) or
+        (b[3] == l and b[6] == l and b[9] == l) or
+        (b[1] == l and b[5] == l and b[9] == l) or
+        (b[3] == l and b[5] == l and b[7] == l)
     )
 
 def playerMove():
@@ -46,7 +42,7 @@ def playerMove():
         move = input("please select a position to enter the X between 1 to 9: ")
         try:
             move = int(move)
-            if move > 0 and move < 10:
+            if 1 <= move <= 9:
                 if spaceIsFree(move):
                     run = False
                     insertLetter('X', move)
@@ -54,12 +50,11 @@ def playerMove():
                     print('Sorry, this space is occupied')
             else:
                 print('please type a number between 1 and 9')
-        
-        except:
+        except ValueError:
             print('Please type a number')
 
 def computerMove():
-    possibleMoves = [ x for x, letter in enumerate(board) if letter == ' ' and x != 0]
+    possibleMoves = [x for x, letter in enumerate(board) if letter == ' ' and x != 0]
     move = 0
 
     for let in ['O', 'X']:
@@ -67,36 +62,24 @@ def computerMove():
             boardcopy = board[:]
             boardcopy[i] = let
             if IsWinner(boardcopy, let):
-                move = i
-                return move
+                return i
 
-    cornersOpen = []
-    for i in possibleMoves:
-        if i in [1, 3, 7, 9]:
-            cornersOpen.append(i)
-
+    cornersOpen = [i for i in possibleMoves if i in [1, 3, 7, 9]]
     if len(cornersOpen) > 0:
-        move = selectRandom(cornersOpen)
-        return move
+        return selectRandom(cornersOpen)
 
     if 5 in possibleMoves:
-        move = 5
-        return move
+        return 5
 
-    edgesOpen = []
-    for i in possibleMoves:
-        if i in [2, 4, 6, 8]:
-            edgesOpen.append(i)
-
+    edgesOpen = [i for i in possibleMoves if i in [2, 4, 6, 8]]
     if len(edgesOpen) > 0:
-        move = selectRandom(edgesOpen)
-        return move
+        return selectRandom(edgesOpen)
+
+    return 0
 
 def selectRandom(li):
     import random
-    ln = len(li)
-    r = random.randrange(0, ln)
-    return li[r]
+    return random.choice(li)
 
 def StartTheGame():
     global board
@@ -105,41 +88,30 @@ def StartTheGame():
     print('-------------------------')
     GamePlay()
 
-#clean Old data in screen when event occur
 def CleanScreen():
-    #Linux and macOS
-    if(os.name == 'posix'):
-         os.system('clear') 
-    #windows
-    else:
-         os.system('cls')
+    try:
+        if os.name == 'posix':
+            os.system('clear')
+        else:
+            os.system('cls')
+    except Exception:
+        pass
 
-
-
-#check Tie Game condition
 def TieGame():
-    
-    if isBoardFull(board) and (not((IsWinner(board, 'X')) or (IsWinner(board, 'O')))):
-        return True
-    else:
-        return False
+    return isBoardFull(board) and (not (IsWinner(board, 'X') or IsWinner(board, 'O')))
 
-#Score Count
 scorecount = 0
-#gameplay design here
+
 def GamePlay():
     global scorecount
     if scorecount == 0:
-        #if the game is first time ran
         print("Welcome to the game!")
     if scorecount < 0:
-        #if the score is negative, set it to 0
         scorecount = 0
     printBoard(board)
 
-    while not(isBoardFull(board)):
-        
-        if not(IsWinner(board, 'O')) :
+    while not isBoardFull(board):
+        if not IsWinner(board, 'O'):
             playerMove()
             CleanScreen()
             printBoard(board)
@@ -148,33 +120,38 @@ def GamePlay():
             print(f"Sorry, you lose 😢! Your Score is {scorecount}")
             break
 
-        if (not(IsWinner(board, 'X'))) :
+        if IsWinner(board, 'X'):
+            scorecount += 1
+            print(f"You win! Your Score is {scorecount}")
+            break
+
+        if not isBoardFull(board):
             move = computerMove()
-            if move == 0:
-                print(" ")
-            elif not(isBoardFull(board)):
+            if move != 0:
                 insertLetter('O', move)
                 print('computer placed an o on position', move, ':')
                 CleanScreen()
                 printBoard(board)
-        else:
-            scorecount += 1
-            print(f"You win! Your Score is {scorecount}")
-            break     
-        
+            if IsWinner(board, 'O'):
+                scorecount -= 1
+                print(f"Sorry, you lose 😢! Your Score is {scorecount}")
+                break
 
-while True:
-    if FirstRun:
-        FirstRun=False
-        StartTheGame()
-
-    else :
-        if TieGame():
-            print("It's a tie!")
-        x = input("Do you want to play again? (y/n)")
-        if x.lower() == 'y' or x.lower() =='yes':
+def main():
+    first_run = True
+    while True:
+        if first_run:
+            first_run = False
             StartTheGame()
-        
         else:
-            print("GLHF")
-            break
+            if TieGame():
+                print("It's a tie!")
+            x = input("Do you want to play again? (y/n): ")
+            if x.lower() in ('y', 'yes'):
+                StartTheGame()
+            else:
+                print("GLHF")
+                break
+
+if __name__ == '__main__':
+    main()
