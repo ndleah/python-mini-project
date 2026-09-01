@@ -1,45 +1,57 @@
-class main: 
-    def __init__(self,key:dict) -> None:
-        self.key = key
+import sys
 
-    def get_input(self) -> None: 
-        while True:
-            blank_string = str(input("Enter string to decrypt: "))
-            if blank_string.isalpha():
-                blank_string = blank_string.lower()
-                self.blank_string = blank_string
-                break
+class CaesarCipher:
+    """Caesar Cipher encoder/decoder supporting configurable alphabet shifts."""
+    def __init__(self, shift: int = 3):
+        self.shift = shift % 26
+
+    def encrypt(self, text: str) -> str:
+        """Encrypt plain text with Caesar Cipher shift."""
+        result = []
+        for char in text:
+            if char.isalpha():
+                base = ord('A') if char.isupper() else ord('a')
+                shifted = chr((ord(char) - base + self.shift) % 26 + base)
+                result.append(shifted)
             else:
-                print("Input is not valid")
-                continue
+                result.append(char)
+        return "".join(result)
 
-    def encrypt_string(self) -> str:
-        output = ""
-        for c in self.blank_string:
-            for k,v in self.key.items():
-                if k == c:
-                    output += v
-                else:
-                    continue
-        self.decrypted_string = output
-        return(output)
+    def decrypt(self, text: str) -> str:
+        """Decrypt cipher text with Caesar Cipher shift."""
+        result = []
+        for char in text:
+            if char.isalpha():
+                base = ord('A') if char.isupper() else ord('a')
+                shifted = chr((ord(char) - base - self.shift) % 26 + base)
+                result.append(shifted)
+            else:
+                result.append(char)
+        return "".join(result)
 
-    def decrypt_string(self, string: str) -> str:
-        output = "" 
-        string = string.lower()
-        string = string.strip()
-        if string == "":
-            return(self.blank_string)
-        else: 
-            for c in string:
-                for k,v in self.key.items():
-                    if v == c:
-                        output += k
-        
-        return(output)
+def main():
+    if len(sys.argv) > 1:
+        user_text = " ".join(sys.argv[1:])
+        shift_val = 3
+    else:
+        user_text = input("Enter text to encrypt: ").strip()
+        if not user_text:
+            user_text = "Hello, World! 123"
+        try:
+            raw_shift = input("Enter shift key (default 3): ").strip()
+            shift_val = int(raw_shift) if raw_shift else 3
+        except ValueError:
+            shift_val = 3
+
+    cipher = CaesarCipher(shift=shift_val)
+    encrypted = cipher.encrypt(user_text)
+    decrypted = cipher.decrypt(encrypted)
+
+    print(f"\n🔐 Caesar Cipher (Shift={shift_val})")
+    print(f"  • Original:  {user_text}")
+    print(f"  • Encrypted: {encrypted}")
+    print(f"  • Decrypted: {decrypted}")
 
 if __name__ == "__main__":
-    key ={"a": "d", "b": "e", "c": "f", "d": "g", "e": "h", "f": "i", "g": "j", "h": "k", "i": "l", "j": "m", "k": "n", "l": "o", "m": "p", "n": "q", "o": "r", "p": "s", "q": "t", "r": "u", "s": "v", "t": "w", "u": "x", "v": "y", "w": "z", "x": "a", "y": "b", "z": "c"}
-    main = main(key=key)
-    main.get_input()
-    print(main.encrypt_string())
+    main()
+
