@@ -1,51 +1,62 @@
+import math
 import random
 import operator
 
-def errorHandle(problem_answer):
-    switch = False
-    validated_guess = 0.0
-    while switch == False:
+def error_handle() -> float:
+    """Safely prompt user until a valid numeric answer is entered."""
+    while True:
         try:
-            validated_guess = float(input('Please enter a valid answer: '))
-            if type(validated_guess) is float:
-                switch = True
-                break
+            val = float(input('Please enter a valid numeric answer: '))
+            return val
         except ValueError:
-            pass
-    return validated_guess
+            print("Invalid input! Please enter a number.")
 
-def random_problem():
+def random_problem() -> tuple:
+    """Generate a random math problem and calculate expected answer."""
     operators = {
-    '+': operator.add,
-    '-': operator.sub,
-    '*': operator.mul,
-    '/': operator.truediv,
+        '+': operator.add,
+        '-': operator.sub,
+        '*': operator.mul,
+        '/': operator.truediv,
     }
 
     num_1 = random.randint(1, 10)
     num_2 = random.randint(1, 10)
-    operation = random.choice(list(operators.keys()))
-    answer = float(round(operators.get(operation)(num_1, num_2),3))
-    print(f'What is {num_1} {operation} {num_2}')
-    return answer
+    op_char = random.choice(list(operators.keys()))
+    answer = float(operators[op_char](num_1, num_2))
 
-def ask_question():
-    answer = random_problem()
+    print(f'What is {num_1} {op_char} {num_2}?')
+    return answer, f"{num_1} {op_char} {num_2}"
+
+def ask_question() -> bool:
+    answer, prob_str = random_problem()
     try:
-        guess = float(input('Enter you answer: '))
+        guess = float(input('Enter your answer: '))
     except ValueError:
-        guess = errorHandle(answer)
-    return guess == answer
+        guess = error_handle()
+
+    # Use tolerance for float comparison, especially on division
+    is_correct = math.isclose(guess, answer, abs_tol=0.01)
+    if is_correct:
+        print(f"Correct! ({prob_str} = {answer:.3f})")
+    else:
+        print(f"Incorrect. Expected ~{answer:.3f}, got {guess}")
+    return is_correct
 
 def game():
+    print("=== Welcome to Math Game ===")
     score = 0
     while True:
-        if ask_question()  == True:
+        if ask_question():
             score += 1
-            print('Correct !')
+            print("Keep going!\n")
         else:
-            print('Incorrect')
             break
-    print(f'======== Game Over ========\nYou score is {score}\nKeep going!')
+    print(f'======== Game Over ========\nYour final score is: {score}\nGreat effort!')
 
-game()
+def main():
+    game()
+
+if __name__ == '__main__':
+    main()
+
