@@ -1,7 +1,6 @@
-# Import necessary modules
+import sys
 import subprocess
 import LocateIP
-
 
 def Display_Menu():
     header = """
@@ -9,10 +8,10 @@ def Display_Menu():
     |       IP Locater        |
     |       IP Finder         |
     |___________   ___________|
-                \  \ 
+                \\  \\ 
                 ^_ _^
-                (o o)\_________
-                (_ _)\         )/\/
+                (o o)\\_________
+                (_ _)\\         )/\\/
                   U   ||----W||
                       ||     ||
     ### Tools:
@@ -21,77 +20,40 @@ def Display_Menu():
         [3] Exit
 
     * Type <clear> to clear previous commands
-    * Type <q> or to abort operation of a tool
+    * Type <q> to abort operation of a tool
     """
     print(header)
 
-def option_1():
-    """
-    Option 1 --> IP Locater
-    """
-    LocateIP.locate_ip()
-    Display_Menu()
-    Home()
-
-def option_2():
-    """
-    Option 2 --> IP Finder
-    """
-    LocateIP.get_ip()
-    Display_Menu()
-    Home()
-
-def option_3():
-    """
-    Option 3 --> Exit the program
-    """
-    quit()
-
-
 def Home():
-    """
-    Home of the program is selecting an option from available options.
-    """
-    # Available options' numbers as shown in the menu
-    available_options = (1, 2, 3)
+    """Non-recursive menu loop."""
+    Display_Menu()
 
-    # Get the option's number.
-    # If it is wrong, this while loop will run unless it gets
-    # a proper number that is related with one of the available options.
     while True:
         try:
-            selected_option = input("\nEnter your option\n>>> ")
-            # In order to clear the mess created by the previous commands,
-            # we define 'clear' command to clear up the screen from previous commands.
-            if selected_option == 'clear':
-                subprocess.call('cls', shell=True)
+            selected_option = input("\nEnter your option (1-3): ").strip()
+            if selected_option.lower() == 'clear':
+                subprocess.call('cls' if sys.platform == 'win32' else 'clear', shell=True)
                 Display_Menu()
                 continue
-            else:
-                selected_option = int(selected_option)
-        except ValueError:
-            print("Please enter the number of the option")
-            continue
-        else:
-            # If the given option number is not available, try to get an available option number.
-            if selected_option not in available_options:
-                print("The option is not available.\nTry another one.")
-                continue
-            else:
+            if selected_option.lower() == 'q':
+                print("Exiting tool.")
                 break
-    
-    # Operate the option related to the given number
-    if selected_option == 1:
-        option_1()
-    elif selected_option == 2:
-        option_2()
-    elif selected_option == 3:
-        option_3()
 
+            opt_int = int(selected_option)
+            if opt_int == 1:
+                LocateIP.locate_ip()
+            elif opt_int == 2:
+                LocateIP.get_ip()
+            elif opt_int == 3:
+                print("Goodbye!")
+                break
+            else:
+                print("Option not available. Please enter 1, 2, or 3.")
+        except ValueError:
+            print("Please enter a valid option number (1, 2, or 3).")
 
-# Run the program
-def Start_Program():
-    Display_Menu()
+def main():
     Home()
 
-Start_Program()
+if __name__ == '__main__':
+    main()
