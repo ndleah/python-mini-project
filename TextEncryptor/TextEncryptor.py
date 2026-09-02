@@ -1,49 +1,62 @@
-#This application uses the ceaser cipher in order to encrypt text
-def encrypt(text):
+import sys
+
+def encrypt(text: str, shift: int = 3) -> str:
+    """Encrypt input text using Caesar cipher with given shift."""
     result = ""
-    
-    for i in range(len(text)):
-        char = text[i]
-        
+    shift = shift % 26
+    for char in text:
         if char.isupper():
-            result += chr((ord(char) + key - 65) % 26 + 65)
+            result += chr((ord(char) + shift - 65) % 26 + 65)
         elif char.islower():
-            result += chr((ord(char) + key - 97) % 26 + 97)
+            result += chr((ord(char) + shift - 97) % 26 + 97)
         else:
             result += char
-    
     return result
 
-def decrypt(text):
+def decrypt(text: str, shift: int = 3) -> str:
+    """Decrypt cipher text using Caesar cipher with given shift."""
     result = ""
-    
-    for i in range(len(text)):
-        char = text[i]
-        
+    shift = shift % 26
+    for char in text:
         if char.isupper():
-            result += chr((ord(char) - decryptkey - 65) % 26 + 65)
+            result += chr((ord(char) - shift - 65) % 26 + 65)
         elif char.islower():
-            result += chr((ord(char) - decryptkey - 97) % 26 + 97)
+            result += chr((ord(char) - shift - 97) % 26 + 97)
         else:
             result += char
-    
     return result
 
+def main():
+    print("=== Text Encryptor (Caesar Cipher) ===")
+    print("1. Encrypt text")
+    print("2. Decrypt text")
 
-choice = int(input("Would you like to encrypt some text or decrypt some text? Choose 1 to encrypt and 2 to decrypt "))
-if choice == 1:
-    text = input("Input the text you want to encrypt: \n")
-    key = int(input("Input the key for the encryption *NOTE! This is using the Ceaser cipher \n"))
+    try:
+        raw_choice = input("Enter choice (1 or 2): ").strip()
+        choice = int(raw_choice)
+    except ValueError:
+        print("Invalid choice! Defaulting to Option 1 (Encrypt).")
+        choice = 1
 
-    result = encrypt(text)
-    print(result)
+    if choice == 1:
+        text = input("Enter text to encrypt: ")
+        try:
+            key = int(input("Enter numeric shift key (e.g. 3): "))
+        except ValueError:
+            key = 3
+        res = encrypt(text, key)
+        print(f"\nEncrypted Text: {res}")
+    elif choice == 2:
+        text = input("Enter text to decrypt: ")
+        try:
+            key = int(input("Enter numeric shift key (e.g. 3): "))
+        except ValueError:
+            key = 3
+        res = decrypt(text, key)
+        print(f"\nDecrypted Text: {res}")
+    else:
+        print("Invalid option selected.")
 
-elif choice == 2:
-    text = input("Input the text you want to decrypt: \n")
-    decryptkey = int(input("Input the key for the decryption *NOTE! This is using the Ceaser cipher \n"))
+if __name__ == '__main__':
+    main()
 
-    result = decrypt(text)
-    print(result)
-
-else:
-    print("idk")
