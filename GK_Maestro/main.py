@@ -1,85 +1,79 @@
-""" 
-This game tests your general knowledge skills! 
-You just need to answer the 10 questions correctly to become the winner!
-"""
-
+import random
 from question_bank import easy_question, hard_question
 from answer_bank import answer
-from random import randint, choice
-from art import *
 
-# Main functionality
-def main():
-    # Counter for questions
-    ques_count = 1
+def print_congratulations(text: str = "Congratulations!"):
+    """Print ASCII art congratulations message or fallback."""
+    try:
+        from art import tprint
+        tprint(text)
+    except Exception:
+        print(f"\n🎉 {text.upper()} 🎉\n")
 
-    # Store the score
-    score = 0
-
-    # Loop till 10 questions are asked
-    while ques_count <= 10:
-        # Store question number and the question
-        question_tuple = generate_question()
-
-        # Store the question
-        question = question_tuple[1]
-
-        # Display the question on the screen
-        print(f"Question No. {ques_count}: {question}")
-
-        # Increase question count by 1
-        ques_count += 1
-
-        # Record user answer
-        user_answer = input("Answer: ")
-
-        # Generate and store correct answer
-        correct_answer = generate_answer(question_tuple[0])
-
-        # Update score by 1 if the answer matches, and display the score
-        if user_answer.lower() == correct_answer.lower():
-            score += 1
-            print(f"Correct Answer. Your Score: {score}")
-        # Alert about wrong answer, and display the score
-        else:
-            print(f"Wrong Answer. Your Score: {score}")
-    
-    # Display final score on the screen
-    print(f"Your final score: {score}")
-
-    # Display congratulations message on the screen, If all 10 questions are answered correctly
-    if score == 10:
-        tprint("Congratulations!")
-        print("You have answered all 10 questions correctly!")
-        
-# Generates question for the user
-def generate_question():
-    # List the question numbers and their difficulty level
+def generate_question(seen_questions: set) -> tuple:
+    """Generate a random unasked question from easy or hard bank."""
     easy_qlist = [2, 3, 4, 8, 9, 14, 15, 16]
     hard_qlist = [1, 5, 6, 7, 10, 11, 12, 13]
 
-    # Choose a random value - 1 or 2
-    difficulty = randint(1, 2)
+    available_easy = [q for q in easy_qlist if q not in seen_questions]
+    available_hard = [q for q in hard_qlist if q not in seen_questions]
 
-    # Difficulty level: easy
-    if difficulty == 1:
-        # Select a random question from the choices
-        random_choice = choice(easy_qlist)
-        ques = easy_question(random_choice)
-    # Difficulty level: hard
-    elif difficulty == 2:
-        # Select a random question from the choices
-        random_choice = choice(hard_qlist)
-        ques = hard_question(random_choice)
-    
-    # Return question number and the question
-    return random_choice, ques
+    if not available_easy and not available_hard:
+        seen_questions.clear()
+        available_easy = easy_qlist
+        available_hard = hard_qlist
 
-# Generate and match answer of the user
-def generate_answer(num):
-    actual_answer = answer(num)
-    return actual_answer
+    difficulty = random.choice([1, 2])
+    if difficulty == 1 and available_easy:
+        q_num = random.choice(available_easy)
+        q_text = easy_question(q_num)
+    elif available_hard:
+        q_num = random.choice(available_hard)
+        q_text = hard_question(q_num)
+    else:
+        q_num = random.choice(available_easy)
+        q_text = easy_question(q_num)
 
-# When the program is run, main function is called
+    seen_questions.add(q_num)
+    return q_num, q_text
+
+def generate_answer(num: int) -> str:
+    return answer(num)
+
+def main():
+    print("=== Welcome to GK Maestro ===")
+    print("Test your general knowledge skills across 10 questions!\n")
+
+    ques_count = 1
+    score = 0
+    seen_questions = set()
+
+    while ques_count <= 10:
+        q_num, question = generate_question(seen_questions)
+
+        print(f"Question {ques_count}/10: {question}")
+        user_answer = input("Your Answer: ").strip()
+
+        correct_answer = generate_answer(q_num)
+
+        if user_answer.lower() == correct_answer.lower():
+            score += 1
+            print(f"✅ Correct! Score: {score}/10\n")
+        else:
+            print(f"❌ Wrong! Correct answer was: '{correct_answer}'. Score: {score}/10\n")
+
+        ques_count += 1
+
+    print(f"Final Score: {score}/10")
+
+    if score == 10:
+        print_congratulations("Congratulations!")
+        print("You answered all 10 questions correctly!")
+    elif score >= 7:
+        print("Great job! You passed with high distinction!")
+    else:
+        print("Good effort! Try again to get a perfect score!")
+
 if __name__ == "__main__":
     main()
+

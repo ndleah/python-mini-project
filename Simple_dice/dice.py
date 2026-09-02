@@ -1,32 +1,43 @@
-from tkinter import *
 import random
+import tkinter as tk
 
+def roll_dice() -> int:
+    """Generate a random dice roll between 1 and 6."""
+    return random.randint(1, 6)
 
-def roll():
-    r = random.randint(1, 6)
-    s = str(r)
-    e.delete(0, END)
-    e.insert(0, s)
+def run_gui():
+    root = tk.Tk()
+    root.geometry("220x180")
+    root.title("Dice Roller")
+    root.configure(bg="#f0f0f0")
 
-def on_enter(event):
-  button1.config(fg="black")
+    title_label = tk.Label(root, text="Simple Dice", font=("Arial", 14, "bold"), bg="#f0f0f0")
+    title_label.pack(pady=10)
 
-def on_leave(event):
-  button1.config(fg="green")
+    result_var = tk.StringVar(value="-")
+    result_label = tk.Label(root, textvariable=result_var, font=("Arial", 28, "bold"), fg="darkblue", bg="#f0f0f0")
+    result_label.pack(pady=5)
 
-root = Tk()
-root.geometry("99x117+1153+210")
-root.title("Dice")
-label = Label(root, text="Simple Dice" ,wraplength=100)
-e = Entry(root, width=5)
-button1 = Button(root, text="Roll", command=roll,wraplength=100)
+    def on_roll():
+        r = roll_dice()
+        result_var.set(str(r))
 
-button1.bind("<Enter>", on_enter)
-button1.bind("<Leave>", on_leave)
+    roll_button = tk.Button(root, text="Roll Dice 🎲", font=("Arial", 12, "bold"), bg="green", fg="white", activebackground="darkgreen", command=on_roll)
+    roll_button.pack(pady=10)
 
+    def on_enter(event):
+        roll_button.config(bg="darkgreen")
 
-label.grid(row=0, sticky=N)
-e.grid(row=2 ,sticky=N)
-button1.grid(row=4 ,sticky=S)
+    def on_leave(event):
+        roll_button.config(bg="green")
 
-root.mainloop()
+    roll_button.bind("<Enter>", on_enter)
+    roll_button.bind("<Leave>", on_leave)
+
+    root.mainloop()
+
+def main():
+    run_gui()
+
+if __name__ == '__main__':
+    main()
