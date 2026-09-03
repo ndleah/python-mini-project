@@ -1,111 +1,106 @@
-import os 
-#it lets the user interact with the native OS Python is currently running on.
+import os
+import sys
 
-from pprint import pprint
-#pprint enables printing in situations where errors wouldn't let them print... or something like that
+def generate_animalese(
+    text: str = "Hello Animalese",
+    voice_dir: str = None,
+    output_path: str = None,
+    speed_multiplier: float = 2.2,
+    play_audio: bool = False
+) -> str:
+    """Generate Animalese audio speech WAV file from input text."""
+    script_dir = os.path.dirname(__file__)
 
-from playsound import playsound
-#playsound needs 1 argument in order to work: the sound file path.
+    if voice_dir is None:
+        voice_dir = os.path.join(script_dir, "voices", "guy3")
 
-from scipy.io import wavfile
-#scipy.io (Input/Output)
+    if not os.path.exists(voice_dir):
+        print(f"Error: Voice samples directory not found at '{voice_dir}'")
+        return None
 
-from scipy.io.wavfile import write
-#import the function of writing a soundfile from a 1D or 2D Numpy array of either integer or float data-type.
+    try:
+        from scipy.io import wavfile
+        from scipy.io.wavfile import write
+        import numpy as np
+    except ImportError:
+        print("Notice: scipy / numpy libraries not installed.")
+        return None
 
-import numpy as np
-# if you pip install scipy numpy will come too
+    files = [f for f in os.listdir(voice_dir) if f.lower().endswith('.wav')]
+    files.sort()
 
-voice_path = "/home/wilson/Documentos/git_repo/python-mini-project/Animalese_translator/voices/guy3"
-files = os.listdir(voice_path)
-# lists the containing names of the entries of the specified directory
+    sounds = {}
+    sample_rate = 48000
+    for file in files:
+        raw_name = file.split(".")[0]
+        fp = os.path.join(voice_dir, file)
+        try:
+            rate, data = wavfile.read(fp)
+            sample_rate = rate
+            channel_one = data[:, 0] if len(data.shape) > 1 else data
+            sounds[raw_name] = channel_one
+        except Exception as e:
+            print(f"Skipping audio sample '{file}': {e}")
 
-files.sort()
-# lists voices from A to Z
+    if not sounds:
+        print("Error: No valid WAV samples loaded.")
+        return None
 
-sounds = {}
-for file in files:
-    print(file)
-    raw_name = file.split(".")[0]
-    # will return 'a' from 'a.wav'
+    say = text.lower().strip()
+    advance = 0.15 * sample_rate
+    space_skip = 0.4 * advance
 
-    fp = os.path.join(voice_path, file)
-    # will do 'pathname/a' to find the file
+    cursor = 0.0
+    notes = []
+    for char in say:
+        if char in sounds:
+            notes.append((char, cursor))
+            cursor += advance
+        elif char == " ":
+            cursor += space_skip
 
-    rate, data = wavfile.read(fp)
-    # x = 48000
-    # [[-38  24]
-    #  [-21  20]
-    #  [-30  23]
-    #      ...
-    #  [ 40  71]
-    #  [ 26 108]
-    #  [ 57 226]]
- 
-    channel_one = data[:, 0]
-    #[-38 -21 -30 ...  40  26  57]
+    if not notes:
+        print("Notice: No matching character sounds found for input string.")
+        return None
 
-    sounds[raw_name] = channel_one
-# pprint(sounds)
+    last_char = notes[-1][0]
+    last_note = sounds[last_char]
+    last_note_length = last_note.shape[0]
+    total_duration = cursor + last_note_length
 
-sample_rate = 48000
-speed_multiplier = 2.2
-advance = 0.15 * sample_rate
-space_skip = 0.4 * advance
+    end_pad = sample_rate * 1.0
+    buffer_length = int(total_duration + end_pad)
+    base = np.zeros(buffer_length, dtype=np.int16)
 
-# say_this = "This is a test of the animal crossing style talking machine"
-# say_this = "mestr lokee i mess yu bro"
-# say_this = "ha"
-# say_this = "pastee luuk at des"
-# say_this = "kil haw es yor de goeng"
-# say_this = "weleam haw was yor de"
-say_this = "i med somteng kul"
-# say_this = "ame  i lov yuu vere alat"
-# say_this = "ef yu wurk hard yu wel hav a gud lif"
+    for char, cur in notes:
+        sound = sounds[char]
+        start = int(cur)
+        end = int(start + sound.shape[0])
+        base[start:end] += sound
 
-say = say_this.lower().strip()
-#lowercased, removes leading/trailing whitespaces.
+    if output_path is None:
+        output_dir = os.path.join(script_dir, "output")
+        os.makedirs(output_dir, exist_ok=True)
+        filename = text.replace(" ", "_").lower() + ".wav"
+        output_path = os.path.join(output_dir, filename)
 
-cursor = 0
-notes = []
-for char in say:
-    notes.append((char, cursor))
-    if char == " ":
-        cursor += space_skip
-    else:
-        cursor += advance
-# advance the cursor by the length of the last note
-last_char = say[-1]
-last_note = sounds[last_char]
-last_note_length = last_note.shape[0]
-cursor += last_note_length
+    write_rate = int(sample_rate * speed_multiplier)
+    write(output_path, write_rate, base.astype(np.int16))
+    print(f"Animalese audio synthesized successfully -> '{output_path}'")
 
-end_pad = sample_rate * 1.0
-buffer_length = int(cursor + end_pad)
-base = np.zeros(buffer_length, dtype=np.int16)
+    if play_audio:
+        try:
+            from playsound import playsound
+            playsound(output_path)
+        except Exception:
+            print("Notice: playsound library or audio playback device unavailable.")
 
-for note in notes:
-    char = note[0]
-    cursor = note[1]
-    if char not in sounds:
-        continue
-    sound = sounds[char]
-    start = int(cursor)
-    end = int(start + sound.shape[0])
-    print(f"Adding {char} from {start} to {end}")
-    selection = base[start:end]
-    print(selection.shape)
-    print(sound.shape)
-    base[start:end] += sound
+    return output_path
 
-output_dir = "output"
-if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
+def main():
+    target_text = sys.argv[1] if len(sys.argv) > 1 else "Hello Animalese"
+    generate_animalese(target_text)
 
-name = say_this.replace(" ", "_")
-file_path = os.path.join(output_dir, name + '.wav')
-write_rate = int(sample_rate*speed_multiplier)
-write(file_path, write_rate, base.astype(np.int16))
-playsound(file_path)
-# for file in files:
-#     playsound(voice_path + "/" + file)
+if __name__ == '__main__':
+    main()
+
