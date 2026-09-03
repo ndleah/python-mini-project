@@ -1,23 +1,41 @@
 import socket
+import sys
 
-HOST = 'localhost' # host where the server is located
-PORT = 3000 # port the server is on
+DEFAULT_HOST = 'localhost'
+DEFAULT_PORT = 3000
 
-s = socket.socket() # new socket with name s
-s.bind((HOST, PORT)) # bind host and port to socket
-s.listen() # start the server to receive connections
+def run_server(host: str = DEFAULT_HOST, port: int = DEFAULT_PORT, single_shot: bool = False):
+    """Run socket server supporting multiple or single-shot client requests."""
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
-print("Server runing in port ", PORT) # print port address
+    try:
+        server_socket.bind((host, port))
+        server_socket.listen(5)
+        print(f"Server running on {host}:{port}")
 
-while True:
+        while True:
+            conn, addr = server_socket.accept()
+            print(f"New connection from {addr}")
 
-    conn, addr = s.accept() # accept connections
-    res = conn.recv(1024) # buffer size to receive the data sent from the client
+            data = conn.recv(1024)
+            if data:
+                print(f"Received from client: {data.decode('utf-8', errors='replace')}")
 
-    print('New conection', addr) # print the address of the current connection
+            conn.sendall(b"Hello from server!")
+            conn.close()
 
-    print(res) # print data receive from client
+            if single_shot:
+                break
+    except Exception as e:
+        print(f"Server error on {host}:{port}: {e}")
+    finally:
+        server_socket.close()
 
-    conn.send(b' Hello from server!') # send data to client
+def main():
+    port = int(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_PORT
+    run_server(DEFAULT_HOST, port)
 
-    conn.close() #close the conection
+if __name__ == '__main__':
+    main()
+

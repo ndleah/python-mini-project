@@ -1,88 +1,70 @@
-#Importing Flask and other important functions
-from flask import Flask, render_template, request, redirect, abort, flash, session ,url_for
-#Importing firebase auth from db.py
+from flask import Flask, render_template, request, redirect, abort, flash, session, url_for
 from db import auth
 
 app = Flask(__name__)
 app.secret_key = "somesecretkey"
 
-exempted_endpoints = ['signup','login','static']
+exempted_endpoints = ['signup', 'login', 'static']
 
-'''
-Signup Route
-''' 
-@app.route("/signup", methods = ['GET','POST'])
+@app.route("/signup", methods=['GET', 'POST'])
 def signup():
-    if request.method=='POST':
+    if request.method == 'POST':
         name = request.form.get("name")
         username = request.form.get("email")
         password = request.form.get("password")
         repassword = request.form.get("repassword")
         if password == repassword:
-            if len(password)>=6:
+            if len(password) >= 6:
                 try:
-                    #Creating User in firebase using create_user_with_email_and_password method of firebase/auth
-                    _user_ = auth.create_user_with_email_and_password(username ,password)
+                    _user_ = auth.create_user_with_email_and_password(username, password)
                     flash("User has been created successfully! Please Login")
-                    return redirect("/")
+                    return redirect(url_for("login"))
                 except Exception as e:
                     abort(500, {'message': str(e)})
             else:
-                flash('Password is less than 6 characters!')
-                return redirect("/signup")
+                flash('Password must be at least 6 characters long!')
+                return redirect(url_for("signup"))
         else:
             flash('Both Passwords do not match!')
-            return redirect("/signup")
+            return redirect(url_for("signup"))
     return render_template("signup.html")
 
-'''
-Login Route
-'''  
-@app.route("/login",methods = ['GET','POST'] )
+@app.route("/login", methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         data = dict(request.form)
         email = data.get("email")
         password = data.get("password")
         try:
-            #Signing User in firebase using sign_in_with_email_and_password method of firebase/auth
-            user = auth.sign_in_with_email_and_password(email ,password)
-            print(user)
+            user = auth.sign_in_with_email_and_password(email, password)
             session['user'] = user['localId']
             session['email'] = user['email']
-            return redirect("/")     
+            return redirect(url_for("start"))
         except Exception as e:
             abort(500, {'message': str(e)})
 
     if 'user' in session:
-        return redirect("/")
+        return redirect(url_for("start"))
     return render_template("login.html")
 
-'''
-Main dashboard route which has to be protected
-'''   
-@app.route("/",methods = ['GET','POST'])
+@app.route("/", methods=['GET', 'POST'])
 def start():
-    return render_template("index.html", user=session['email'])
+    user_email = session.get('email', 'Guest')
+    return render_template("index.html", user=user_email)
 
-'''
-Logout Route
-'''
-@app.route("/logout",methods = ['GET','POST'])
+@app.route("/logout", methods=['GET', 'POST'])
 def logout():
-    session.pop('user')
-    session.pop('email')
+    session.pop('user', None)
+    session.pop('email', None)
     flash("User logged out successfully!")
-    return redirect("/")
-
-
-'''This is an important middleware that run before any request made to flask application and checks
-when user is authenticated or not!
-'''
+    return redirect(url_for("login"))
 
 @app.before_request
 def before_request_func():
     if request.endpoint in exempted_endpoints:
-        return 
+        return
     if 'user' not in session:
         return redirect(url_for('login'))
+
+if __name__ == '__main__':
+    app.run(debug=True)
