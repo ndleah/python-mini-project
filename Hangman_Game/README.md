@@ -8,21 +8,27 @@
 <img src="https://i.pinimg.com/736x/56/21/55/5621553db7eedebcad64bf185be3d7e6.jpg" width=40% height=40%>
 
 ## 🛠️ Description
+A hangman CLI game simulator in Python where the player gets 10 attempts to guess a hidden word.
 
-A hangman game simulator using Python in which the player have 10 attempts to guess the phrase before the men is hung.
+## 🚀 Features
+- **Strict Input Validation**: Validates single-character alphabetic inputs and prompts again without deducting attempts.
+- **No Duplicate Penalties**: Warns the player if a letter was already guessed without losing attempts.
+- **Module Import Guard**: Includes `if __name__ == '__main__':` entrypoint for safe module imports.
 
 ## ⚙️ Languages or Frameworks Used
-You only need Python to run this script. You can visit [here](https://www.python.org/downloads/) to download Python.
+Written in standard Python 3 (no third-party dependencies required).
 
 ## 🌟 How to run
-Running the script is really simple! Just open a terminal in the folder where your script is located and run the following command:
+Run the following command in terminal:
 
 ```sh
-python hangman.py
+python Hangman_Game/hangman.py
 ```
+
 ## 📺 Demo
 <p align="center">
 <img src="https://github.com/ndleah/python-mini-project/blob/main/IMG/hangman.gif" width=70% height=70%>
 
 ## 🤖 Author
 [Leah Nguyen](https://github.com/ndleah)
+
