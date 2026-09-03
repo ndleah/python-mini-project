@@ -1,102 +1,98 @@
-import pyttsx3
-import datetime
-import speech_recognition as sr
-import wikipedia
-import webbrowser
-import pyautogui
-import time
 import os
-import pywhatkit
-import spotipy
-from spotipy.oauth2 import SpotifyOAuth
-#from selenium import webdriver
-#from selenium.webdriver.chrome.options import Options
-#import python_weather
-engine=pyttsx3.init('sapi5')
-voices=engine.getProperty('voices')
+import sys
+import time
+import datetime
+import webbrowser
 
-engine.setProperty('voice',voices[1].id)
+def speak(audio: str):
+    """Speak text audio using pyttsx3 or fallback print."""
+    try:
+        import pyttsx3
+        try:
+            engine = pyttsx3.init('sapi5')
+        except Exception:
+            engine = pyttsx3.init()
+        engine.say(audio)
+        engine.runAndWait()
+    except Exception:
+        print(f"🔊 Assistant: {audio}")
 
-
-
-def speak(audio):
-    engine.say(audio)
-    engine.runAndWait()
-def wishMe():
-    hour=int(datetime.datetime.now().hour)
-    if hour>=7 and hour<12:
-        speak("Good Morning")
-    elif hour>=12 and hour<18:
-        speak("Good Afternoon")
-    elif hour>=18 and hour<21:
+def wish_me():
+    """Greet user based on current hour of day."""
+    hour = int(datetime.datetime.now().hour)
+    if 5 <= hour < 12:
+        speak("Good Morning!")
+    elif 12 <= hour < 18:
+        speak("Good Afternoon!")
+    elif 18 <= hour < 21:
         speak("Good Evening!")
     else:
-        speak("Good night")
-    speak("Hello I am your personal desktop assistant. Please tell me how may i help you ")
-def takeCommand():
-    '''It takes microphone input from the user and returns string output'''
-    r=sr.Recognizer()
-    with sr.Microphone() as source:
-        speak("Go Ahead, I am listening to you......")
-        print("Go Ahead, I am listening to you......")
-        r.pause_threshold = 1
-        audio=r.listen(source)
+        speak("Good Night!")
+    speak("Hello, I am your personal desktop assistant. How may I help you today?")
 
+def take_command() -> str:
+    """Take microphone audio input or fallback console prompt."""
     try:
-        print("Recognizing")
-        
-        query=r.recognize_google(audio, language='hi-in')
-        print(f"User said:{query}\n")
+        import speech_recognition as sr
+        r = sr.Recognizer()
+        with sr.Microphone() as source:
+            speak("Go ahead, I am listening to you...")
+            print("Listening...")
+            r.pause_threshold = 1
+            audio = r.listen(source, timeout=5, phrase_time_limit=5)
+
+        print("Recognizing speech...")
+        query = r.recognize_google(audio, language='en-US')
+        print(f"User said: {query}\n")
+        return query.lower()
     except Exception as e:
-        #print(e)
-        speak("sorry i can't able to hear you Say that again please....")
-        return "None"
-    return query
+        print(f"Notice: Microphone input unavailable or timed out ({e}).")
+        return "none"
 
-
-
-if __name__=="__main__":
-    wishMe()
+def main():
+    wish_me()
     while True:
-        query=takeCommand().lower()
-        sites=[["youtube","https://youtube.com"],["wikipedia","https://www.wikipedia.com"],["google","https://google.com"]]
+        query = take_command()
+        if query == "none":
+            query = input("Enter command prompt manually (or 'exit' to quit): ").strip().lower()
+
         if 'wikipedia' in query:
-            speak('Searching wikipedia...')
-            query = query.replace("wikipedia", "").strip()
-            speak("Please provide a topic to search for on Wikipedia.")
-            mkv = takeCommand()
-            speak(f"playing {mkv}")
-            print(f"playing {mkv}...")
-            results = wikipedia.summary(query, sentences=2)
-            speak("According to Wikipedia")
-            print(results)
-            speak(results)
-       
-        
-                
+            speak('Searching Wikipedia...')
+            topic = query.replace("wikipedia", "").strip()
+            if not topic:
+                topic = "Python (programming language)"
+            try:
+                import wikipedia
+                results = wikipedia.summary(topic, sentences=2)
+                speak("According to Wikipedia:")
+                print(results)
+                speak(results)
+            except Exception as e:
+                speak(f"Could not retrieve Wikipedia summary for '{topic}'.")
 
         elif 'open youtube' in query:
-             speak('Which youtube video do you want to watch ?')
-             mkv = takeCommand()
-             speak(f"playing {mkv}")
-             print(f"playing {mkv}...")
-             pywhatkit.playonyt(mkv, open_video=True)
-        elif 'open google' or 'search on google' in query:
-             webbrowser.open("https://google.com")
-        elif 'open stackoverflow' in query:
-            webbrowser.open("https://stackoverflow.com")
-        
-        elif 'open leetcode' in query:
-            webbrowser.open("leetcode.com")
-        elif "the time" in query:
-            strfTime = datetime.datetime.now().strftime("%H:%M:%S")
-            speak(f"Okay now its {strfTime}")
-        elif 'open code' in query:
-            codePath="C:\\Program Files\\Microsoft VS Code\\Code.exe"
-            os.startfile(codePath)
-        
-        elif 'stop and exit' in query:
-            False
-        break
+            speak('Opening YouTube...')
+            webbrowser.open("https://youtube.com")
 
-    #logic for executing task based on query
+        elif 'open google' in query or 'search on google' in query:
+            speak('Opening Google...')
+            webbrowser.open("https://google.com")
+
+        elif 'open stackoverflow' in query:
+            speak('Opening StackOverflow...')
+            webbrowser.open("https://stackoverflow.com")
+
+        elif 'open leetcode' in query:
+            speak('Opening LeetCode...')
+            webbrowser.open("https://leetcode.com")
+
+        elif "the time" in query or "current time" in query:
+            strf_time = datetime.datetime.now().strftime("%H:%M:%S")
+            speak(f"The current time is {strf_time}")
+
+        elif 'stop' in query or 'exit' in query or 'quit' in query:
+            speak("Goodbye! Have a great day!")
+            break
+
+if __name__ == "__main__":
+    main()
