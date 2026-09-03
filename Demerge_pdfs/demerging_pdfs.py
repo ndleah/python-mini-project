@@ -1,63 +1,106 @@
-import PyPDF2
+import os
+import sys
 import re
-def check_valid_filename(filename):
+
+def get_pdf_reader_writer():
+    """Return PyPDF2 or pypdf PdfReader and PdfWriter classes."""
+    try:
+        from pypdf import PdfReader, PdfWriter
+        return PdfReader, PdfWriter
+    except ImportError:
+        try:
+            from PyPDF2 import PdfReader, PdfWriter
+            return PdfReader, PdfWriter
+        except ImportError:
+            try:
+                from PyPDF2 import PdfFileReader, PdfFileWriter
+                class ReaderAdapter:
+                    def __init__(self, stream):
+                        self._r = PdfFileReader(stream)
+                        self.pages = [self._r.getPage(i) for i in range(self._r.numPages)]
+                class WriterAdapter(PdfFileWriter):
+                    def add_page(self, page):
+                        self.addPage(page)
+                return ReaderAdapter, WriterAdapter
+            except ImportError:
+                return None, None
+
+def check_valid_filename(filename: str) -> bool:
+    """Validate output PDF file name against forbidden OS path characters."""
     invalid_chars = r'[/\\:*?"<>|]'
     if re.search(invalid_chars, filename):
-        print('A file name cannot contain any of these characters / \\ : * ? " < > |')
+        print('A file name cannot contain any of these characters: / \\ : * ? " < > |')
         return False
-    else:
-        return True
+    return True
 
-# Note: here instead of Python.pdf you should give the whole path to the pdf if the pdf is not present in the same directory where python program is present
-merged_pdf = open('Python.pdf', mode='rb')
+def demerge_pdf(pdf_path: str = None, page_splits: list = None, output_dir: str = None) -> list:
+    """Demerge/split a multi-page PDF into separate PDF documents."""
+    script_dir = os.path.dirname(__file__)
+    if pdf_path is None:
+        pdf_path = os.path.join(script_dir, "Python.pdf")
 
+    if not os.path.exists(pdf_path):
+        print(f"Notice: Source PDF file '{pdf_path}' not found.")
+        return []
 
-pdf = PyPDF2.PdfFileReader(merged_pdf)
+    ReaderClass, WriterClass = get_pdf_reader_writer()
+    if ReaderClass is None:
+        print("Notice: PyPDF2 or pypdf library not installed.")
+        return []
 
-(u, ctr, x) = tuple([0]*3)
-for i in range(1, pdf.numPages+1):
+    output_files = []
 
-    if u >= pdf.numPages:
-        print("Successfully done!")
-        exit(0)
-    
-    while True:
-        name = input("Enter the name of the pdf: ")
-        if check_valid_filename(name) == True:
-            break
+    try:
+        with open(pdf_path, 'rb') as f:
+            reader = ReaderClass(f)
+            total_pages = len(reader.pages)
+            print(f"Loaded '{pdf_path}' with {total_pages} total pages.")
 
-    while True:
-        ctr = input(f"Enter the number of pages for {name}: ")
-        try:
-            ctr = int(ctr)
-            if ctr > 0:
-                break
-            else:
-                raise ValueError
-        except ValueError:
-            print("Page number must be a positive integer")
+            if page_splits is None:
+                # Default split: 10 pages per file
+                chunk_size = 10
+                page_splits = []
+                for i in range(0, total_pages, chunk_size):
+                    end_idx = min(i + chunk_size, total_pages)
+                    page_splits.append((f"split_part_{(i // chunk_size) + 1}", end_idx - i))
 
-    u += ctr
-    if u > pdf.numPages:
-        print('Limit exceeded! ')
-        break
+            current_page = 0
+            if output_dir is None:
+                output_dir = script_dir
 
-    # Note: In the braces you should give the desired path of where new files should be stored
-    base_path = '{}.pdf'
-    # If you want to store the new pdfs in the same directory, then leave the braces empty
-    path = base_path.format(name)
-    f = open(path, mode='wb')
-    pdf_writer = PyPDF2.PdfFileWriter()
+            for name, page_count in page_splits:
+                if current_page >= total_pages:
+                    break
 
-    for j in range(x, x+ctr):
-        page = pdf.getPage(j)
-        pdf_writer.addPage(page)
+                writer = WriterClass()
+                end_page = min(current_page + page_count, total_pages)
 
-    x += ctr
+                for p in range(current_page, end_page):
+                    page = reader.pages[p]
+                    if hasattr(writer, 'add_page'):
+                        writer.add_page(page)
+                    else:
+                        writer.addPage(page)
 
-    pdf_writer.write(f)
-    f.close()
+                out_filename = f"{name}.pdf" if not name.endswith(".pdf") else name
+                out_path = os.path.join(output_dir, out_filename)
 
+                with open(out_path, 'wb') as out_f:
+                    writer.write(out_f)
 
-merged_pdf.close()
-print("Successfully done!")
+                print(f"Created split PDF: '{out_path}' ({end_page - current_page} pages)")
+                output_files.append(out_path)
+                current_page = end_page
+
+    except Exception as e:
+        print(f"Error demerging PDF '{pdf_path}': {e}")
+
+    return output_files
+
+def main():
+    target_pdf = sys.argv[1] if len(sys.argv) > 1 else None
+    demerge_pdf(pdf_path=target_pdf)
+
+if __name__ == '__main__':
+    main()
+

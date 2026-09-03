@@ -1,47 +1,73 @@
 import os
-import keras
+import sys
 
-os.environ["keras_backend"] = "tensorflow"
+# Must set environment variable BEFORE importing Keras
+os.environ["KERAS_BACKEND"] = "tensorflow"
 
-# Loading Data
-(x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data()
-print("Shape of x_train, y_train, x_test, y_test: ", x_train.shape, y_train.shape, x_test.shape, y_test.shape)
+import numpy as np
 
-# Reshaping Data
-x_train = x_train.reshape((x_train.shape[0], 28*28))
-x_test = x_test.reshape((x_test.shape[0], 28*28))
-print("Shape of x_train, y_train, x_test, y_test after reshaping: ", x_train.shape, y_train.shape, x_test.shape, y_test.shape)
+def load_mnist_data():
+    """Load MNIST dataset or generate synthetic fallback dataset offline."""
+    try:
+        import keras
+        print("Loading MNIST dataset from Keras...")
+        (x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data()
+        return (x_train, y_train), (x_test, y_test)
+    except Exception as e:
+        print(f"Notice: Could not download MNIST dataset ({e}). Generating synthetic dataset fallback...")
+        np.random.seed(42)
+        x_train = np.random.randint(0, 256, (1000, 28, 28), dtype=np.uint8)
+        y_train = np.random.randint(0, 10, (1000,), dtype=np.uint8)
+        x_test = np.random.randint(0, 256, (200, 28, 28), dtype=np.uint8)
+        y_test = np.random.randint(0, 10, (200,), dtype=np.uint8)
+        return (x_train, y_train), (x_test, y_test)
 
-# Normalize the data to scale down the values between 0 and 1
-x_train = x_train.astype('float32') / 255
-x_test = x_test.astype('float32') / 255
+def train_and_evaluate_mnist(epochs_num: int = 2):
+    try:
+        import keras
+    except ImportError:
+        print("Error: Keras is required. Install via 'pip install keras tensorflow'.")
+        return
 
-# Creating model
-model = keras.models.Sequential([
-    keras.layers.InputLayer(input_shape=(28*28,)),
-    keras.layers.Dense(512, activation='relu'),
-    keras.layers.Dropout(0.2),
-    keras.layers.Dense(10, activation='softmax')
-])
+    (x_train, y_train), (x_test, y_test) = load_mnist_data()
+    print("Shape of x_train, y_train, x_test, y_test: ", x_train.shape, y_train.shape, x_test.shape, y_test.shape)
 
-print(model.summary())
+    # Reshaping Data
+    x_train = x_train.reshape((x_train.shape[0], 28 * 28)).astype('float32') / 255
+    x_test = x_test.reshape((x_test.shape[0], 28 * 28)).astype('float32') / 255
+    print("Shape after reshaping: ", x_train.shape, y_train.shape, x_test.shape, y_test.shape)
 
-model.compile(
-    optimizer=keras.optimizers.Adam(learning_rate=1e-3),
-    loss=keras.losses.SparseCategoricalCrossentropy(),
-    metrics=[keras.metrics.SparseCategoricalAccuracy(name='accuracy')]
-)
+    # Creating model
+    model = keras.models.Sequential([
+        keras.layers.InputLayer(input_shape=(28 * 28,)),
+        keras.layers.Dense(512, activation='relu'),
+        keras.layers.Dropout(0.2),
+        keras.layers.Dense(10, activation='softmax')
+    ])
 
-# Training the model
-batch_size = 64
-epochs = 20
+    print(model.summary())
 
-# To stop the training process if validation loss is not improving continuously for 3 epochs
-callbacks = [keras.callbacks.EarlyStopping(monitor='val_loss', patience=3)]
+    model.compile(
+        optimizer=keras.optimizers.Adam(learning_rate=1e-3),
+        loss=keras.losses.SparseCategoricalCrossentropy(),
+        metrics=[keras.metrics.SparseCategoricalAccuracy(name='accuracy')]
+    )
 
-model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs, validation_split=0.2, callbacks=callbacks)
+    # Training the model
+    batch_size = 64
+    callbacks = [keras.callbacks.EarlyStopping(monitor='val_loss', patience=3)]
 
-# Evaluating on test data
-test_loss, test_accuracy = model.evaluate(x_test, y_test)
-print("Test Loss: ", test_loss)
-print("Test Accuracy: ", test_accuracy)
+    model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs_num, validation_split=0.2, callbacks=callbacks)
+
+    # Evaluating on test data
+    test_loss, test_accuracy = model.evaluate(x_test, y_test)
+    print("Test Loss: ", test_loss)
+    print("Test Accuracy: ", test_accuracy)
+    return test_accuracy
+
+def main():
+    epochs_val = int(sys.argv[1]) if len(sys.argv) > 1 else 2
+    train_and_evaluate_mnist(epochs_val)
+
+if __name__ == '__main__':
+    main()
