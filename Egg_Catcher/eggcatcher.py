@@ -1,136 +1,162 @@
+import sys
 from itertools import cycle
 from random import randrange
-from tkinter import Tk, Canvas, messagebox, font
+import tkinter as tk
+from tkinter import Tk, Canvas, messagebox
 
-# Game setup variables
-canvas_width = 800
-canvas_height = 400
+class EggCatcherGame:
+    def __init__(self, root: Tk = None):
+        self.win = root or Tk()
+        self.win.title("Egg Catcher Game")
+        self.win.resizable(width=False, height=False)
 
-# Initialize the main window
-win = Tk()
-c = Canvas(win, width=canvas_width, height=canvas_height, background='deep sky blue')
-c.create_rectangle(-5, canvas_height - 100, canvas_width + 5, canvas_height + 5, fill='sea green', width=0)
-c.create_oval(-80, -80, 120, 120, fill='orange', width=0)
-c.pack()
+        self.canvas_width = 800
+        self.canvas_height = 400
 
-# Game design variables
-color_cycle = cycle(['light blue', 'light pink', 'light yellow', 'light green', 'red', 'blue', 'green', 'black'])
-egg_width = 45
-egg_height = 55
-egg_score = 10
-egg_speed = 500
-egg_interval = 4000
-difficulty_factor = 0.95
+        self.c = Canvas(self.win, width=self.canvas_width, height=self.canvas_height, background='deep sky blue')
+        self.c.create_rectangle(-5, self.canvas_height - 100, self.canvas_width + 5, self.canvas_height + 5, fill='sea green', width=0)
+        self.c.create_oval(-80, -80, 120, 120, fill='orange', width=0)
+        self.c.pack()
 
-# Catcher setup
-catcher_color = 'blue'
-catcher_width = 100
-catcher_height = 100
-catcher_start_x = canvas_width / 2 - catcher_width / 2
-catcher_start_y = canvas_height - catcher_height - 20
-catcher_start_x2 = catcher_start_x + catcher_width
-catcher_start_y2 = catcher_start_y + catcher_height
+        self.color_cycle = cycle(['light blue', 'light pink', 'light yellow', 'light green', 'red', 'blue', 'green', 'black'])
+        self.egg_width = 45
+        self.egg_height = 55
+        self.egg_score = 10
+        self.egg_speed = 500
+        self.egg_interval = 4000
+        self.difficulty_factor = 0.95
 
-catcher = c.create_arc(catcher_start_x, catcher_start_y, catcher_start_x2, catcher_start_y2, start=200, extent=140, style='arc', outline=catcher_color, width=3)
+        self.catcher_color = 'blue'
+        self.catcher_width = 100
+        self.catcher_height = 100
+        self.catcher_start_x = self.canvas_width / 2 - self.catcher_width / 2
+        self.catcher_start_y = self.canvas_height - self.catcher_height - 20
 
-# Score and lives setup
-score = 0
-score_text = c.create_text(10, 10, anchor='nw', font=('Arial', 18, 'bold'), fill='darkblue', text='Score : ' + str(score))
+        self.catcher = self.c.create_arc(
+            self.catcher_start_x, self.catcher_start_y,
+            self.catcher_start_x + self.catcher_width, self.catcher_start_y + self.catcher_height,
+            start=200, extent=140, style='arc', outline=self.catcher_color, width=3
+        )
 
-lives_remaning = 3
-lives_text = c.create_text(canvas_width - 10, 10, anchor='ne', font=('Arial', 18, 'bold'), fill='darkblue', text='Lives : ' + str(lives_remaning))
+        self.score = 0
+        self.score_text = self.c.create_text(10, 10, anchor='nw', font=('Arial', 18, 'bold'), fill='darkblue', text='Score : 0')
 
-eggs = []
+        self.lives_remaning = 3
+        self.lives_text = self.c.create_text(self.canvas_width - 10, 10, anchor='ne', font=('Arial', 18, 'bold'), fill='darkblue', text='Lives : 3')
 
-# Function to create eggs at random positions
-def create_eggs():
-    x = randrange(10, 740)
-    y = 40
-    new_egg = c.create_oval(x, y, x + egg_width, y + egg_height, fill=next(color_cycle), width=0)
-    eggs.append(new_egg)
-    win.after(egg_interval, create_eggs)
+        self.eggs = []
+        self.game_running = True
 
-# Function to move eggs downwards
-def move_eggs():
-    for egg in eggs:
-        (egg_x, egg_y, egg_x2, egg_y2) = c.coords(egg)
-        c.move(egg, 0, 10)
-        if egg_y2 > canvas_height:
-            egg_dropped(egg)
-    win.after(egg_speed, move_eggs)
+        self.c.bind('<Left>', self.move_left)
+        self.c.bind('<Right>', self.move_right)
+        self.c.focus_set()
 
-# Function to handle egg drop events
-def egg_dropped(egg):
-    global lives_remaning
-    eggs.remove(egg)
-    c.delete(egg)
-    lose_a_life()
-    if lives_remaning == 0:
-        # Prompt the player to play again or exit
-        response = messagebox.askyesno('GAME OVER!', 'Final Score: ' + str(score) + '\nDo you want to play again?')
-        if response:
-            reset_game()  # Reset the game if the player chooses to play again
-        else:
-            win.destroy()  # Close the game if the player chooses not to play again
+    def start(self):
+        self.win.after(1000, self.create_eggs)
+        self.win.after(1000, self.move_eggs)
+        self.win.after(1000, self.catch_check)
+        self.win.mainloop()
 
-# Function to reset the game state for a new game
-def reset_game():
-    global score, lives_remaning, eggs
-    for egg in eggs:
-        c.delete(egg)
-    eggs = []
-    score = 0
-    lives_remaning = 3
-    c.itemconfigure(score_text, text='Score : ' + str(score))
-    c.itemconfigure(lives_text, text='Lives : ' + str(lives_remaning))
-    # Restart egg creation and movement
-    win.after(1000, create_eggs)
-    win.after(1000, move_eggs)
-    win.after(1000, catch_check)
+    def create_eggs(self):
+        if not self.game_running:
+            return
+        x = randrange(10, 740)
+        y = 40
+        new_egg = self.c.create_oval(x, y, x + self.egg_width, y + self.egg_height, fill=next(self.color_cycle), width=0)
+        self.eggs.append(new_egg)
+        self.win.after(self.egg_interval, self.create_eggs)
 
-# Function to decrease lives
-def lose_a_life():
-    global lives_remaning
-    lives_remaning -= 1
-    c.itemconfigure(lives_text, text='Lives : ' + str(lives_remaning))
+    def move_eggs(self):
+        if not self.game_running:
+            return
+        to_drop = []
+        for egg in list(self.eggs):
+            coords = self.c.coords(egg)
+            if coords and len(coords) == 4:
+                _, _, _, egg_y2 = coords
+                self.c.move(egg, 0, 10)
+                if egg_y2 > self.canvas_height:
+                    to_drop.append(egg)
 
-# Function to check if eggs are caught
-def catch_check():
-    (catcher_x, catcher_y, catcher_x2, catcher_y2) = c.coords(catcher)
-    for egg in eggs:
-        (egg_x, egg_y, egg_x2, egg_y2) = c.coords(egg)
-        if catcher_x < egg_x and egg_x2 < catcher_x2 and catcher_y2 - egg_y2 < 40:
-            eggs.remove(egg)
-            c.delete(egg)
-            increase_score(egg_score)
-    win.after(100, catch_check)
+        for egg in to_drop:
+            self.egg_dropped(egg)
 
-# Function to increase the score
-def increase_score(points):
-    global score, egg_speed, egg_interval
-    score += points
-    egg_speed = int(egg_speed * difficulty_factor)
-    egg_interval = int(egg_interval * difficulty_factor)
-    c.itemconfigure(score_text, text='Score : ' + str(score))
+        self.win.after(self.egg_speed, self.move_eggs)
 
-# Event handlers for moving the catcher
-def move_left(event):
-    (x1, y1, x2, y2) = c.coords(catcher)
-    if x1 > 0:
-        c.move(catcher, -20, 0)
+    def egg_dropped(self, egg):
+        if egg in self.eggs:
+            self.eggs.remove(egg)
+            self.c.delete(egg)
+            self.lose_a_life()
 
-def move_right(event):
-    (x1, y1, x2, y2) = c.coords(catcher)
-    if x2 < canvas_width:
-        c.move(catcher, 20, 0)
+    def lose_a_life(self):
+        self.lives_remaning -= 1
+        self.c.itemconfigure(self.lives_text, text='Lives : ' + str(self.lives_remaning))
+        if self.lives_remaning == 0:
+            self.game_running = False
+            response = messagebox.askyesno('GAME OVER!', 'Final Score: ' + str(self.score) + '\nDo you want to play again?')
+            if response:
+                self.reset_game()
+            else:
+                self.win.destroy()
 
-c.bind('<Left>', move_left)
-c.bind('<Right>', move_right)
-c.focus_set()
+    def reset_game(self):
+        for egg in self.eggs:
+            self.c.delete(egg)
+        self.eggs = []
+        self.score = 0
+        self.lives_remaning = 3
+        self.egg_speed = 500
+        self.egg_interval = 4000
+        self.game_running = True
+        self.c.itemconfigure(self.score_text, text='Score : ' + str(self.score))
+        self.c.itemconfigure(self.lives_text, text='Lives : ' + str(self.lives_remaning))
+        self.win.after(1000, self.create_eggs)
+        self.win.after(1000, self.move_eggs)
+        self.win.after(1000, self.catch_check)
 
-# Start the game processes
-win.after(1000, create_eggs)
-win.after(1000, move_eggs)
-win.after(1000, catch_check)
+    def catch_check(self):
+        if not self.game_running:
+            return
+        catcher_coords = self.c.coords(self.catcher)
+        if catcher_coords and len(catcher_coords) == 4:
+            c_x, c_y, c_x2, c_y2 = catcher_coords
+            caught_list = []
+            for egg in list(self.eggs):
+                egg_coords = self.c.coords(egg)
+                if egg_coords and len(egg_coords) == 4:
+                    e_x, e_y, e_x2, e_y2 = egg_coords
+                    if c_x < e_x and e_x2 < c_x2 and c_y2 - e_y2 < 40:
+                        caught_list.append(egg)
 
-win.mainloop()
+            for egg in caught_list:
+                if egg in self.eggs:
+                    self.eggs.remove(egg)
+                    self.c.delete(egg)
+                    self.increase_score(self.egg_score)
+
+        self.win.after(100, self.catch_check)
+
+    def increase_score(self, points):
+        self.score += points
+        self.egg_speed = max(int(self.egg_speed * self.difficulty_factor), 50)
+        self.egg_interval = max(int(self.egg_interval * self.difficulty_factor), 500)
+        self.c.itemconfigure(self.score_text, text='Score : ' + str(self.score))
+
+    def move_left(self, event):
+        coords = self.c.coords(self.catcher)
+        if coords and coords[0] > 0:
+            self.c.move(self.catcher, -20, 0)
+
+    def move_right(self, event):
+        coords = self.c.coords(self.catcher)
+        if coords and coords[2] < self.canvas_width:
+            self.c.move(self.catcher, 20, 0)
+
+def main():
+    game = EggCatcherGame()
+    game.start()
+
+if __name__ == '__main__':
+    main()
+
