@@ -1,74 +1,58 @@
+import sys
+
 instruction = '''
-        firstly we have to take input of capital String/single word without spaces
-
-        game rules:
-        1) Both players are given the same string, .
-        2) Both players have to make substrings using the letters of the string .
-        3) Stuart has to make words starting with consonants.
-        4) Kevin has to make words starting with vowels.
-        5) The game ends when both players have made all possible substrings.
-
-        A player gets +1 point for each occurrence of the substring in the string .
+        Game Rules for Minion Game:
+        1) Both players are given the same string.
+        2) Stuart has to make substrings starting with consonants.
+        3) Kevin has to make substrings starting with vowels.
+        4) The player with higher score wins!
 '''
 
+VOWELS = {'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'}
 
-def check(alpha) :
-    vowels = ['a','e','i','o','u']
-    for vowel in vowels:
-        if alpha == vowel:
-            return True
-    return False
+def is_vowel(char: str) -> bool:
+    return char in VOWELS
 
+def calculate_minion_scores(string_val: str) -> tuple:
+    """Calculate Stuart (consonants) and Kevin (vowels) scores in O(N) time."""
+    string_val = string_val.strip()
+    n = len(string_val)
+    stuart_score = 0  # Consonants
+    kevin_score = 0   # Vowels
 
-def minion_game(s):
-    p1 = input("enter name of player 1 who is taken strings are starts from consonant: \n")
-    p2 = input("enter name of player 2 who is taken strings are starts from vowel: \n")
-    s.lower()
-    k =len(s)
-    v = []
-    c = []
-    vowel = 0
-    const = 0
-    for a in range(k):
-        if(check(s[a])):
-            v.append(a)
-            vowel += 1
+    for i in range(n):
+        if is_vowel(string_val[i]):
+            kevin_score += (n - i)
         else:
-            c.append(a)
-            const += 1
-    # print(c)
-    cPossible = []
-    vPossible = []
-    list = [c,v]
-    for i1 in list:
-        for value in i1:
-            l = value
-            i = 1
-            for _ in range(k-l):
-                temp = ''
-                for _ in range(k - (k - i)):
-                    # print(s[l], end="")
-                    temp = temp + s[l]
-                    l += 1
-                if i1 == c:
-                    cPossible.append(temp)
-                else:
-                    vPossible.append(temp)
-                temp = ''
-                l = value  
-                i += 1              
+            stuart_score += (n - i)
 
-    print('overall score is given by:')
-    print(f'{p1} : {cPossible}')
-    print(f'{p2} : {vPossible}')
+    return stuart_score, kevin_score
 
-    if len(cPossible) > len(vPossible):
-        print(f"{p1} wins with score {len(cPossible)}")
-    elif len(cPossible) < len(vPossible):
-        print(f"{p2} wins with score {len(vPossible)}")
+def minion_game(s: str = None, player1_name: str = "Stuart", player2_name: str = "Kevin"):
+    if not s:
+        print(instruction)
+        s = input("Enter any string / single word: ").strip()
+
+    if not s:
+        print("Error: Input string cannot be empty.")
+        return
+
+    stuart_score, kevin_score = calculate_minion_scores(s)
+
+    print('\nOverall score:')
+    print(f'{player1_name} (Consonants) : {stuart_score}')
+    print(f'{player2_name} (Vowels)     : {kevin_score}')
+
+    if stuart_score > kevin_score:
+        print(f"-> {player1_name} wins with score {stuart_score}! 🏆")
+    elif kevin_score > stuart_score:
+        print(f"-> {player2_name} wins with score {kevin_score}! 🏆")
     else:
-        print("Draw")
+        print("-> Game ended in a Draw!")
 
-print(instruction)
-s = input("enter any String / single Word: \n")
-minion_game(s)
+def main():
+    target_string = sys.argv[1] if len(sys.argv) > 1 else None
+    minion_game(target_string)
+
+if __name__ == '__main__':
+    main()
