@@ -22,29 +22,38 @@ except ImportError:
 def visualize_pipeline(
     image_path: str,
     output_path: str = None,
-    show: bool = True
-) -> None:
+    show: bool = True,
+    fill_lane: bool = False
+) -> bool:
     """Visualize all intermediate stages of the lane detection pipeline.
 
     Args:
         image_path: Path to the input image.
         output_path: Optional path to save the generated subplot figure.
         show: Whether to display the plot interactively.
+        fill_lane: Whether to fill the drivable corridor between lane lines.
+
+    Returns:
+        True if visualization completed successfully, False otherwise.
     """
     if not os.path.exists(image_path):
         print(f"Error: Image '{image_path}' does not exist.", file=sys.stderr)
-        return
+        return False
 
     # Read image using OpenCV (BGR format)
     bgr_img = cv2.imread(image_path)
     if bgr_img is None:
         print(f"Error: Failed to read image from '{image_path}'.", file=sys.stderr)
-        return
+        return False
 
     rgb_img = cv2.cvtColor(bgr_img, cv2.COLOR_BGR2RGB)
 
     # Process frame and retrieve intermediate stages
-    combo_bgr, lanes, intermediates = process_frame(bgr_img, return_intermediates=True)
+    combo_bgr, lanes, intermediates = process_frame(
+        bgr_img,
+        return_intermediates=True,
+        fill_lane=fill_lane
+    )
     combo_rgb = cv2.cvtColor(combo_bgr, cv2.COLOR_BGR2RGB)
 
     fig, axes = plt.subplots(2, 2, figsize=(14, 8))
@@ -81,6 +90,8 @@ def visualize_pipeline(
     else:
         plt.close(fig)
 
+    return True
+
 
 def main() -> None:
     """Parse CLI arguments and run visualization."""
@@ -100,6 +111,11 @@ def main() -> None:
         help="Path to save the pipeline stages plot image."
     )
     parser.add_argument(
+        "--fill-lane",
+        action="store_true",
+        help="Highlight the drivable corridor between lanes in the visualization."
+    )
+    parser.add_argument(
         "--no-show",
         action="store_true",
         help="Run without displaying the Matplotlib window."
@@ -107,7 +123,14 @@ def main() -> None:
 
     args = parser.parse_args()
     image_path = args.image or resolve_asset_path("picture.jpg")
-    visualize_pipeline(image_path, output_path=args.output, show=not args.no_show)
+    success = visualize_pipeline(
+        image_path,
+        output_path=args.output,
+        show=not args.no_show,
+        fill_lane=args.fill_lane
+    )
+    if not success:
+        sys.exit(1)
 
 
 if __name__ == "__main__":

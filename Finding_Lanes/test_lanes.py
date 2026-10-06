@@ -8,22 +8,26 @@ import cv2
 # Support running directly or as package
 try:
     from lanes import (
+        LaneTracker,
         canny,
         roi,
         make_coordinate,
         average_lines_intercept,
         display_lines,
         process_frame,
+        process_image,
         resolve_asset_path,
     )
 except ImportError:
     from Finding_Lanes.lanes import (
+        LaneTracker,
         canny,
         roi,
         make_coordinate,
         average_lines_intercept,
         display_lines,
         process_frame,
+        process_image,
         resolve_asset_path,
     )
 
@@ -70,6 +74,19 @@ class TestFindingLanes(unittest.TestCase):
         masked = roi(edges, polygons=custom_poly)
         self.assertEqual(masked.shape, edges.shape)
 
+    def test_roi_three_channel_color_preservation(self):
+        """Verify ROI on 3-channel image preserves all color channels (fixes scalar mask bug)."""
+        color_img = np.full((100, 100, 3), 200, dtype=np.uint8)
+        custom_poly = np.array([[(10, 90), (90, 90), (50, 10)]], dtype=np.int32)
+        masked = roi(color_img, polygons=custom_poly)
+        self.assertEqual(masked.shape, (100, 100, 3))
+        # Inside the polygon, all three channels should remain 200
+        inside_pixel = masked[50, 50]
+        np.testing.assert_array_equal(inside_pixel, np.array([200, 200, 200]))
+        # Outside polygon, all channels must be zeroed
+        outside_pixel = masked[5, 5]
+        np.testing.assert_array_equal(outside_pixel, np.array([0, 0, 0]))
+
     def test_make_coordinate_valid(self):
         """Verify make_coordinate computes expected pixel coordinates from slope & intercept."""
         # Slope = -1.0, Intercept = 1000
@@ -82,12 +99,15 @@ class TestFindingLanes(unittest.TestCase):
         self.assertEqual(x1, int((720 - 1000) / -1.0))
 
     def test_make_coordinate_edge_cases(self):
-        """Verify make_coordinate handles zero slopes, NaNs, infinities, and None inputs."""
+        """Verify make_coordinate handles zero slopes, NaNs, infinities, 2D arrays, and None."""
         self.assertIsNone(make_coordinate(self.test_frame, None))
         self.assertIsNone(make_coordinate(self.test_frame, []))
         self.assertIsNone(make_coordinate(self.test_frame, (0.0, 500.0)))
         self.assertIsNone(make_coordinate(self.test_frame, (np.nan, 500.0)))
         self.assertIsNone(make_coordinate(self.test_frame, (-1.0, np.inf)))
+        # 2D array input (e.g. from np.polyfit or reshape) should not crash
+        coords_2d = make_coordinate(self.test_frame, np.array([[-1.0, 1000.0]]))
+        self.assertIsNotNone(coords_2d)
 
     def test_average_lines_intercept_none_and_empty(self):
         """Verify average_lines_intercept handles None and empty line inputs."""
@@ -110,6 +130,59 @@ class TestFindingLanes(unittest.TestCase):
         self.assertIsNotNone(lane_lines)
         self.assertEqual(len(lane_lines), 2)
 
+    def test_average_lines_spatial_cross_contamination_filtering(self):
+        """Verify line segments on wrong side of image are rejected to prevent cross-lane distortion."""
+        # Genuine left lane on left side
+        left_seg = [[300, 720, 580, 450]]
+        # Erroneous segment on right side of image with negative slope (e.g. shadow or cross marking)
+        corrupt_seg = [[1100, 700, 1150, 600]]
+        lines = np.array([left_seg, corrupt_seg])
+        lane_lines = average_lines_intercept(self.test_frame, lines)
+        self.assertIsNotNone(lane_lines)
+        # Should only detect 1 lane (left) because corrupt_seg is on right side with negative slope
+        self.assertEqual(len(lane_lines), 1)
+
+    def test_lane_tracker_smoothing(self):
+        """Verify LaneTracker applies exponential moving average smoothing."""
+        tracker = LaneTracker(alpha=0.5)
+        # First measurement
+        l1, r1 = tracker.update((-1.0, 1000.0), (1.0, 200.0))
+        self.assertEqual(l1, (-1.0, 1000.0))
+        self.assertEqual(r1, (1.0, 200.0))
+        # Second measurement: EMA should blend 50%
+        l2, r2 = tracker.update((-1.2, 1020.0), (1.2, 180.0))
+        self.assertAlmostEqual(l2[0], -1.1)
+        self.assertAlmostEqual(l2[1], 1010.0)
+        self.assertAlmostEqual(r2[0], 1.1)
+        self.assertAlmostEqual(r2[1], 190.0)
+
+    def test_lane_tracker_dropout_retention_and_expiry(self):
+        """Verify LaneTracker retains lane estimates across missed frames up to threshold."""
+        tracker = LaneTracker(alpha=0.5, max_missed_frames=2)
+        tracker.update((-1.0, 1000.0), (1.0, 200.0))
+
+        # Miss 1 frame: should still return previous estimate
+        l_miss1, r_miss1 = tracker.update(None, None)
+        self.assertIsNotNone(l_miss1)
+        self.assertIsNotNone(r_miss1)
+
+        # Miss 2 frames: should still retain
+        l_miss2, r_miss2 = tracker.update(None, None)
+        self.assertIsNotNone(l_miss2)
+
+        # Miss 3 frames: exceeds max_missed_frames (2), should clear to None
+        l_miss3, r_miss3 = tracker.update(None, None)
+        self.assertIsNone(l_miss3)
+        self.assertIsNone(r_miss3)
+
+    def test_lane_tracker_reset(self):
+        """Verify LaneTracker reset clears internal state."""
+        tracker = LaneTracker()
+        tracker.update((-1.0, 1000.0), (1.0, 200.0))
+        tracker.reset()
+        self.assertIsNone(tracker.left_fit)
+        self.assertIsNone(tracker.right_fit)
+
     def test_display_lines(self):
         """Verify display_lines generates an overlay image with the correct shape."""
         lanes = np.array([[300, 720, 580, 432], [1000, 720, 700, 432]])
@@ -122,6 +195,14 @@ class TestFindingLanes(unittest.TestCase):
         line_img = display_lines(self.test_frame, None)
         self.assertEqual(line_img.shape, self.test_frame.shape)
         self.assertTrue(np.all(line_img == 0))
+
+    def test_display_lines_with_fill_lane(self):
+        """Verify display_lines renders drivable corridor polygon when fill_lane=True."""
+        lanes = np.array([[300, 720, 580, 432], [1000, 720, 700, 432]])
+        line_img = display_lines(self.test_frame, lanes, fill_lane=True)
+        self.assertEqual(line_img.shape, self.test_frame.shape)
+        # Driveable area between lines should contain non-zero pixels
+        self.assertTrue(np.any(line_img > 0))
 
     def test_process_frame_end_to_end(self):
         """Verify full process_frame pipeline runs successfully on synthetic frame."""
@@ -137,6 +218,13 @@ class TestFindingLanes(unittest.TestCase):
         self.assertIn("line_image", intermediates)
         self.assertIn("raw_lines", intermediates)
 
+    def test_process_frame_with_tracker_and_fill(self):
+        """Verify process_frame integrates with LaneTracker and fill_lane."""
+        tracker = LaneTracker()
+        combo, lanes = process_frame(self.test_frame, fill_lane=True, tracker=tracker)
+        self.assertEqual(combo.shape, self.test_frame.shape)
+        self.assertIsNotNone(lanes)
+
     def test_process_bundled_image_if_present(self):
         """Verify pipeline execution on bundled picture.jpg asset."""
         img_path = resolve_asset_path("picture.jpg")
@@ -147,6 +235,11 @@ class TestFindingLanes(unittest.TestCase):
             self.assertEqual(combo.shape, img.shape)
             self.assertIsNotNone(lanes)
             self.assertEqual(len(lanes), 2, "Should detect both left and right lane lines")
+
+    def test_process_image_file_not_found(self):
+        """Verify process_image returns None when target file does not exist."""
+        result = process_image("nonexistent_image_file.jpg", show=False)
+        self.assertIsNone(result)
 
 
 if __name__ == "__main__":
