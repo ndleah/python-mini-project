@@ -15,6 +15,9 @@ def div(a,b):
 def mod(a,b):
     return a % b
 
+def quotient(a, b):  #added a new operation that helps us to find quotient of the given two no, using floor division
+    return a//b
+
 def lcm(a,b):
     if a<0 or b<0: return
     L = a if a > b else b
@@ -40,29 +43,39 @@ def extract_from_text(text):
             pass
     return l
 
+#fixed the problem of displaying error on entering anything
+
 def calculate():
     text = textin.get()
-    for word in text.split(' '):
-        if word.upper() in operations.keys():
+
+    for word in text.upper().split():
+        if word in operations:
             try:
-                l = extract_from_text(text)
-                r = operations[word.upper()](l[0], l[1])
-                list.delete(0,END)
-                list.insert(END,r)
-            except:
-                list.delete(0,END)
-                list.insert(END,'something went wrong please enter again')
-            finally:
-                break
-        elif word.upper() not in operations.keys():
-            list.delete(0,END)
-            list.insert(END,'something went wrong please enter again')
+                numbers = extract_from_text(text)
+
+                if len(numbers) < 2:
+                    raise ValueError("Enter two numbers")
+
+                a, b = numbers[0], numbers[1]
+                result = operations[word](a, b)     #replaced r with result 
+
+                list.delete(0, END)
+                list.insert(END, result)
+
+            except (ValueError, ZeroDivisionError, TypeError):
+                list.delete(0, END)
+                list.insert(END, "Invalid input. Enter two valid numbers.")
+
+            return
+
+    list.delete(0, END)
+    list.insert(END, "Please enter a valid operation.")
 
 operations = {'ADD':add,'ADDITION':add, 'SUM':add, 'PLUS':add,
             'SUB':sub, 'DIFFERENCE':sub, 'MINUS': sub, 'SUBTRACT':sub, 'DIFF':sub,
             'LCM':lcm, 'HCF':hcf, 'PRODUCT':mul, 'MULTIPLICATION':mul,
             'MULTIPLY':mul, 'DIVISION':div, 'DIV':div, 'DIVIDE':div,
-            'MOD':mod,'REMAINDER':mod, 'MODULUS':mod}
+            'MOD':mod,'REMAINDER':mod, 'MODULUS':mod, 'QUOTIENT':quotient}
 
 
 win = Tk()
